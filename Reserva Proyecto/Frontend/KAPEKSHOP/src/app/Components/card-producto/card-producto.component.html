@@ -1,0 +1,19 @@
+<div class="card h-100">
+    <a href="#">
+        <img src="../../../assets/{{producto?.imagen}}" class="card-img-top" alt="...">
+    </a>
+    <div class="card-body">
+        <ul class="list-unstyled d-flex justify-content-between">
+            <li  >
+                <i *ngFor="let item of estrellas"  class="text-warning fa fa-star"></i>
+            </li>
+            <li class="text-muted text-right">{{producto.precio}}</li>
+        </ul>
+        <a href="#" class="h2 text-decoration-none text-dark">{{producto.imagen}}</a>
+        <p class="card-text">
+            Potente linterna de mano con 4 modos de luz, totalmente recargable; la batería incluida permite
+            hasta 20 horas de funcionamiento entre cargas.
+        </p>
+        <p class="text-muted">Reviews (24)</p>
+    </div>
+</div>

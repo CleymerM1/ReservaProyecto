@@ -1,0 +1,66 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Categoria } from 'src/app/interfaces/Categorias';
+import { UsuarioService } from 'src/app/Services/usuario.service';
+import { ModalNuevaCategoriaComponent } from '../modal-nueva-categoria/modal-nueva-categoria.component';
+
+@Component({
+  selector: 'app-categorias',
+  templateUrl: './categorias.component.html',
+  styleUrls: ['./categorias.component.css']
+})
+export class CategoriasComponent implements OnInit {
+  
+  esVendedor:boolean = false;
+
+  usuarioActual:any = {}
+  constructor( private modalService: NgbModal, private usuarioService:UsuarioService, private route: ActivatedRoute, private router:Router) { }
+
+  categorias:Categoria[] = []
+
+  ngOnInit(): void {
+
+    // Verificar si el usuario es vendedor
+    this.getTipoUsuario()
+    this.obtenerUsuarioActual()
+
+    // Obtener las categorias
+    this.usuarioService.obtenerCategorias().subscribe( (res:any) => {
+      console.log(res)
+      this.categorias = res;
+    }, (err:any) => {
+      console.log(this.categorias)
+    })
+  }
+
+  getTipoUsuario(){
+    let param = this.route.snapshot.paramMap.get('tipoUsuario')
+    switch (param) {
+      case 'vender':
+        this.esVendedor = true;
+        break;
+      case 'comprar':
+        this.esVendedor = false;
+        break
+      default:
+        this.router.navigateByUrl('/tienda')
+        break;
+    }
+
+  }
+
+  obtenerUsuarioActual() {
+    this.usuarioService.obtenerUsuarioActual().subscribe( (res:any) => {
+      this.usuarioActual = res;
+    })
+  }
+
+  open() {
+    let modalRef:NgbModalRef;
+    modalRef = this.modalService.open(ModalNuevaCategoriaComponent)
+  }
+
+ 
+
+}

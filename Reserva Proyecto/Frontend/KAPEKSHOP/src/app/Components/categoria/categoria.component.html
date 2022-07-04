@@ -1,0 +1,8 @@
+<div >
+    <h1>{{categoriaActual?.nombreCategoria}}</h1>
+    <div class="row">
+        <div *ngFor="let item of productos" class="col-4">
+            <app-card-producto [producto]="item"></app-card-producto>
+        </div>
+    </div>
+</div>
