@@ -34,6 +34,7 @@ import { TiendaComponent } from './Components/tienda/tienda.component';
 import { RecuperarContraseniaComponent } from './Components/recuperar-contrasenia/recuperar-contrasenia.component';
 import { SolicitarRecuperarContraseniaComponent } from './Components/solicitar-recuperar-contrasenia/solicitar-recuperar-contrasenia.component';
 import { CategoriasComponent } from './Components/categorias/categorias.component';
+import { ProductoComponent } from './Components/producto/producto.component';
 import { CardCategoriaComponent } from './Components/card-categoria/card-categoria.component';
 import { DialogoUsuarioComponent } from './Components/dialogo-usuario/dialogo-usuario.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -59,6 +60,7 @@ import { ModalNuevaCategoriaComponent } from './Components/modal-nueva-categoria
     ValidarCorreoComponent,
     IniciarSesionComponent,
     CategoriaComponent,
+    ProductoComponent,
     CardProductoComponent,
     TiendaComponent,
     RecuperarContraseniaComponent,

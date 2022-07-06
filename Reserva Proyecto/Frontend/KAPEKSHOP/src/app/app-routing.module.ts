@@ -13,12 +13,14 @@ import { RecuperarContraseniaComponent } from './Components/recuperar-contraseni
 import { IniciarSesionComponent } from './Components/iniciar-sesion/iniciar-sesion.component';
 import { SolicitarRecuperarContraseniaComponent } from './Components/solicitar-recuperar-contrasenia/solicitar-recuperar-contrasenia.component';
 import { CategoriasComponent } from './Components/categorias/categorias.component';
+import { ProductoComponent } from './Components/producto/producto.component';
 
 //componentes
 const routes: Routes = [
   {path: '', component:LandingComponent},
   {path: 'inicio', component:IniciarSesionComponent},
   {path:'registrar-usuario',component:RegistrarUsuarioComponent},
+  {path:'producto',component:ProductoComponent},
   {path:'editar-usuario/:id', component:RegistrarUsuarioComponent, canActivate:[AuthGuard]},
   {path:'listar-productos', component:ListarProductosComponent},
   {path:'confirmar/:token', component:ValidarCorreoComponent},
