@@ -5,7 +5,7 @@
             <h1 class="text-success text-center">¡Hola {{usuarioActual?.nombre}}!</h1>
             <h1 class="text-success text-center">Busca productos en las diferentes categorías que tenemos para ti</h1>
         </div>
-        <div *ngIf="esVendedor" (click)="open()" class="col-12" style="cursor: pointer;">
+        <div *ngIf="comprobarUsuarioAdmin()" (click)="open()" class="col-12" style="cursor: pointer;">
             <div mat-raised-button class="float-left" matTooltip="Agregar nueva categoría" aria-label="Pulsa el boton para agregar nueva categoría" style="width: 50px ; height: 50px ; background-color: black; border-radius: 100% ; margin-left: auto;">
                 
                 <svg style="color:white" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
