@@ -18,11 +18,9 @@
             </mat-form-field>
         </div>
         <div class="col-12 mb-3">
+          <app-btn-imagen (onChange)="fileChangeEvent($event)"></app-btn-imagen>
 
-
-              <input (change)="fileChangeEvent($event)" type="file"  placeholder="Imagen de la categoría">
-              <mat-error *ngIf="categoria.get('descripcion')?.invalid">La imagen de la categoría es requerida</mat-error>
-
+              
         </div>
         <div class="col-12 mb-5 text-center">
             <input class="btn btn-primary" type="submit" value="Agregar nueva categoría" />
