@@ -41,6 +41,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ModalNuevaCategoriaComponent } from './Components/modal-nueva-categoria/modal-nueva-categoria.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { BtnImagenComponent } from './Components/btn-imagen/btn-imagen.component';
 
 
 //import { ListarUsuariosComponent } from './components/listar-usuarios/listar-usuarios.component';
@@ -68,7 +70,8 @@ import { ModalNuevaCategoriaComponent } from './Components/modal-nueva-categoria
     CategoriasComponent,
     CardCategoriaComponent,
     DialogoUsuarioComponent,
-    ModalNuevaCategoriaComponent
+    ModalNuevaCategoriaComponent,
+    BtnImagenComponent
 
     
   ],
@@ -90,7 +93,8 @@ import { ModalNuevaCategoriaComponent } from './Components/modal-nueva-categoria
     FormsModule,
     MatDialogModule,
     MatSelectModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatToolbarModule
 
   ],
   providers: [],
