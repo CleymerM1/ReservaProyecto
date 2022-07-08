@@ -27,7 +27,8 @@ const routes: Routes = [
   {path:'tienda', component:TiendaComponent, canActivate:[AuthGuard]},
   {path:'recuperar-contrasenia/:token', component:RecuperarContraseniaComponent},
   {path:'recuperar-contrasenia', component:SolicitarRecuperarContraseniaComponent},
-  {path:'tienda/:tipoUsuario/categorias', component:CategoriasComponent, canActivate:[AuthGuard]},
+  //se modificó las rutas de categorias
+  {path:'categorias',component:CategoriasComponent},
   {path:'tienda/categorias/:idCategoria', component:CategoriaComponent, canActivate:[AuthGuard]},
   {path:'**', redirectTo:'',pathMatch:'full'},
 ];
