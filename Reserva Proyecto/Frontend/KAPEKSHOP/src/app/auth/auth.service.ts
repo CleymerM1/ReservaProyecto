@@ -18,6 +18,12 @@ export class AuthService {
         let token = localStorage.getItem('token');
         if( token ){
             const tokenExpiro = helper.isTokenExpired(token); // helper
+            //eliminar token
+            console.log(tokenExpiro);
+            if(tokenExpiro){
+                console.log(tokenExpiro);
+                this.cerrarSesion()
+            }
             return tokenExpiro ? false: true;
         }
 
