@@ -2,20 +2,20 @@ export class Producto{
     _id?: number;
     nombre: string;
     categoria:string;
-    estado: string;
-    descripcion: string;
-    descuento: number;
+    estado:string;
+    descripcion:string;
     ubicacion:string;
-    precio:string;
+    costo:string;
 
 
-    constructor(nombre: string, categoria:string, estado:string, descripcion: string, descuento: number, ubicacion:string, precio:string){
+    constructor(nombre: string, categoria:string,estado:string,
+        descripcion:string, ubicacion:string, costo:string){
         this.nombre=nombre;
         this.categoria=categoria;
-        this.estado= estado;
-        this.descripcion = descripcion;
-        this.descuento= descuento;
+        this.estado=estado;
+        this.descripcion=descripcion;
         this.ubicacion=ubicacion;
-        this.precio=precio
+        this.costo=costo;
+        
     }
 }
