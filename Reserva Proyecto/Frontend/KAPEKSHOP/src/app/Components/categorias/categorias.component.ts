@@ -12,7 +12,7 @@ import { ModalNuevaCategoriaComponent } from '../modal-nueva-categoria/modal-nue
 })
 export class CategoriasComponent implements OnInit {
   
-  esVendedor:boolean = false;
+  
 
   usuarioActual:any = {}
   constructor( private modalService: NgbModal, private usuarioService:UsuarioService, private route: ActivatedRoute, private router:Router) { }
@@ -21,32 +21,8 @@ export class CategoriasComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Verificar si el usuario es vendedor
-    this.getTipoUsuario()
+    this.obtenerCategorias()
     this.obtenerUsuarioActual()
-
-    // Obtener las categorias
-    this.usuarioService.obtenerCategorias().subscribe( (res:any) => {
-      console.log(res)
-      this.categorias = res;
-    }, (err:any) => {
-      console.log(this.categorias)
-    })
-  }
-
-  getTipoUsuario(){
-    let param = this.route.snapshot.paramMap.get('tipoUsuario')
-    switch (param) {
-      case 'vender':
-        this.esVendedor = true;
-        break;
-      case 'comprar':
-        this.esVendedor = false;
-        break
-      default:
-        this.router.navigateByUrl('/tienda')
-        break;
-    }
 
   }
 
@@ -55,10 +31,27 @@ export class CategoriasComponent implements OnInit {
       this.usuarioActual = res;
     })
   }
-
+  
+  comprobarUsuarioAdmin(){
+    if(this.usuarioActual && this.usuarioActual.idRol==3) {
+      return true
+    }else{
+      return false
+    }
+  }
+  
   open() {
     let modalRef:NgbModalRef;
     modalRef = this.modalService.open(ModalNuevaCategoriaComponent)
+  }
+  
+  obtenerCategorias(){
+    this.usuarioService.obtenerCategorias().subscribe( (res:any) => {
+      console.log(res)
+      this.categorias = res;
+    }, (err:any) => {
+      console.log(this.categorias)
+    })
   }
 
  
