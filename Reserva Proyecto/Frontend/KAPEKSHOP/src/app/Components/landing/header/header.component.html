@@ -19,17 +19,17 @@
                     <li [ngClass]="urlItemActual == '/' ? 'item-seleccionado nav-item': 'nav-item'" >
                         <a class="nav-link" routerLink="/">Principal</a>
                     </li>
-                    <li [ngClass]="urlItemActual == '/tienda' ? 'item-seleccionado nav-item': 'nav-item'" >
+                    <li *ngIf="comprobarUsuarioAdmin()" [ngClass]="urlItemActual == '/tienda' ? 'item-seleccionado nav-item': 'nav-item'" >
                         <a class="nav-link" routerLink="/tienda">Tienda</a>
                     </li>
 
-                    <li style="cursor: pointer;" class="nav-item">
+                    <li *ngIf="comprobarUsuario()"  style="cursor: pointer;" class="nav-item">
                         <div ngbDropdown class="d-inline-block">
                           <a class="nav-link" class="nav-link dropdown-toggle" id="dropdownCategorias" ngbDropdownToggle>Categorias</a>
                           <ul ngbDropdownMenu aria-labelledby="dropdownCategorias">
 
-                            <button routerLink="/producto"  ngbDropdownItem>Another Action</button>
-                            <button routerLink="tienda/categorias" ngbDropdownItem>Something else is here</button>
+                            <button routerLink="/producto"  ngbDropdownItem>Producto</button>
+                            <button routerLink="/categorias" ngbDropdownItem>categorias</button>
                           </ul>
                         </div>
                       </li>
@@ -38,6 +38,9 @@
                     </li>
                     <li *ngIf="!token?.correo" class="nav-item">
                         <a class="nav-link" href="#" routerLink="/inicio">Iniciar sesión</a>
+                    </li>
+                    <li *ngIf="token?.correo" class="nav-item">
+                        <a class="nav-link" style="cursor: pointer;" (click)="cerrar()">Cerrar sesión</a>
                     </li>
                 </ul>
             </div>
