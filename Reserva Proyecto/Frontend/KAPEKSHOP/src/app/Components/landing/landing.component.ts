@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import leerToken from 'src/app/helpers/decodificarToken';
 
 @Component({
   selector: 'app-landing',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
+
   constructor() { }
 
   ngOnInit(): void {
+    leerToken();
   }
 
 }
