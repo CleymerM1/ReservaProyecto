@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { DialogoUsuarioComponent  } from '../dialogo-usuario/dialogo-usuario.component';
+
+
 
 export interface DialogData {
   usuario: 'vendedor' | 'comprador' ;
@@ -14,26 +14,18 @@ export interface DialogData {
 })
 export class TiendaComponent implements OnInit {
 
-  constructor(
-    public dialog: MatDialog
-
-  ) { }
+  sidebarShow = true;
+  constructor() { }
 
   ngOnInit(): void {
-    this.openDialog()
-  }
-
-  openDialog() {
-
-    this.dialog.open(DialogoUsuarioComponent, {
-      data: {
-        usuario: 'vendedor',
-      },
-    });
-  }
-  closeDialog() {
 
   }
+
+  setSidebar(show:boolean) {
+    this.sidebarShow = !this.sidebarShow;
+  }
+
+
 
 
 
