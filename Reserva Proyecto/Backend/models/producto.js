@@ -47,7 +47,7 @@ let obtenerQuery = `select * from producto where idProducto = ${id}`
     })                                                                                                                  
 }                                                                                                                   
 Producto.obtenerPorUbi = (departamento, resultado) => {
-    let obtenerQuery = `select * from producto left join usuario on producto.idProducto = usuario.idUsuario where usuario.departamento = '${departamento}'`  //Hay que definir que columnas se quieren de la tabla producto
+    let obtenerQuery = `select * from producto where ubicacion = '${departamento}'`  //Hay que definir que columnas se quieren de la tabla producto
     conexion.query(obtenerQuery, (err, res) => {
         if(err)
             return resultado({msj: 'Hubo un error' + err}, null)                                                                                                                    
