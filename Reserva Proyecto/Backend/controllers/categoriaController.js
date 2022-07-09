@@ -40,3 +40,12 @@ exports.obtenerCategorias = (req,res)=>{
         }
     });
 };
+exports.obtenerCategoria = (req,res)=>{
+    Categoria.obtenerPorId(req.params.id,(error,data)=>{
+        if(error){
+            res.status(404).json({mensaje: 'No se pudo obtener los datos'})
+        }else{
+            res.status(200).json(data[0]);
+        }
+    });
+}
