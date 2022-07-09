@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import leerToken from 'src/app/helpers/decodificarToken';
 import {AuthService} from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ import { UsuarioService } from 'src/app/Services/usuario.service';
 export class HeaderComponent implements OnInit {
 
   @Input() urlItemActual:string = "/";
+  @Output() onClickBurguer = new EventEmitter<boolean>()
 
 
   usuarioActual:any;
@@ -23,6 +24,10 @@ export class HeaderComponent implements OnInit {
   cerrar(){
     this.authService.cerrarSesion();
     this.router.navigateByUrl('/inicio')
+  }
+  clickBurguer() {
+    this.onClickBurguer.emit(true)
+
   }
 
   ngOnInit(): void {
