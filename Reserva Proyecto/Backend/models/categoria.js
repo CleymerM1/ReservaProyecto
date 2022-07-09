@@ -32,6 +32,19 @@ Categoria.obtener = (resultado) =>{
     });
 };
 
+Categoria.obtenerPorId = (id, resultado) =>{
+    conexion.query(`select * from categoria where idCategoria = ${id}`, (err, rows)=>{
+        if(err) throw err;
+
+        rows = rows.map( categoria => {
+            categoria.imagen = categoria.imagen.toString('ascii')
+            return categoria;
+        } )
+
+        resultado(null, rows);
+    });
+}
+
 Categoria.eliminar = (newObjCat, res) =>{
     let buscarCat =`selec idCategoria from categoria where nombreCategoria = '${newObjCat.nombre}'`;
     conexion.query(buscarCat, (err, data)=>{
