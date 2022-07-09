@@ -1,4 +1,3 @@
-
 const jwt = require('jsonwebtoken')
 const Usuario =  require('../models/usuario.js')
 const checkAuth =  async( req, res, next ) => {
@@ -34,10 +33,6 @@ const checkAuth =  async( req, res, next ) => {
         return res.status(401).json({ msj: error.message})
 
     }
-
-
-
-
 }
 
 module.exports = checkAuth

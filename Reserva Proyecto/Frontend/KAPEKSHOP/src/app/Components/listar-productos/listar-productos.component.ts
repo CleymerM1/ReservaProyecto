@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
+import { ProductosService } from 'src/app/Services/productos.service';
+import {Pipe, PipeTransform} from '@angular/core';
 
+ 
 
 @Component({
   selector: 'app-listar-productos',
@@ -8,6 +11,7 @@ import { Producto } from 'src/app/models/producto';
   styleUrls: ['./listar-productos.component.css']
 })
 export class ListarProductosComponent {
+  [x: string]: any;
 
   productoArray: Producto[] = [
     {nombre : "Laptop", categoria: "Electronica", estado: "Nuevo", descripcion: "HP de 32 GB Ram, 286 SSD",ubicacion: "Comayagua", costo: "16000"},
@@ -16,6 +20,8 @@ export class ListarProductosComponent {
   
   
   ];
-   
 
-}
+  
+
+  }
+

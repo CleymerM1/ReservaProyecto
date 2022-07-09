@@ -15,12 +15,14 @@ import { SolicitarRecuperarContraseniaComponent } from './Components/solicitar-r
 import { CategoriasComponent } from './Components/categorias/categorias.component';
 import { ProductoComponent } from './Components/producto/producto.component';
 
+
 //componentes
 const routes: Routes = [
   {path: '', component:LandingComponent},
   {path: 'inicio', component:IniciarSesionComponent},
   {path:'registrar-usuario',component:RegistrarUsuarioComponent},
   {path:'producto',component:ProductoComponent},
+  {path:'producto/:idProducto',component:ProductoComponent, canActivate:[AuthGuard]},
   {path:'editar-usuario/:id', component:RegistrarUsuarioComponent, canActivate:[AuthGuard]},
   {path:'listar-productos', component:ListarProductosComponent},
   {path:'confirmar/:token', component:ValidarCorreoComponent},

@@ -1,7 +1,8 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { TransitionCheckState } from '@angular/material/checkbox';
 import { ProductosService } from 'src/app/Services/productos.service';
+
 
 
 @Component({
@@ -15,6 +16,23 @@ export class ProductoComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  //eliminarProducto(Producto: any){
+    //if(confirm('¿Seguo que desea eliminar?'))
+    //this.productosService.eliminarProducto(Producto).subscribe((data)=>{
+      //this.getProductos();
+
+   // })
+  //}
+
+  eliminarProducto(Producto: string) {
+    if(confirm('Seguro que desea eliminar?')) {
+      this.productosService.delete(Producto);
+    }
+  }
+
+
+
 
   formularioCrear = new FormGroup( {
     nombreFormControl: new FormControl("", [Validators.required]),

@@ -39,7 +39,7 @@ import { CardCategoriaComponent } from './Components/card-categoria/card-categor
 import { DialogoUsuarioComponent } from './Components/dialogo-usuario/dialogo-usuario.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule} from '@angular/material/tooltip';
 import { ModalNuevaCategoriaComponent } from './Components/modal-nueva-categoria/modal-nueva-categoria.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BtnImagenComponent } from './Components/btn-imagen/btn-imagen.component';

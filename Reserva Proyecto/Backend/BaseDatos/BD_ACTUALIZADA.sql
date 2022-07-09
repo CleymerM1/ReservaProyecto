@@ -1,5 +1,3 @@
-
-
 CREATE DATABASE Pagina_Web;
 USE Pagina_Web;
 
@@ -8,8 +6,8 @@ CREATE TABLE privilegios (idPrivilegio INT PRIMARY KEY AUTO_INCREMENT, visualiza
 CREATE TABLE categoria (idCategoria INT PRIMARY KEY AUTO_INCREMENT, nombreCategoria VARCHAR(50), descripcion VARCHAR(50));
 DROP TABLE producto;
 
-CREATE TABLE producto(idProducto INT auto_increment,idCategoria INT, nombre VARCHAR(50), costo INT,
-estado VARCHAR(50), descripcion VARCHAR(50),
+CREATE TABLE producto(idProducto INT auto_increment,idCategoria INT,nombre VARCHAR(50), costo INT,
+estado VARCHAR(50), ubicacion VARCHAR(50), descripcion VARCHAR(50),
 primary key (idProducto, idCategoria),
 FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria));
 
