@@ -1,12 +1,14 @@
+/*--------------------------------------IMPORTS----------------------------------*/
 const express = require('express');
-const conexion = require('../config/conexion');
 const router = express.Router();
-const ProductoController = require('../controllers/productoController');
+const productoController = require('../controllers/productoController');
 
+/*---------------------------------------CRUD------------------------------------*/
+router.post('/registro', productoController.crearProducto);
+router.get('/', productoController.obtenerProductos);
+router.get('/:idP', productoController.obtenerProducto);
+router.put('/:idP', productoController.actualizarProducto);
+router.delete('/:idP', productoController.eliminarProducto);
 
-router.post('/registro', ProductoController.crearProducto);
-router.get('/', ProductoController.obtenerProductos);
-
-
-
+/*-------------------------------------------------------------------------------*/
 module.exports = router;
