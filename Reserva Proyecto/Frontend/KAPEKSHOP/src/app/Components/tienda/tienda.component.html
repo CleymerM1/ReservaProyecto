@@ -1,7 +1,9 @@
-<app-header urlItemActual="/tienda"></app-header>
-<div class="container">
-    
-</div>
+<app-header (onClickBurguer)="setSidebar($event)" urlItemActual="/tienda"></app-header>
+
+<app-admin (sidebarShowChange)="sidebarShow = false" [sidebarShow]="sidebarShow"></app-admin>
+
+
+
 
 
 
