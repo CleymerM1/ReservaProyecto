@@ -15,7 +15,13 @@ export class CategoriasService {
   }
 
   getCategorias():Observable<any>{
-    let urlC = 'http://localhost:3000/categorias/';
+    let urlC = 'http://localhost:3000/categoria';
+    return this.http.get(urlC)
+
+  }
+
+  getCategoria(idCategoria:number):Observable<any>{
+    let urlC = `http://localhost:3000/categoria/${idCategoria}`;
     return this.http.get(urlC)
 
   }
