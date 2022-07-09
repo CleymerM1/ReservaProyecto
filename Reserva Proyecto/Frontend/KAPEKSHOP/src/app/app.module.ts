@@ -44,7 +44,14 @@ import { ModalNuevaCategoriaComponent } from './Components/modal-nueva-categoria
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BtnImagenComponent } from './Components/btn-imagen/btn-imagen.component';
 
-
+import { ImagenesProductoComponent } from './Components/imagenes-producto/imagenes-producto.component';
+import {MatListModule} from '@angular/material/list';
+import { AdminComponent } from './Components/admin/admin.component';
+import { AnunciosComponent } from './Components/admin/anuncios/anuncios.component';
+import { CategoriasAdminComponent } from './Components/admin/categorias-admin/categorias-admin.component';
+import { DenunciasComponent } from './Components/admin/denuncias/denuncias.component';
+import { EstadisticasComponent } from './Components/admin/estadisticas/estadisticas.component';
+import { SidebarComponent } from './Components/admin/sidebar/sidebar.component';
 //import { ListarUsuariosComponent } from './components/listar-usuarios/listar-usuarios.component';
 
 @NgModule({
@@ -71,7 +78,14 @@ import { BtnImagenComponent } from './Components/btn-imagen/btn-imagen.component
     CardCategoriaComponent,
     DialogoUsuarioComponent,
     ModalNuevaCategoriaComponent,
-    BtnImagenComponent
+    BtnImagenComponent,
+    ImagenesProductoComponent,
+    AdminComponent,
+    AnunciosComponent,
+    CategoriasAdminComponent,
+    DenunciasComponent,
+    EstadisticasComponent,
+    SidebarComponent 
 
     
   ],
@@ -94,7 +108,9 @@ import { BtnImagenComponent } from './Components/btn-imagen/btn-imagen.component
     MatDialogModule,
     MatSelectModule,
     MatTooltipModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule
 
   ],
   providers: [],
