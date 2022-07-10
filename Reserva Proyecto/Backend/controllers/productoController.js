@@ -91,7 +91,7 @@ exports.actualizarProducto = (req, res) => {
         return res.status(404).send({msj: 'Error del cliente'})
     else
         Producto.actualizarPorId(id, (err, data) => {
-            if(err.data)
+            if(err)
                 return res.status(502).send({msj: `Error encontrando el producto con el id = '${id}' para actualizarlo`})
             else
                 return res.json(data)
@@ -105,7 +105,7 @@ exports.eliminarProducto = (req, res) => {
             return res.status(404).send({msj: 'Error del cliente'})
         else
             Producto.eliminarPorId(id, (err, data) => {
-                if(err.data)
+                if(err)
                     return res.status(502).send({msj: `Error al eliminar el producto con el id = '${id}'`})
                 else
                     return res.json(data)
