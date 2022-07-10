@@ -7,29 +7,25 @@ import { Producto } from '../models/producto';
   providedIn: 'root'
 })
 export class ProductosService {
-  delete(Producto: string) {
-    throw new Error('Method not implemented.');
-  }
 
-  constructor(private http:HttpClient) { }
-  crearProducto(objUsuario:any): Observable<any> {
+  constructor(private http: HttpClient) { }
+  crear(objUsuario: any): Observable<any> {
     let urlStr = `http://localhost:3000/producto/registro/`
-      return this.http.post(urlStr, objUsuario)
+    return this.http.post(urlStr, objUsuario)
   }
-  getProductos(): Observable<any>{
+  getProductos(): Observable<any> {
     let url = 'http://localhost:3000/producto/';
     return this.http.get(url);
   }
-  editarProducto(): Observable<any>{
-    let url = 'http://localhost:3000/producto/{{producto.producto_id}}';
-    return this.http.put(this.editarProducto+'/producto',producto_id);
+
+  actualizarProducto(objUsuario: any): Observable<any> {
+    let urlStr = 'http://localhost:3000/producto/producto/${idProducto}'
+    return this.http.put(urlStr, objUsuario)
   }
 
-  eliminarProducto(): Observable<any>{
-    return this.http.delete('http://localhost:3000/producto/');
+  eliminarPorId(objUsuario: any): Observable<any> {
+    let urlStr = 'http://localhost:3000/producto/${idProducto}'
+    return this.http.delete(urlStr, objUsuario)
+
   }
 }
-function producto_id(arg0: string, producto_id: any): Observable<any> {
-  throw new Error('Function not implemented.');
-}
-

@@ -45,7 +45,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BtnImagenComponent } from './Components/btn-imagen/btn-imagen.component';
 
 import { ImagenesProductoComponent } from './Components/imagenes-producto/imagenes-producto.component';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule} from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AdminComponent } from './Components/admin/admin.component';
 import { AnunciosComponent } from './Components/admin/anuncios/anuncios.component';

@@ -33,8 +33,7 @@
       <div class="navbar align-self-center d-flex">
         <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
           <div class="form-group">
-            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ..."
-              [(ngModel)]="productoArray" name="productoArray">
+            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
             <div class="input-group-text">
               <i class="fa fa-fw fa-search"></i>
             </div>
@@ -58,90 +57,41 @@
 </nav>
 <!-- Fin Header -->
 
-
-
-<!--<div class="container mt-5">
-    <div class="row">
-        <div class="col-lg-8 offset-lg-2">
-            <div class="card">
-                <div class="card-body text-center">
-                    <span class="titulo"> Listar Productos</span>
-                    <button class="btn btn-success float-end">Nuevo</button>
-                    <table class="table table-striped mt-3">
-                        <thead>
-                          <tr>
-                            <th scope="col">Producto</th>
-                            <th scope="col">Categoría</th>
-                            <th scope="col">Ubicación</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td scope="row">Laptop HP</td>
-                            <td>Electrónica</td>
-                            <td>Tegucigalpa</td>
-                            <td>15,000</td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td scope="row">Skinny Jeans</td>
-                            <td>Moda</td>
-                            <td>San Pedro Sula</td>
-                            <td>850</td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-</div>
--->
-
-
 <div class="container mt-5">
   <div class="row">
     <div class="col-lg-8 offset-lg-2">
       <div class="card">
         <div class="card-body text-center">
-          <span class="titulo"> Lista Productos</span>
+          <span class="titulo"> Lista de Productos</span>
           <div class="form-group">
-          <button class="btn btn-success float-end" routerLink="/producto">Agregar Producto</button>
-          <table class="table table-striped mt-3">
+            <button class="btn btn-success float-end" routerLink="/producto">Agregar Producto</button>
+            <table class="table table-striped mt-3">
 
-            <thead>
-              <tr *ngFor="let producto of productoArray" class="list-group-item-list-group">
-                <td>{{producto.nombre}}</td>
-                <td>{{producto.categoria}}</td>
-                <td>{{producto.estado}}</td>
-                <td>{{producto.descripcion}}</td>
-                <td>{{producto.ubicacion}}</td>
-                <td>{{producto.costo}}</td>
-                <td>
+              <thead>
+                <tr *ngFor="let producto of listarProductos" class="list-group-item-list-group">
+                  <td>{{producto.nombre}}</td>
+                  <td>{{producto.categoria}}</td>
+                  <td>{{producto.estado}}</td>
+                  <td>{{producto.descripcion}}</td>
+                  <td>{{producto.ubicacion}}</td>
+                  <td>{{producto.costo}}</td>
+                  <td>
 
-                  <!--BOTON EDITAR-->
-                  <a class="btn btn-secondary text-white" routerLink="/producto/:idProducto" style="margin-right: 10px">
-                    <i class="far fa-edit"></i>
-                  </a>
+                      <!--BOTON EDITAR-->
+                      <button class="btn btn-secondary text-white" routerLink="/producto/${idProducto}"
+                        style="margin-right: 10px">
+                        <i class="far fa-edit"></i>
+                      </button>
 
-                  <!--BOTON ELIMINAR-->
-                  <a class="btn btn-danger text-white">
-                    <i class="fas fa-trash-alt"></i>
-                  </a>
-                </td>
-              </tr>
-            </thead>
-          </table>
+                      <!--BOTON ELIMINAR-->
+                      <button class="btn btn-danger text-white">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+              </thead>
+            </table>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</div>

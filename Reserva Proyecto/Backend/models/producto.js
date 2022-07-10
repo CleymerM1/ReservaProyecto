@@ -1,6 +1,8 @@
 /*-------------------------------Import para la conexion con la base de datos------------------------------*/ 
 const conexion = require('../config/conexion');
 
+
+
 /*------------------------------------------Creacion de clases---------------------------------------------*/ 
 const Producto = function(objProducto){
     this.categoria = objProducto.categoria;
@@ -85,7 +87,7 @@ Producto.obtenerPorCosto = (inter1, inter2, resultado) => {
 Producto.actualizarPorId = (id, newObjProducto, resultado) => {
     let actualizarQuery =   `UPDATE producto SET idCategoria = '${newObjProducto.categoria}', nombre = '${newObjProducto.nombre}', 
                             costo = '${newObjProducto.costo}', estado = '${newObjProducto.estado}', descripcion = '${newObjProducto.descripcion}', 
-                            descuento = '${newObjProducto.descuento}' WHERE idProducto = '${id}'`
+                            ubicacion = '${newObjProducto.ubicacion}' WHERE idProducto = '${id}'`
     conexion.query(actualizarQuery, (err, res) => {
         if(err)
             return resultado({msj: `Hubo un error '${err}'`}, null)

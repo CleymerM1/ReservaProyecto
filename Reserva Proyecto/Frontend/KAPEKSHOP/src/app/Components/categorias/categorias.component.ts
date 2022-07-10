@@ -12,7 +12,6 @@ import { ModalNuevaCategoriaComponent } from '../modal-nueva-categoria/modal-nue
 })
 export class CategoriasComponent implements OnInit {
   
-  
 
   usuarioActual:any = {}
   constructor( private modalService: NgbModal, private usuarioService:UsuarioService, private route: ActivatedRoute, private router:Router) { }

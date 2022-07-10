@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Categoria } from 'src/app/interfaces/Categorias';
 import { CategoriasService } from 'src/app/Services/categorias.service';
+
+
 @Component({
   selector: 'app-categoria',
   templateUrl: './categoria.component.html',
