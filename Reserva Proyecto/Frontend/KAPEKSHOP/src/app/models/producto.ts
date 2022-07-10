@@ -4,18 +4,18 @@ export class Producto{
     categoria:string;
     estado:string;
     descripcion:string;
-    ubicacion:string;
     costo:string;
+    ubicacion:string;
 
 
     constructor(nombre: string, categoria:string,estado:string,
-        descripcion:string, ubicacion:string, costo:string){
+        descripcion:string, costo:string, ubicacion:string){
         this.nombre=nombre;
         this.categoria=categoria;
         this.estado=estado;
         this.descripcion=descripcion;
-        this.ubicacion=ubicacion;
         this.costo=costo;
+        this.ubicacion=ubicacion;
         
     }
 }
