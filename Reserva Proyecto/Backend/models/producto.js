@@ -38,15 +38,12 @@ Producto.obtenerTodos = (resultado)=>{
 
 /*--------------------Funciones de Busqueda--------------------*/
 Producto.obtenerPorId = (id, resultado) => {                                                    
-let obtenerQuery = `select * from producto where idProducto = ${id}`                                                                                                                    
-    conexion.query(obtenerQuery, (err, res) => {                                                                                                                    
-        if(err)                                                                                                                     
-            return resultado({msj: 'Hubo un error' + err}, null)                                                                                                                    
-        else if(res.length)                                                                                                                 
-            return resultado(null, res[0])                                                                                                                  
-        else                                                                                                                    
-            return resultado({msj: 'Producto no encontrado'}, null)                                                                                                                 
-    })                                                                                                                  
+    let obtenerQuery = `select * from producto where idProducto = ${id}`
+    conexion.query(obtenerQuery, (err, res) => {
+        if(err) return resultado({msj: 'Hubo un error' + err}, null)
+
+        return resultado(null, res)
+    })
 }                                                                                                                   
 Producto.obtenerPorUbi = (departamento, resultado) => {
     let obtenerQuery = `select * from producto where ubicacion = '${departamento}'`  //Hay que definir que columnas se quieren de la tabla producto
