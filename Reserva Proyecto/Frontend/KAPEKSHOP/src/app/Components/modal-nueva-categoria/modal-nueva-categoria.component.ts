@@ -35,8 +35,7 @@ export class ModalNuevaCategoriaComponent implements OnInit {
     }
   }
 
-  agregarCategoria(event:Event){
-    event.preventDefault()
+  agregarCategoria(){
     let objCategoria = {
       nombre: this.categoria.get('nombre')?.value,
       descripcion: this.categoria.get('descripcion')?.value,
