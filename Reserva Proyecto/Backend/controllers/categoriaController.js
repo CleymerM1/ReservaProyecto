@@ -48,4 +48,14 @@ exports.obtenerCategoria = (req,res)=>{
             res.status(200).json(data[0]);
         }
     });
-}
+};
+
+exports.eliminarCategoria = (req,res) =>{
+    Categoria.eliminar(req.params.id, (error, data)=>{
+        if(error){
+            res.status(404).json({mensaje: 'No se pudo eliminar la categoria'})
+        }else{
+            res.status(200).json({mensaje:'Se eliminó la categoria correctamente'});
+        }
+    })
+};
