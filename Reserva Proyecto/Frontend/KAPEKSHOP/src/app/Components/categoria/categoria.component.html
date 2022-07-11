@@ -27,8 +27,8 @@
         </div>
     </div>
     <div class="row" *ngIf="!mostarFormulario">
-        <div *ngFor="let item of productos" class="col-4">
-            <app-card-producto [producto]="item"></app-card-producto>
+        <div *ngFor="let item of listarProductos" class="col-4">
+            <app-card-producto [listarProducto]="item"></app-card-producto>
         </div>
     </div>
     <div class="row" *ngIf="mostarFormulario">
