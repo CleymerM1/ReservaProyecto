@@ -129,4 +129,24 @@ Producto.eliminarTodosPorUsuario = (resultado) => {                             
     })                                                                                            // Importante cambiar    
 }                                                                                                 // Importante cambiar
 
+//Estas funciones son para contabilizar los productos mas visitados
+Producto.actualizarContador = (res) => {
+    let updateQuery = `update producto set contador = contador + 1`
+    conexion.query(updateQuery, (err, rows) => {
+        if(err) return res({msj: 'Hubo un error' + err}, null);
+
+        return res(null, rows);
+    }
+    )
+};
+
+Producto.obtenerDiezProductosMasVisitados = (idCategoria, departamento, res) => {
+    let searchQuery = `SELECT categoria.idCategoria, nombreCategoria, departamento, contador FROM categoria JOIN usuario ON idUsuario = usuario.idUsuario JOIN producto on producto.idCategoria = categoria.idCategoria WHERE (departamento = '${departamento}' AND categoria.idCategoria = ${idCategoria}) order by contador desc limit 10;`
+    conexion.query(searchQuery, (err, rows) => {
+        if(err) return res({msj: 'Hubo un error' + err}, null);
+
+        return res(null, rows);
+    }
+    )
+};
 module.exports = Producto;
