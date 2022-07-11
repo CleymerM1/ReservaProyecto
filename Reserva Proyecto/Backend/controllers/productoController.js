@@ -45,6 +45,28 @@ exports.obtenerProductos = (req,res)=>{
     })
 };
 
+exports.actualizarContador = (req,res)=>{
+    Producto.actualizarContador((error,data)=>{
+        if(error){
+            res.status(404).json({msj: 'Hubo un problema al actualizar el contador' + error})
+        }else{
+            res.status(200).json(data)
+        }
+    })
+};
+
+exports.obtenerProductosMasVistos = (req,res)=>{
+    let { id, departamento } = req.body;
+    Producto.obtenerProductosMasVistos(id, departamento, (error,data)=>{
+        if(error){
+            res.status(404).json({msj: 'Hubo un problema al obtener los productos mas vistos' + error})
+        }else{
+            res.status(200).json(data)
+        }
+    })
+};
+
+
 /*---------Obtener un solo producto----------*/
 exports.obtenerProducto = (req, res) =>{
     let id = req.params.id
