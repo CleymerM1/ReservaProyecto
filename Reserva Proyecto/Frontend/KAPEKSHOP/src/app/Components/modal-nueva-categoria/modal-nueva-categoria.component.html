@@ -1,7 +1,7 @@
 <div class="container">
-    <form (submit)="agregarCategoria($event)" [formGroup]="categoria" class="row mt-5">
+    <form (submit)="handleSubmit($event)" [formGroup]="categoria" class="row mt-5">
         <div class="col-12 text-center">
-            <h1>Nueva categoría</h1>
+            <h1>{{editandoCategoria ? 'Editando categoria' : 'Nueva categoria'}}</h1>
         </div>
         <div class="col-12 mb-3">
             <mat-form-field class="input-full" class="input-full" style="width: 100%" appearance="fill" >
@@ -23,7 +23,7 @@
               
         </div>
         <div class="col-12 mb-5 text-center">
-            <input class="btn btn-primary" type="submit" value="Agregar nueva categoría" />
+            <input class="btn btn-primary" type="submit" [value]="editandoCategoria ? 'Editar categoria' : 'Agregar categoria'" />
         </div>
     </form>
 
