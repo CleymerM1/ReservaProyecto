@@ -32,6 +32,11 @@ export class ProductosService {
     const headers = getHeaders(token)
     return this.http.get(`http://localhost:3000/producto/${id}`, headers);
   }
+  
+  actualizarContador(id:any): Observable<any>{
+    let url = `http://localhost:3000/producto/contador/${id}`;
+    return this.http.put(url, {contador:1});
+  }
 
   getProducto(id: any): Observable<any>{
     let url = `http://localhost:3000/producto/${id}`;
