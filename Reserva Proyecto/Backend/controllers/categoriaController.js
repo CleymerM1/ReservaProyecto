@@ -59,3 +59,13 @@ exports.eliminarCategoria = (req,res) =>{
         }
     })
 };
+
+exports.editarCategoria = (req, res) =>{
+    Categoria.editarCategoria(req, (error,data)=>{
+        if(error){
+            res.status(404).json({mensaje:'No se puedo editar la categoria'})
+        }else{
+            res.status(200).json({mensaje: 'Se editó la categoria'})
+        }
+    })
+};
