@@ -124,12 +124,4 @@ export class actualizarProductoComponent implements OnInit {
     })
   }
 
-  /*obtenerProducto(){
-    this.productosService.getProducto(id).subscribe(data =>{
-      console.log(data);
-      this.listarProductos = data;
-    })
-  }*/
-
-
 }

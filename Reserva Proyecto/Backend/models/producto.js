@@ -85,6 +85,7 @@ Producto.obtenerPorCosto = (inter1, inter2, resultado) => {
 Producto.actualizarPorId = (id, newObjProducto, resultado) => {
 console.log("Id",id)
 console.log("Esto recibe de frontend ",newObjProducto)
+//SE QUITO IDCATEGORIA PARA QUE FUNCIONE EL ACTUALIZAR
     let actualizarQuery = `UPDATE producto SET nombre = '${newObjProducto.nombre}', 
                             costo = '${newObjProducto.costo}', estado = '${newObjProducto.estado}', descripcion = '${newObjProducto.descripcion}', 
                             ubicacion = '${newObjProducto.ubicacion}' WHERE idProducto = '${id}'`
