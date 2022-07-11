@@ -32,6 +32,14 @@ Categoria.obtener = (resultado) =>{
     });
 };
 
+Categoria.eliminar = (id, res) =>{
+    let eliminar = `delete from categoria where idCategoria='${id}'`
+    conexion.query(eliminar, (err, data)=>{
+        if(err) return res(error,null)
+        return res(null,{msj:'Categoria eliminada'})
+    })
+};
+
 Categoria.obtenerPorId = (id, resultado) =>{
     conexion.query(`select * from categoria where idCategoria = ${id}`, (err, rows)=>{
         if(err) throw err;
@@ -45,20 +53,6 @@ Categoria.obtenerPorId = (id, resultado) =>{
     });
 }
 
-Categoria.eliminar = (newObjCat, res) =>{
-    let buscarCat =`selec idCategoria from categoria where nombreCategoria = '${newObjCat.nombre}'`;
-    conexion.query(buscarCat, (err, data)=>{
-        if(err) return res(error, null)
-        if(data.lenght){
-            let idCat = Object.values(JSON.parse(JSON.stringify(data[0])))
-            let eliminarC = `delete from categoria where idCategoria = '${idCat}'`;
-            conexion.query(eliminarC, (error, respuesta)=>{
-                if(error) return res({msj: 'La categoria no pudo ser eliminada' + error})
-                return res({msj:'Categoria eliminada'})
-            })
-        }
-    })
-};
 
         
 module.exports = Categoria;
