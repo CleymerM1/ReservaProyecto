@@ -39,3 +39,5 @@ ALTER TABLE usuario ADD confirmado ENUM('1','0') DEFAULT '0'
 ALTER TABLE categoria ADD imagen LONGBLOB;
 ALTER TABLE producto ADD ubicacion VARCHAR(50);
 insert into rol (idPrivilegio, nombreRol, estado) values (2,'admin', 'activo');
+Alter TABLE producto ADD contador int DEFAULT 0;
+CREATE TABLE suscripcion(idSuscripcion INT PRIMARY KEY AUTO_INCREMENT, idCategoria INT, idUsuario INT , correoUsuario VARCHAR(50), FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria));
