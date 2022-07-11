@@ -69,6 +69,7 @@
 
               <thead>
                 <tr *ngFor="let producto of listarProductos" class="list-group-item-list-group">
+                  <td>{{producto.idProducto}}</td>
                   <td>{{producto.nombre}}</td>
                   <td>{{producto.categoria}}</td>
                   <td>{{producto.estado}}</td>
@@ -84,7 +85,7 @@
                       </button>
 
                       <!--BOTON ELIMINAR-->
-                      <button class="btn btn-danger text-white">
+                      <button class="btn btn-danger text-white" (click)="eliminarProducto(producto.idProducto)">
                         <i class="fas fa-trash-alt"></i>
                       </button>
               </thead>

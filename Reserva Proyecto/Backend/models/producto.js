@@ -5,13 +5,14 @@ const conexion = require('../config/conexion');
 
 /*------------------------------------------Creacion de clases---------------------------------------------*/ 
 const Producto = function(objProducto){
+    this.idProducto = objProducto.idProducto;
     this.categoria = objProducto.categoria;
     this.nombre = objProducto.nombre;
     this.costo = objProducto.costo;
     //this.foto = objProducto.foto;
     this.estado = objProducto.estado;
     this.descripcion = objProducto.descripcion;
-    this.ubicacion = objProducto.ubicacion;;
+    this.ubicacion = objProducto.ubicacion;
 };
 
 /*---------------------------------------------Funciones---------------------------------------------------*/

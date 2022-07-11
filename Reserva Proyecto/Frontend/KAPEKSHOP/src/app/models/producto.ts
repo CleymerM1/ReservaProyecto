@@ -1,5 +1,5 @@
 export class Producto{
-    _id?: number;
+    idProducto: number;
     nombre: string;
     categoria:string;
     estado:string;
@@ -8,8 +8,9 @@ export class Producto{
     ubicacion:string;
 
 
-    constructor(nombre: string, categoria:string,estado:string,
+    constructor(idProducto: number,nombre: string, categoria:string,estado:string,
         descripcion:string, costo:string, ubicacion:string){
+        this.idProducto=idProducto;
         this.nombre=nombre;
         this.categoria=categoria;
         this.estado=estado;

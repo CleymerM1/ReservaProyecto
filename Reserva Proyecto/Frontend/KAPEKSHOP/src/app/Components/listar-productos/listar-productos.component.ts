@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from 'src/app/models/producto';
 import { ProductosService } from 'src/app/Services/productos.service';
 
+
 @Component({
   selector: 'app-listar-productos',
   templateUrl: './listar-productos.component.html',
@@ -20,7 +21,9 @@ export class ListarProductosComponent implements OnInit {
   
   obtenerProductos(){
     this.productoService.getProductos().subscribe(data =>{
+      console.log("<<<<<<<<")
       console.log(data);
+      console.log("<<<<<<<<")
       this.listarProductos = data;
     })
   }
@@ -36,6 +39,21 @@ export class ListarProductosComponent implements OnInit {
       }      }
     );
     }
+
+
+    eliminarProducto(id: number){
+      console.log("Eliminar< >>>>>>>>",id)
+       if(confirm("¿Seguro que desea eliminar?")){
+       this.productoService.eliminarProducto(id).subscribe((data)=>{
+       this.obtenerProductos();
+        },(error)=>{
+       console.log(error);
+       })
+       }
+      }
+      
+
+
   }
 
   
