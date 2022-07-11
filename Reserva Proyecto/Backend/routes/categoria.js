@@ -8,7 +8,7 @@ router.post('/registro', CategoriaController.crearCategoria);
 //router.post('/login',categoriaController.inicioSesion);
 router.get('/', CategoriaController.obtenerCategorias);
 router.get('/:id', CategoriaController.obtenerCategoria)
-
+router.delete('/eliminar/:id',CategoriaController.eliminarCategoria );
 
 
 module.exports = router;
