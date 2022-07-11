@@ -64,7 +64,6 @@ exports.obtenerProducto = (req, res) =>{
 exports.filtrarProductos = (req, res) => {
     let filter = req.params.filter
     let value1 = req.params.value1
-    let value2 = req.params.value2
     let producto = req.body
     if(!filter || !value1)
         return console.log('hay parametros vacios')
@@ -76,10 +75,10 @@ exports.filtrarProductos = (req, res) => {
             case 'ubi':
                 data = producto.filter(el => el.ubicacion == value1)
                 break;
-            case 'prec':
-                if(!value2 || value2 == 0)
-                    return res.status(404).send({msj: 'falta un intervalo'})
-                data = producto.filter(el => el.costo >= value1 && el.costo <= value2)
+            case 'precMas':
+                data = producto.filter(el => el.costo >= value1)
+            case 'precMenos':
+                data = producto.filter(el => el.costo <= value1)
         }
         return res.json(data)
 }
