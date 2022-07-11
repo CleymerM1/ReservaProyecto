@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioService } from 'src/app/Services/usuario.service';
+import { Categoria } from 'src/app/interfaces/Categorias';
+import {CategoriasService } from 'src/app/Services/categorias.service';
+
 
 @Component({
   selector: 'app-modal-nueva-categoria',
@@ -9,6 +12,11 @@ import { UsuarioService } from 'src/app/Services/usuario.service';
   styleUrls: ['./modal-nueva-categoria.component.css']
 })
 export class ModalNuevaCategoriaComponent implements OnInit {
+
+  @Input() objetoCategoria: Categoria | undefined
+  @Input() editandoCategoria = false
+
+  @Output() onEvento = new EventEmitter<boolean>();
 
   categoriaAgregada = false;
   imagenB64:any = null;
@@ -19,9 +27,12 @@ export class ModalNuevaCategoriaComponent implements OnInit {
     imagen: new FormControl()
   })
   
-  constructor( public activeModal: NgbActiveModal, private usuarioService:UsuarioService ) { }
+  constructor( public activeModal: NgbActiveModal, private usuarioService:UsuarioService, private categoriasService: CategoriasService  ) { }
 
   ngOnInit(): void {
+    if(this.editandoCategoria){
+      this.editarFormulario()
+    }
   }
 
   agregarCategoria(event:Event){
@@ -33,12 +44,43 @@ export class ModalNuevaCategoriaComponent implements OnInit {
     }
     this.usuarioService.nuevaCategoria(objCategoria).subscribe( (res:any) => {
       this.categoriaAgregada = true;
+      this.onEvento.emit(true)
       this.activeModal.close();
     }, (err:any) => {
       this.categoriaAgregada = false;
     });
   }
+  
+  handleSubmit(event: Event){
+    event.preventDefault()
+    if(this.editandoCategoria){
+      this.editarCategoria()
+    }else{
+      this.agregarCategoria()
+    }
+  }
+  
+  editarFormulario(){
+    this.categoria.get('nombre')?.setValue(this.objetoCategoria?.nombreCategoria)
+    this.categoria.get('descripcion')?.setValue(this.objetoCategoria?.descripcion)
+  }
 
+  editarCategoria(){
+    let objCategoria = {
+      nombre: this.categoria.get('nombre')?.value,
+      descripcion: this.categoria.get('descripcion')?.value,
+      imagen: this.imagenB64 || this.objetoCategoria?.imagen
+    }
+    this.categoriasService.editarCategoria(objCategoria, this.objetoCategoria?.idCategoria).subscribe(res =>{
+      console.log(res)
+      this.onEvento.emit(true)
+      this.activeModal.close();
+    }, error =>{
+      console.log(error)
+      this.activeModal.close();
+    })
+  }
+  
   async fileChangeEvent(event:any) {
     if(event.target.files.length != 0){
       this.categoria.get("imagen")?.setValue(event.target.files[0].name)
