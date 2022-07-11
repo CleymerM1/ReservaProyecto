@@ -9,6 +9,7 @@ router.post('/registro', CategoriaController.crearCategoria);
 router.get('/', CategoriaController.obtenerCategorias);
 router.get('/:id', CategoriaController.obtenerCategoria)
 router.delete('/eliminar/:id',CategoriaController.eliminarCategoria );
+router.put('/editar/:id', CategoriaController.editarCategoria);
 
 
 module.exports = router;
