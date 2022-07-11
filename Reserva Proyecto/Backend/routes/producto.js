@@ -10,6 +10,8 @@ router.get('/:filter/:value1', productoController.filtrarProductos);
 router.get('/:idP', productoController.obtenerProducto);
 router.put('/actualizar/:id', productoController.actualizarProducto);
 router.delete('/:idP', productoController.eliminarProducto);
+router.put('/contador/:id', ProductoController.actualizarContador);
+
 
 /*-------------------------------------------------------------------------------*/
 module.exports = router;
