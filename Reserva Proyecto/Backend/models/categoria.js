@@ -51,7 +51,19 @@ Categoria.obtenerPorId = (id, resultado) =>{
 
         resultado(null, rows);
     });
-}
+};
+
+Categoria.editarCategoria = (req, res) =>{
+    let edit=`update categoria set nombreCategoria = '${req.body.nombre}', descripcion = '${req.body.descripcion}', imagen='${req.body.imagen}' where idCategoria='${req.params.id}' `
+    conexion.query(edit, (error,data)=>{
+        if(error){
+            //console.log(error)
+            return res(error, null)
+        }else{
+            return res(null, {msj:'Se actualizó la categoria'})
+        }
+    } )
+};
 
 
         
