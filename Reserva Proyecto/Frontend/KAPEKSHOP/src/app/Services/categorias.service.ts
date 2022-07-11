@@ -25,4 +25,13 @@ export class CategoriasService {
     return this.http.get(urlC)
 
   }
+  eliminarCategoria(idCategoria:number): Observable<any>{
+    let UrlEl= `http://localhost:3000/categoria/eliminar/${idCategoria}`;
+    return this.http.delete(UrlEl)
+  }
+
+  editarCategoria(objCategoria:any, idCategoria:any): Observable<any>{
+    let UrlEl= `http://localhost:3000/categoria/editar/${idCategoria}`;
+    return this.http.put(UrlEl,objCategoria)
+  }
 }
