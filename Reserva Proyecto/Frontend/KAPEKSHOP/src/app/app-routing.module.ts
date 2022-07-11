@@ -14,6 +14,7 @@ import { IniciarSesionComponent } from './Components/iniciar-sesion/iniciar-sesi
 import { SolicitarRecuperarContraseniaComponent } from './Components/solicitar-recuperar-contrasenia/solicitar-recuperar-contrasenia.component';
 import { CategoriasComponent } from './Components/categorias/categorias.component';
 import { ProductoComponent } from './Components/producto/producto.component';
+import { actualizarProductoComponent } from './Components/actualizarProducto/actualizarProducto.component';
 
 
 //componentes
@@ -22,7 +23,6 @@ const routes: Routes = [
   {path: 'inicio', component:IniciarSesionComponent},
   {path:'registrar-usuario',component:RegistrarUsuarioComponent},
   {path:'producto',component:ProductoComponent},
-  {path:'producto/:idProducto',component:ProductoComponent, canActivate:[AuthGuard]},
   {path:'editar-usuario/:id', component:RegistrarUsuarioComponent, canActivate:[AuthGuard]},
   {path:'listar-productos', component:ListarProductosComponent},
   {path:'confirmar/:token', component:ValidarCorreoComponent},
@@ -32,7 +32,9 @@ const routes: Routes = [
   //se modificó las rutas de categorias
   {path:'categorias',component:CategoriasComponent},
   {path:'tienda/categorias/:idCategoria', component:CategoriaComponent, canActivate:[AuthGuard]},
+  {path:'producto/actualizarProducto/:id', component:actualizarProductoComponent},
   {path:'**', redirectTo:'',pathMatch:'full'},
+  
 ];
 
 @NgModule({

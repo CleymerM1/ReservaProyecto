@@ -44,6 +44,8 @@ import { ModalNuevaCategoriaComponent } from './Components/modal-nueva-categoria
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BtnImagenComponent } from './Components/btn-imagen/btn-imagen.component';
 
+import { actualizarProductoComponent } from './Components/actualizarProducto/actualizarProducto.component';
+
 import { ImagenesProductoComponent } from './Components/imagenes-producto/imagenes-producto.component';
 import { MatListModule} from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -86,7 +88,8 @@ import { SidebarComponent } from './Components/admin/sidebar/sidebar.component';
     CategoriasAdminComponent,
     DenunciasComponent,
     EstadisticasComponent,
-    SidebarComponent   
+    SidebarComponent,
+    actualizarProductoComponent
   ],
   imports: [
     BrowserModule,

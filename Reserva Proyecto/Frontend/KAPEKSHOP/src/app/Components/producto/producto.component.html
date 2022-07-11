@@ -13,16 +13,15 @@
                   <mat-form-field class="input-full" class="input-full" style="width: 100%" appearance="fill" >
                     <mat-label>Nombre</mat-label>
                     <input matInput formControlName="nombreFormControl"  placeholder="Ex. Juan" value="">
-                    <mat-error *ngIf="formularioCrear.get('nombreFormControl')?.invalid">El nombre es requerido</mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-12 mb-3">
                   <mat-form-field class="input-full" style="width: 100%" appearance="fill">
                     <mat-label>Categoria</mat-label>
                     <mat-select  formControlName="categoriaFormControl" placeholder="Seleccione una categoria">
-                      <mat-option  [value]="categoriaActual.idCategoria">
+                      <!--<mat-option  [value]="categoriaActual.idCategoria">
                         {{categoriaActual.nombreCategoria}}
-                      </mat-option>
+                      </mat-option>-->
                     </mat-select>
                     <mat-icon matSuffix></mat-icon>
                   </mat-form-field>

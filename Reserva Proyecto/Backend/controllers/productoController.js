@@ -47,7 +47,7 @@ exports.obtenerProductos = (req,res)=>{
 
 /*---------Obtener un solo producto----------*/
 exports.obtenerProducto = (req, res) =>{
-    let id = req.params.idP
+    let id = req.params.id
     if(!id)
         return res.status(404).send({msj: 'Error del cliente'})
     else
@@ -86,16 +86,25 @@ exports.filtrarProductos = (req, res) => {
 
 /*-------------Actualizar por id-------------*/
 exports.actualizarProducto = (req, res) => {
-    let id = req.params.idP
+    let id = req.params.id
     if(!id)
         return res.status(404).send({msj: 'Error del cliente'})
-    else
-        Producto.actualizarPorId(id, (err, data) => {
+
+        console.log("Esto recibe de frontend. ",req.body);
+        const productoActualizado = new Producto({
+        nombre: req.body.nombre,
+        costo: req.body.costo,
+        estado: req.body.estado,
+        descripcion: req.body.descripcion,
+        ubicacion: req.body.ubicacion
+        })
+           Producto.actualizarPorId(id, productoActualizado, (err, data) => {
             if(err)
                 return res.status(502).send({msj: `Error encontrando el producto con el id = '${id}' para actualizarlo`})
             else
                 return res.json(data)
         })
+    
 }
 
 /*--------------Eliminar por id--------------*/

@@ -59,16 +59,29 @@
 
 <div class="container mt-5">
   <div class="row">
-    <div class="col-lg-8 offset-lg-2">
+    <div class="col-lg-10 offset-lg-1">
       <div class="card">
         <div class="card-body text-center">
           <span class="titulo"> Lista de Productos</span>
           <div class="form-group">
             <button class="btn btn-success float-end" routerLink="/producto">Agregar Producto</button>
-            <table class="table table-striped mt-3">
 
-              <thead>
-                <tr *ngFor="let producto of listarProductos" class="list-group-item-list-group">
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Ubicacion</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Editar</th>
+                  <th scope="col">Eliminar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let producto of listarProductos">
                   <td>{{producto.idProducto}}</td>
                   <td>{{producto.nombre}}</td>
                   <td>{{producto.categoria}}</td>
@@ -76,19 +89,18 @@
                   <td>{{producto.descripcion}}</td>
                   <td>{{producto.ubicacion}}</td>
                   <td>{{producto.costo}}</td>
-                  <td>
 
-                      <!--BOTON EDITAR-->
-                      <button class="btn btn-secondary text-white" routerLink="/producto/${idProducto}"
-                        style="margin-right: 10px">
-                        <i class="far fa-edit"></i>
-                      </button>
-
-                      <!--BOTON ELIMINAR-->
-                      <button class="btn btn-danger text-white" (click)="eliminarProducto(producto.idProducto)">
-                        <i class="fas fa-trash-alt"></i>
-                      </button>
-              </thead>
+                  <!--BOTON EDITAR-->
+                  <td> <button class="btn btn-secondary text-white" [routerLink]="['/producto/actualizarProducto/',producto.idProducto]"
+                      style="margin-right: 10px">
+                      <i class="far fa-edit"></i>
+                    </button></td>                   
+                  <!--BOTON ELIMINAR-->
+                    <td><button class="btn btn-danger text-white" (click)="eliminarProducto(producto.idProducto)">
+                      <i class="fas fa-trash-alt"></i>
+                    </button> </td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>

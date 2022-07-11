@@ -2,6 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Producto } from '../models/producto';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import getHeaders from 'src/app/helpers/getHeaders'
+
+const helper = new JwtHelperService();
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +27,14 @@ export class ProductosService {
     return this.http.get(url);
   }
 
-  getProducto(nombre: string): Observable<any>{
-    let url = `http://localhost:3000/producto/${nombre}`
+  obtenerProductoActual(id:any) {
+    const token = localStorage.getItem('token') || '';
+    const headers = getHeaders(token)
+    return this.http.get(`http://localhost:3000/producto/${id}`, headers);
+  }
+
+  getProducto(id: any): Observable<any>{
+    let url = `http://localhost:3000/producto/${id}`;
     return this.http.get(url);
   }
   filtrarProductos(filtro: string, valor1: string, valor2: string, objProductos: any): Observable<any>{
@@ -33,8 +43,8 @@ export class ProductosService {
   }
 
   /*-----------------------------Metodos UPDATE-----------------------------*/
-  editarProducto(id: number, objProducto: any): Observable<any>{
-    let url = `http://localhost:3000/producto/${id}`;
+  editarProducto(id: any, objProducto: any): Observable<any>{
+    let url = `http://localhost:3000/producto/actualizar/${id}`;
     return this.http.put(url, objProducto);
   }
   /*-----------------------------Metodos DELETE-----------------------------*/

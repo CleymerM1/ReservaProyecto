@@ -7,8 +7,8 @@ const productoController = require('../controllers/productoController');
 router.post('/registro', productoController.crearProducto);
 router.get('/', productoController.obtenerProductos);
 router.get('/:filter/:value1/:value2', productoController.filtrarProductos);
-router.get('/:idP', productoController.obtenerProducto);
-router.put('/:idP', productoController.actualizarProducto);
+router.get('/:id', productoController.obtenerProducto);
+router.put('/actualizar/:id', productoController.actualizarProducto);
 router.delete('/:idP', productoController.eliminarProducto);
 
 /*-------------------------------------------------------------------------------*/

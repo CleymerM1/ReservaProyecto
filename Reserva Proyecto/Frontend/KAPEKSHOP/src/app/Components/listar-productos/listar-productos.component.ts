@@ -16,19 +16,17 @@ export class ListarProductosComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerProductos();
-    this.actualizarProducto()
+    this.editarProducto()
   }
   
   obtenerProductos(){
     this.productoService.getProductos().subscribe(data =>{
-      console.log("<<<<<<<<")
       console.log(data);
-      console.log("<<<<<<<<")
       this.listarProductos = data;
     })
   }
 
-  actualizarProducto():void{
+  editarProducto():void{
     this.activatedRoute.params.subscribe(
       e=>{
         let id=e['id'];
