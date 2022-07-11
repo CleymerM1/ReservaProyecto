@@ -1,5 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import leerToken from 'src/app/helpers/decodificarToken';
 import { Categoria } from 'src/app/interfaces/Categorias';
+import { ConfigModal } from 'src/app/interfaces/config-modal';
+import { UsuarioService } from 'src/app/Services/usuario.service';
+import { ModalConfirmacionComponent } from '../modal-confirmacion/modal-confirmacion.component';
+import { ModalNuevaCategoriaComponent } from '../modal-nueva-categoria/modal-nueva-categoria.component';
+
 
 @Component({
   selector: 'app-card-categoria',
@@ -8,11 +16,65 @@ import { Categoria } from 'src/app/interfaces/Categorias';
 })
 export class CardCategoriaComponent implements OnInit {
 
+  usuarioActual:any;
+  token:any = leerToken();
   @Input() categoria:Categoria | undefined;
-  constructor() { }
+  @Output() onEvento = new EventEmitter<boolean>();
+  constructor( private router:Router,private modalService:NgbModal , private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
-    console.log(typeof this.categoria)
+    console.log(this.categoria)
+    if(this.token?.correo){
+      this.usuarioService.getUsuario(this.token.correo).subscribe((res:any)=>{
+        this.usuarioActual=res;
+        console.log(res)
+      })
+    }
+  }
+  onclickCategoria() {
+    this.router.navigateByUrl(`/tienda/categorias/${this.categoria?.idCategoria}`)
   }
 
+  open() {
+
+    let modalRef:NgbModalRef;
+    modalRef = this.modalService.open(ModalConfirmacionComponent)
+    let configuracion:ConfigModal = {
+      titulo1: '¿Está seguro de eliminar la categoria?',
+      titulo2:'Se eliminará la categoria',
+      parametros:{idCategoria:this.categoria?.idCategoria}
+    }
+
+    modalRef.componentInstance.mensaje = configuracion
+    modalRef.componentInstance.onEvento.subscribe((res:any)=>[
+      this.onEvento.emit(true)
+    ])
+
+  }
+
+  editarCategoria(){
+    this.abrirModalCategoria()
+
+  }
+
+  abrirModalCategoria() {
+
+    let modalRef:NgbModalRef;
+    modalRef = this.modalService.open(ModalNuevaCategoriaComponent)
+    modalRef.componentInstance.editandoCategoria = true
+    modalRef.componentInstance.objetoCategoria = this.categoria
+    modalRef.componentInstance.onEvento.subscribe((res:any)=>[
+      this.onEvento.emit(true)
+    ])
+
+  }
+
+  comprobarUsuarioAdmin(){
+    if(this.usuarioActual && this.usuarioActual.idRol==3) {
+      return true
+    }else{
+      return false
+    }
+  }
+  
 }
