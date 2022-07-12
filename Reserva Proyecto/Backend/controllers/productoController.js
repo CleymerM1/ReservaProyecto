@@ -13,7 +13,9 @@ exports.crearProducto = (req,res)=>{
         costo: req.body.costo,
         estado: req.body.estado,
         descripcion: req.body.descripcion,
-        ubicacion: req.body.ubicacion
+        ubicacion: req.body.ubicacion,
+        idUsuario: req.body.idUsuario,
+        imagen: req.body.imagen
     })
 
     /*----Llamdo de la funcion crear en models----*/
@@ -82,6 +84,15 @@ exports.obtenerProducto = (req, res) =>{
                 return res.json(data)
         })
 }
+exports.obtenerPorCategoria = (req, res) =>{
+    Producto.obtenerPorCat(req.params.id, (error, data) =>{
+        if(error){
+            res.status(404).json({msj: 'Hubo un problema al obtener el producto' + error})
+        }else{
+            res.status(200).json(data)
+        }
+    })
+};
 /*-------------Filtrar Productos-------------*/
 exports.filtrarProductos = (req, res) => {
     let filter = req.params.filter
