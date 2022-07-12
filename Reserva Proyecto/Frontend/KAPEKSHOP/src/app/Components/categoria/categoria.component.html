@@ -28,7 +28,7 @@
     </div>
     <div class="row" *ngIf="!mostarFormulario">
         <div *ngFor="let item of listarProductos" class="col-4">
-            <app-card-producto [listarProducto]="item"></app-card-producto>
+            <app-card-producto (onEditarProducto)="editarProducto($event)" (onEvento)="obtenerProductosPorId()" [listarProducto]="item"></app-card-producto>
         </div>
     </div>
     <div class="row" *ngIf="mostarFormulario">
@@ -37,7 +37,7 @@
             <app-producto [categoriaActual]="categoriaActual"></app-producto>!
         </div>
         <div class="col-12">
-            <app-producto [categoriaActual]="categoriaActual"></app-producto>
+            <app-producto [productoActual]="productoActual" [editandoProducto]="editandoProducto" (actualizarProducto)="obtenerProductosPorId()"  [categoriaActual]="categoriaActual"></app-producto>
         </div>
     </div>
 
