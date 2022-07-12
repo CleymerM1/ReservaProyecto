@@ -42,3 +42,4 @@ insert into rol (idPrivilegio, nombreRol, estado) values (2,'admin', 'activo');
 ALTER TABLE producto ADD idCliente int;
 Alter TABLE producto ADD contador int DEFAULT 0;
 CREATE TABLE suscripcion(idSuscripcion INT PRIMARY KEY AUTO_INCREMENT, idCategoria INT, idUsuario INT , correoUsuario VARCHAR(50), FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria));
+ALTER TABLE producto ADD imagen LONGBLOB;
