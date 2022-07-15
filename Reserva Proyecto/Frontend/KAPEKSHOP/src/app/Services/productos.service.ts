@@ -38,7 +38,7 @@ export class ProductosService {
     return this.http.put(url, {contador:1});
   }
 
-  getProducto(id: any): Observable<any>{
+  getProductoPorCategoria(id: any): Observable<any>{
     let url = `http://localhost:3000/producto/${id}`;
     return this.http.get(url);
   }

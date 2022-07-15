@@ -42,6 +42,9 @@ export class CategoriasComponent implements OnInit {
   open() {
     let modalRef:NgbModalRef;
     modalRef = this.modalService.open(ModalNuevaCategoriaComponent)
+    modalRef.componentInstance.onEvento.subscribe((res:any)=>{
+      this.obtenerCategorias()
+    })
   }
   
   obtenerCategorias(){

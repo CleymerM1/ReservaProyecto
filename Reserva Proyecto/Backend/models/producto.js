@@ -9,19 +9,20 @@ const Producto = function (objProducto) {
     this.idCategoria = objProducto.idCategoria;
     this.nombre = objProducto.nombre;
     this.costo = objProducto.costo;
-    //this.foto = objProducto.foto;
     this.estado = objProducto.estado;
     this.descripcion = objProducto.descripcion;
     this.ubicacion = objProducto.ubicacion;
+    this.idUsuario = objProducto.idUsuario;
+    this.imagen = objProducto.imagen;
 };
 
 /*---------------------------------------------Funciones---------------------------------------------------*/
 /*--------Crear Producto---------*/
 Producto.crear = (newObjProducto, res) => {
     //SE DEBE DE MANDAR LAS FOTOS A SU TABLA ESPECIFICA, RECORDAR QUE SON VARIAS Y SE DEBE DE ITERAR
-    let insertQuery = `insert into producto (idCategoria, nombre, costo, estado, descripcion, ubicacion) 
+    let insertQuery = `insert into producto (idCategoria, nombre, costo, estado, descripcion, ubicacion, idCliente,imagen) 
                 VALUES ('${newObjProducto.categoria}', '${newObjProducto.nombre}', '${newObjProducto.costo}',
-                '${newObjProducto.estado}','${newObjProducto.descripcion}','${newObjProducto.ubicacion}')`;
+                '${newObjProducto.estado}','${newObjProducto.descripcion}','${newObjProducto.ubicacion}','${newObjProducto.idUsuario}', '${newObjProducto.imagen}'))`;
     conexion.query(insertQuery, (err, resRegistrarProducto) => {
         if (err) return res({ msj: 'El producto no pudo ser registrado' + err }, null)
 
@@ -30,10 +31,14 @@ Producto.crear = (newObjProducto, res) => {
 };
 
 /*-------Obtener Productos------*/
-Producto.obtenerTodos = (resultado) => {
-    conexion.query("select * from producto", (err, res) => {
-        if (err) throw err;
-        return resultado(null, res);
+Producto.obtenerTodos = (resultado)=>{
+    conexion.query("select * from producto", (err, rows)=>{
+        if(err) throw err;
+        rows = rows.map( producto => {
+            producto.imagen = producto.imagen?.toString('ascii')
+            return producto;
+        } )
+        resultado(null, rows);
     });
 };
 
@@ -58,16 +63,18 @@ Producto.obtenerPorUbi = (departamento, resultado) => {
     })
 }
 Producto.obtenerPorCat = (idC, resultado) => {
+    
     let obtenerQuery = `select * from producto where idCategoria = '${idC}'`  //Hay que definir que columnas se quieren de la tabla producto
-    conexion.query(obtenerQuery, (err, res) => {
-        if (err)
-            return resultado({ msj: 'Hubo un error' + err }, null)
-        else if (res)
-            return resultado(null, res)
-        else
-            return resultado({ msj: 'Productos no encontrado' }, null)
-    })
-}
+    console.log(obtenerQuery)
+    conexion.query(obtenerQuery, (err, rows) => {
+        if (err) throw err
+        rows = rows.map( producto => {
+            producto.imagen = producto.imagen?.toString('ascii')
+            return producto;
+        } )
+        resultado(null, rows)
+    });
+};
 Producto.obtenerPorCosto = (inter1, inter2, resultado) => {
     let obtenerQuery = `select * from producto where costo BETWEEN ${inter1} AND ${inter2}`  //Hay que definir que columnas se quieren de la tabla producto
     conexion.query(obtenerQuery, (err, res) => {

@@ -16,7 +16,7 @@
     </div>
     <div class="row">
         <div *ngFor="let categoria of categorias" class="col-4 mt-4">
-            <app-card-categoria [categoria]="categoria"></app-card-categoria>
+            <app-card-categoria (onEvento)="obtenerCategorias()" [categoria]="categoria"></app-card-categoria>
         </div>
     
     </div>

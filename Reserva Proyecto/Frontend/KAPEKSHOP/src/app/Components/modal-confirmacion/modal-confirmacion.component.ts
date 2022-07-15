@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigModal } from 'src/app/interfaces/config-modal';
 import { CategoriasService } from 'src/app/Services/categorias.service';
+import { ProductosService } from 'src/app/Services/productos.service';
 
 @Component({
   selector: 'app-modal-confirmacion',
@@ -16,12 +17,12 @@ export class ModalConfirmacionComponent implements OnInit {
   }
   @Output() onEvento = new EventEmitter<boolean>()
   
-  constructor(public activeModal: NgbActiveModal, private categoriaService: CategoriasService) { }
+  constructor(public activeModal: NgbActiveModal, private categoriaService: CategoriasService, private ProductosService: ProductosService) { }
 
   ngOnInit(): void {
   }
 
-  eliminar(){
+  eliminarCategoria(){
     this.categoriaService.eliminarCategoria(this.mensaje.parametros.idCategoria).subscribe(res =>{
       console.log(res)
       this.onEvento.emit(true)
@@ -34,4 +35,32 @@ export class ModalConfirmacionComponent implements OnInit {
 
   }
 
+<<<<<<< HEAD
+=======
+  clickConfirmar(){
+    if(this.mensaje.parametros?.eliminarProducto){
+      this.eliminarProducto()
+    }else{
+      this.eliminarCategoria()
+    }
+  }
+
+  eliminarProducto(){
+    
+    this.ProductosService.eliminarProducto(this.mensaje.parametros.idProducto).subscribe(res =>{
+      console.log(res)
+      this.onEvento.emit(true)
+      this.activeModal.close('close click')
+    },error =>{
+      this.onEvento.emit(true)
+      this.activeModal.close('Close click')
+    })
+  }
+
+
+}
+
+
+
+>>>>>>> 27e7690a7474dd7b9f5c8e2750f57e91d5f284bb
 }
