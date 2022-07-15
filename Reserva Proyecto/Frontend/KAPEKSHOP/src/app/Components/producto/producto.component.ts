@@ -95,6 +95,8 @@ export class ProductoComponent implements OnInit {
   }
 
   
+
+  
   editarProducto(): void {
     this.activatedRoute.params.subscribe(
       (      e: { [x: string]: any; })=>{

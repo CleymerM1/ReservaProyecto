@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import { Categoria } from 'src/app/interfaces/Categorias';
 import {CategoriasService } from 'src/app/Services/categorias.service';
+
 
 
 @Component({
@@ -81,14 +82,14 @@ export class ModalNuevaCategoriaComponent implements OnInit {
   }
   
   async fileChangeEvent(event:any) {
-    if(event.target.files.length != 0){
-      this.categoria.get("imagen")?.setValue(event.target.files[0].name)
-      this.imagenB64 = await this.toBase64(event.target.files[0])
+    if(event.length != 0){
+      this.imagenB64 = await this.toBase64(event[0])
     }
     console.log(this.imagenB64)
     console.log(this.categoria.value)
 
   }
+
 
   toBase64 = (file:any) => new Promise((resolve, reject) => {
     const reader = new FileReader();

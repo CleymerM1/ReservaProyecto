@@ -24,7 +24,7 @@ Categoria.obtener = (resultado) =>{
         if(err) throw err;
 
         rows = rows.map( categoria => {
-            categoria.imagen = categoria.imagen.toString('ascii')
+            categoria.imagen = categoria.imagen?.toString('ascii')
             return categoria;
         } )
 
@@ -45,7 +45,7 @@ Categoria.obtenerPorId = (id, resultado) =>{
         if(err) throw err;
 
         rows = rows.map( categoria => {
-            categoria.imagen = categoria.imagen.toString('ascii')
+            categoria.imagen = categoria.imagen?.toString('ascii')
             return categoria;
         } )
 

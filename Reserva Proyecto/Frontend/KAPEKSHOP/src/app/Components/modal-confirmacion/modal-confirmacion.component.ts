@@ -34,6 +34,4 @@ export class ModalConfirmacionComponent implements OnInit {
 
   }
 
-
-
 }

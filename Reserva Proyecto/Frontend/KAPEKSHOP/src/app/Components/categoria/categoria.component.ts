@@ -27,9 +27,8 @@ export class CategoriaComponent implements OnInit {
   mostarFormulario = false;
 
   ngOnInit(): void {
-    //let idCategoria = parseInt(this.route.snapshot.paramMap.get('idCategoria') || "")
-    //this.categoriaActual = this.categorias.filter(cat => cat.idCategoria == idCategoria)[0]
-    //this.obtenerCategoria(idCategoria)
+    let idCategoria = parseInt(this.route.snapshot.paramMap.get('idCategoria') || "")
+    this.obtenerCategoria(idCategoria)
     this.obtenerProductos()
 
   }
@@ -46,12 +45,11 @@ export class CategoriaComponent implements OnInit {
     this.mostarFormulario = !this.mostarFormulario;
   }
 
-  /*obtenerCategoria(idCategoria:number) {
+  obtenerCategoria(idCategoria:number) {
     this.categoriaService.getCategoria(idCategoria).subscribe( (res:any) => {
       this.categoriaActual = res;
       console.log(res)
     })
   }
-  */
 
 }
