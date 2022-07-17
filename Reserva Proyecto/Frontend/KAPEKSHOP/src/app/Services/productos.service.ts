@@ -1,41 +1,32 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Producto } from '../models/producto';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import getHeaders from 'src/app/helpers/getHeaders'
-
-const helper = new JwtHelperService();
+import getHeaders from '../helpers/getHeaders';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class ProductosService {
 
-
   constructor(private http:HttpClient) { }
-  /*------------------------------Metodos POST------------------------------*/
-  /*Crear Producto*/
-  crear(objProducto:any): Observable<any> {
+  crearProducto(objUsuario:any): Observable<any> {
     let urlStr = `http://localhost:3000/producto/registro/`
-      return this.http.post(urlStr, objProducto)
+      return this.http.post(urlStr, objUsuario)
   }
-  /*------------------------------Metodos GET-------------------------------*/
   getProductos(): Observable<any>{
     let url = 'http://localhost:3000/producto/';
     return this.http.get(url);
+  }
+
+  actualizarContador(id:any): Observable<any>{
+    let url = `http://localhost:3000/producto/contador/${id}`;
+    return this.http.put(url, {contador:1});
   }
 
   obtenerProductoActual(id:any) {
     const token = localStorage.getItem('token') || '';
     const headers = getHeaders(token)
     return this.http.get(`http://localhost:3000/producto/${id}`, headers);
-  }
-  
-  actualizarContador(id:any): Observable<any>{
-    let url = `http://localhost:3000/producto/contador/${id}`;
-    return this.http.put(url, {contador:1});
   }
 
   getProductoPorCategoria(id: any): Observable<any>{
@@ -57,7 +48,3 @@ export class ProductosService {
     return this.http.delete(`http://localhost:3000/producto/${id}`);
   }
 }
-function producto_id(arg0: string, producto_id: any): Observable<any> {
-  throw new Error('Function not implemented.');
-}
-

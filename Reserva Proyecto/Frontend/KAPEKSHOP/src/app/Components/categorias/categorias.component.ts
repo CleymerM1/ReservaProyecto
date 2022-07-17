@@ -4,6 +4,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Categoria } from 'src/app/interfaces/Categorias';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import { ModalNuevaCategoriaComponent } from '../modal-nueva-categoria/modal-nueva-categoria.component';
+import leerToken from 'src/app/helpers/decodificarToken';
 
 @Component({
   selector: 'app-categorias',
@@ -12,25 +13,29 @@ import { ModalNuevaCategoriaComponent } from '../modal-nueva-categoria/modal-nue
 })
 export class CategoriasComponent implements OnInit {
   
+  //esVendedor:boolean = false
+  
+  
 
   usuarioActual:any = {}
   constructor( private modalService: NgbModal, private usuarioService:UsuarioService, private route: ActivatedRoute, private router:Router) { }
-
+  
   categorias:Categoria[] = []
 
   ngOnInit(): void {
 
     this.obtenerCategorias()
     this.obtenerUsuarioActual()
-
   }
+
+  
 
   obtenerUsuarioActual() {
     this.usuarioService.obtenerUsuarioActual().subscribe( (res:any) => {
       this.usuarioActual = res;
     })
   }
-  
+
   comprobarUsuarioAdmin(){
     if(this.usuarioActual && this.usuarioActual.idRol==3) {
       return true
@@ -38,7 +43,7 @@ export class CategoriasComponent implements OnInit {
       return false
     }
   }
-  
+
   open() {
     let modalRef:NgbModalRef;
     modalRef = this.modalService.open(ModalNuevaCategoriaComponent)
@@ -46,7 +51,7 @@ export class CategoriasComponent implements OnInit {
       this.obtenerCategorias()
     })
   }
-  
+
   obtenerCategorias(){
     this.usuarioService.obtenerCategorias().subscribe( (res:any) => {
       console.log(res)
@@ -56,6 +61,6 @@ export class CategoriasComponent implements OnInit {
     })
   }
 
- 
+  //
 
 }

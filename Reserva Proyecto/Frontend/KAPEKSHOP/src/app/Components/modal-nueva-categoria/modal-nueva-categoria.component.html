@@ -6,7 +6,7 @@
         <div class="col-12 mb-3">
             <mat-form-field class="input-full" class="input-full" style="width: 100%" appearance="fill" >
               <mat-label>Nombre Categoría</mat-label>
-              <input matInput formControlName="nombre" placeholder="Ex.Moda" value="">
+              <input matInput formControlName="nombre" placeholder="Ex.Moda" value="" >
               <mat-error *ngIf="categoria.get('nombre')?.invalid">El nombre de la categoría es requerido</mat-error>
             </mat-form-field>
         </div>
@@ -18,9 +18,10 @@
             </mat-form-field>
         </div>
         <div class="col-12 mb-3">
-          <app-btn-imagen (onChange)="fileChangeEvent($event)"></app-btn-imagen>
 
+            <app-btn-imagen (onChange)="fileChangeEvent($event)"></app-btn-imagen>
               
+
         </div>
         <div class="col-12 mb-5 text-center">
             <input class="btn btn-primary" type="submit" [value]="editandoCategoria ? 'Editar categoria' : 'Agregar categoria'" />

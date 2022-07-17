@@ -35,8 +35,6 @@ export class ModalConfirmacionComponent implements OnInit {
 
   }
 
-<<<<<<< HEAD
-=======
   clickConfirmar(){
     if(this.mensaje.parametros?.eliminarProducto){
       this.eliminarProducto()
@@ -46,7 +44,7 @@ export class ModalConfirmacionComponent implements OnInit {
   }
 
   eliminarProducto(){
-    
+    //this.ProductosService.eliminarProducto()
     this.ProductosService.eliminarProducto(this.mensaje.parametros.idProducto).subscribe(res =>{
       console.log(res)
       this.onEvento.emit(true)
@@ -58,9 +56,4 @@ export class ModalConfirmacionComponent implements OnInit {
   }
 
 
-}
-
-
-
->>>>>>> 27e7690a7474dd7b9f5c8e2750f57e91d5f284bb
 }

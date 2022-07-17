@@ -14,7 +14,7 @@ export class SidebarComponent implements OnInit {
   @Output() onClickItem = new EventEmitter<number>();
 
   items = ['denuncias', 'categorias', 'anuncios', 'estadisticas']
-  itemActual = this.items[0]
+  itemActual = this.items[3]
   constructor() { }
 
   ngOnInit(): void {

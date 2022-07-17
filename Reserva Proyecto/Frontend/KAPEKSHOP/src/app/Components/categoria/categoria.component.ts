@@ -31,14 +31,9 @@ export class CategoriaComponent implements OnInit {
 
   ngOnInit(): void {
     let idCategoria = parseInt(this.route.snapshot.paramMap.get('idCategoria') || "")
-<<<<<<< HEAD
-    this.obtenerCategoria(idCategoria)
-    this.obtenerProductos()
-=======
     //this.categoriaActual = this.categorias.filter(cat => cat.idCategoria == idCategoria)[0]
     this.obtenerCategoria(idCategoria)
     
->>>>>>> 27e7690a7474dd7b9f5c8e2750f57e91d5f284bb
 
   }
 

@@ -8,7 +8,7 @@ const cors = require('cors')
 
 app.use(express.json({limit: '50mb'}));
 
-// Configurar CORS
+/*// Configurar CORS
 const whiteList = [process.env.FRONTEND_URL]
 const corsOptions = {
     origin: function(origin, callback ) {
@@ -21,7 +21,7 @@ const corsOptions = {
         }
     }
 }
-
+*/
 
 //rutas
 app.use(cors())

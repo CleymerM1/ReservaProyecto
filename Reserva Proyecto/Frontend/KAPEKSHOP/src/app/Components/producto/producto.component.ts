@@ -27,6 +27,7 @@ export class ProductoComponent implements OnInit {
     this.formularioCrear.get('categoriaFormControl')?.setValue(this.categoriaActual.nombreCategoria)
     console.log(this.categoriaActual.nombreCategoria)
     this.obtenerUsuarioActual()
+    //this.editarProducto()
     console.log(this.editandoProducto)
     if(this.editandoProducto){
       this.enviarDatosProducto()
@@ -66,18 +67,22 @@ export class ProductoComponent implements OnInit {
       })
 
     }
-   
+    
+    
   }
 
   async fileChangeEvent(event:any) {
     if(event.length != 0){
       this.imagenB64 = await this.toBase64(event[0])
     }
+    //console.log(event.length)
+    
 
   }
 
+  
 
-  //para varias imagenes TERMINAR DE HACER
+  //para varias imagenes
   async convertirImagen(evento:any){
     
     console.log(evento);
@@ -109,14 +114,7 @@ export class ProductoComponent implements OnInit {
       this.usuarioActual = res;
     })
   }
-<<<<<<< HEAD
-
-  
-
-  
-=======
   /*
->>>>>>> 27e7690a7474dd7b9f5c8e2750f57e91d5f284bb
   editarProducto(): void {
     this.activatedRoute.params.subscribe(
       (      e: { [x: string]: any; })=>{

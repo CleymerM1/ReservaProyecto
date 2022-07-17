@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 
+
+
 @Component({
   selector: 'app-imagenes-producto',
   templateUrl: './imagenes-producto.component.html',
@@ -14,12 +16,13 @@ export class ImagenesProductoComponent implements OnInit {
   @Input() cols:string = "col-12"
   @Output() onDeleteImage = new EventEmitter<any>()
 
+  
 
   constructor(  ) { 
   }
 
   ngOnInit(): void {
-    console.log(this.imagenes[0])
+    
   }
 
   eliminarImagen(name:any) {
@@ -27,5 +30,8 @@ export class ImagenesProductoComponent implements OnInit {
     this.onDeleteImage.emit(imagenesActualizado)
   }
 
+  
+
 
 }
+

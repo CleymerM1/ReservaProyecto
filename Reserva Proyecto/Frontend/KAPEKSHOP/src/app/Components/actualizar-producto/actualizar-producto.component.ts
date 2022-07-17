@@ -11,8 +11,8 @@ import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-actualizar-Producto',
-  templateUrl: './actualizarProducto.component.html',
-  styleUrls: ['./actualizarProducto.component.css']
+  templateUrl: './actualizar-producto.component.html',
+  styleUrls: ['./actualizar-producto.component.css']
 })
 export class actualizarProductoComponent implements OnInit {
   imagenes: any = []

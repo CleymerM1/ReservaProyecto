@@ -1,45 +1,6 @@
-<<<<<<< HEAD
-<div class="container mt-3 mb-5 contenedor">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="card-header text-center">
-          <h3>Formulario de registro</h3>
-        </div>
-        <div class="card-body border border-info">
-          <form class="row" [formGroup]="formularioCrear">
-            <div class="col-sm-12 col-lg-6">
-              <div class="row">
-                <div class="col-12 mb-3">
-                  <mat-form-field class="input-full" class="input-full" style="width: 100%" appearance="fill" >
-                    <mat-label>Nombre</mat-label>
-                    <input matInput formControlName="nombreFormControl"  placeholder="Ex. Juan" value="">
-                  </mat-form-field>
-                </div>
-                <div class="col-12 mb-3">
-                  <mat-form-field class="input-full" style="width: 100%" appearance="fill">
-                    <mat-label>Categoria</mat-label>
-                    <mat-select  formControlName="categoriaFormControl" placeholder="Seleccione una categoria">
-                      <mat-option  [value]="categoriaActual.idCategoria">
-                        {{categoriaActual.nombreCategoria}}
-                      </mat-option>
-                    </mat-select>
-                    <mat-icon matSuffix></mat-icon>
-                  </mat-form-field>
-              
-                </div>
 
-                <div class="col-12 mb-3">
-                  <mat-form-field class="input-full" style="width: 100%" appearance="fill">
-                      <mat-label>Selecciona un estado</mat-label>
-                      <select formControlName="estadoFormControl" matNativeControl required>
-                          <option value="">--Seleccione una opción--</option>
-                        <option value="Atlántida">Nuevo</option>
-                        <option value="Choluteca">Usado</option>
-                        <option value="Colón">Aceptable</option>
-                      </select>
-                      <mat-error *ngIf="formularioCrear.get('estadoFormControl')?.invalid">Seleccione un estado</mat-error>
-=======
+
+<!--OTRO FORMULARIO MÁS BONITO :V-->
 <div class="container mt-5 mb-5 contenedor">
     <div class="row">
       <div class="col-lg-12">
@@ -56,7 +17,6 @@
                       <mat-label>Nombre</mat-label>
                       <input matInput formControlName="nombreFormControl"  placeholder="Ex. Juan" value="">
                       <mat-error *ngIf="formularioCrear.get('nombreFormControl')?.invalid">El nombre es requerido</mat-error>
->>>>>>> 27e7690a7474dd7b9f5c8e2750f57e91d5f284bb
                     </mat-form-field>
                   </div>
                   <div class="col-12 mb-3">
@@ -150,3 +110,5 @@
       </div>
     </div>
   </div>
+
+  

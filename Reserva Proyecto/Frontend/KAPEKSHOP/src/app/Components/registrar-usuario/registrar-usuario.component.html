@@ -90,7 +90,7 @@
               <div class="row">
                 <div class="col-12 mb-3">
                   <mat-form-field class="input-full" class="input-full" style="width: 100%" appearance="fill" >
-                    <mat-label>Nombres</mat-label>
+                    <mat-label>Nombre Completo</mat-label>
                     <input matInput formControlName="nombreCompletoFormControl" placeholder="Ex. Juan" value="">
                     <mat-error *ngIf="formularioRegistro.get('nombreCompletoFormControl')?.invalid">El nombre es requerido</mat-error>
                   </mat-form-field>
@@ -98,14 +98,14 @@
                 
                 <div class="col-12 mb-3">
                   <mat-form-field class="input-full" style="width: 100%" appearance="fill">
-                  <mat-label>Correo</mat-label>
+                  <mat-label>Email</mat-label>
                   <input matInput placeholder="usuario@gmail.com" formControlName="emailFormControl" required>
                   <mat-error >{{obtenerErrorCorreo()}}</mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-12 mb-3">
                   <mat-form-field class="input-full" style="width: 100%" appearance="fill">
-                    <mat-label>Teléfono</mat-label>
+                    <mat-label>Telefono</mat-label>
                     <span matPrefix>+504 &nbsp;</span>
                     <input type="telefono" matInput placeholder="5555-5555" formControlName="telefonoFormControl" required>
                     <mat-icon matSuffix></mat-icon>
@@ -127,7 +127,7 @@
 
                 <div class="col-12 mb-3">
                   <mat-form-field class="input-full" class="input-full" style="width: 100%" appearance="fill" >
-                    <mat-label>Apellidos</mat-label>
+                    <mat-label>Apellido Completo</mat-label>
                     <input matInput formControlName="apellidoCompletoFormControl" placeholder="Ex.Perez" value="">
                     <mat-error *ngIf="formularioRegistro.get('apellidoCompletoFormControl')?.invalid">El apellido es requerido</mat-error>
                   </mat-form-field>
@@ -173,7 +173,7 @@
                 </div>
                 <div class="col-12 mt-4 mb-3">
                   <section class="example-section">
-                  <mat-checkbox formControlName="terminosFormControl" class="example-margin" >Aceptar <a href="">términos y condiciones</a> </mat-checkbox>
+                  <mat-checkbox formControlName="terminosFormControl" class="example-margin" >Aceptar <a href="">terminos y condiciones</a> </mat-checkbox>
                 </section>
                 </div>
                 <hr>
@@ -192,6 +192,119 @@
     </div>
   </div>
 </div>
+<!--
+  <div class="container mt-5 mb-5">
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3">
+        <div class="card">
+          <div class="card-header text-center">
+            <h3>Formulario de registro</h3>
+                </div>
 
+                  <div class="card-body border border-info">
+                    <form class="row" [formGroup]="formularioRegistro">
+
+                      <div class="col-12 mb-3">
+                        <mat-form-field class="input-full" class="input-full" style="width: 100%" appearance="fill" >
+                          <mat-label>Nombre Completo</mat-label>
+                          <input matInput formControlName="nombreCompletoFormControl" placeholder="Ex. Juan" value="">
+                          <mat-error *ngIf="formularioRegistro.get('nombreCompletoFormControl')?.invalid">El nombre es requerido</mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-12 mb-3">
+                        <mat-form-field class="input-full" class="input-full" style="width: 100%" appearance="fill" >
+                          <mat-label>Apellido Completo</mat-label>
+                          <input matInput formControlName="apellidoCompletoFormControl" placeholder="Ex.Perez" value="">
+                          <mat-error *ngIf="formularioRegistro.get('apellidoCompletoFormControl')?.invalid">El apellido es requerido</mat-error>
+      
+                        </mat-form-field>
+                      </div>
+              
+                      <div class="col-12 mb-3">
+                        <mat-form-field class="input-full" style="width: 100%" appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="usuario@gmail.com" formControlName="emailFormControl" required>
+                        <mat-error >{{obtenerErrorCorreo()}}</mat-error>
+                        </mat-form-field>
+                      </div>
+
+                        <div class="mb-3">
+                          <mat-form-field class="input-full" style="width: 100%" appearance="fill">
+                            <mat-label>Ingresa tu contraseña</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Contraseña" formControlName="contraseniaFormControl" required> 
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            
+                            </button>
+                            <mat-error>{{obtenerErrorContrasenia()}}</mat-error>
+                          </mat-form-field>
+                        </div>
+
+                          <div class="mb-3">
+                            <mat-form-field class="input-full" style="width: 100%" appearance="fill">
+                              <mat-label>Telefono</mat-label>
+                              <span matPrefix>+504 &nbsp;</span>
+                              <input type="telefono" matInput placeholder="5555-5555" formControlName="telefonoFormControl" required>
+                              <mat-icon matSuffix></mat-icon>
+                              <mat-error *ngIf="formularioRegistro.get('telefonoFormControl')?.invalid">El teléfono es requerido</mat-error>
+                            </mat-form-field>
+                          </div>
+                            <div class="mb-3">
+                              <mat-form-field class="input-full" style="width: 100%" appearance="fill">
+                                <mat-label>Dirección</mat-label>
+                                <textarea matInput placeholder="Ex. Danlí" formControlName="direccionFormControl" required></textarea>
+                                <mat-error *ngIf="formularioRegistro.get('direccionFormControl')?.invalid">La dirección es requerida</mat-error>
+                              </mat-form-field>
+                            </div>
+
+                            <div class="mb-3">
+                              <mat-form-field class="input-full" appearance="fill">
+                                  <mat-label>Selecciona un departamento</mat-label>
+                                  <select formControlName="departamentoFormControl" matNativeControl required>
+                                      <option value="">--Seleccione una opción--</option>
+                                    <option value="Atlántida">Atlántida</option>
+                                    <option value="Choluteca">Choluteca</option>
+                                    <option value="Colón">Colón</option>
+                                    <option value="Copán">Copán</option>
+                                    <option value="Cortes">Cortés</option>
+                                    <option value="Comayagua">Comayagua</option>
+                                    <option value="El Paraíso">El Paraíso</option>
+                                    <option value="Francisco Morazan">Francisco Morazán</option>
+                                    <option value="Gracias a Dios">Gracias a Dios</option>
+                                    <option value="Intibuca">Intibucá</option>
+                                    <option value="Islas de la Bahia">Islas de la Bahía</option>
+                                    <option value="La Paz">La Paz</option>
+                                    <option value="Lempira">Lempira</option>
+                                    <option value="Ocotepeque">Ocotepeque</option>
+                                    <option value="Olancho">Olancho</option>
+                                    <option value="Santa Barbara">Santa Bárbara </option>
+                                    <option value="Valle">Valle</option>
+                                    <option value="Yoro">Yoro</option>
+                                  </select>
+                                  <mat-error *ngIf="formularioRegistro.get('departamentoFormControl')?.invalid">Seleccione un departamento</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                          <div class="mb-3">
+                            <section class="example-section">
+                            <mat-checkbox formControlName="terminosFormControl" class="example-margin" >Aceptar <a href="">terminos y condiciones</a> </mat-checkbox>
+                          </section>
+                          </div>
+                          <hr>
+              
+              
+                          <div class="mb-3">
+                            <label class="inicioS">¿Ya tienes cuenta? <a href="" routerLink="/inicio"> Inicia Sesión</a></label>
+                            <button [disabled]="formularioRegistro?.invalid" class="btn btn-primary btn-success btn-lg float-end"  type="button" (click)="enviarFormulario()">Registrarme</button>
+                            <button class="btn btn-secondary btn-lg float-start" routerLink="/landing">Atrás</button>
+                          </div>
+                    </form>
+                 </div>
+              </div>
+            </div>
+          </div>
+        </div>  
+      
+-->
 
 

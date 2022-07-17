@@ -15,7 +15,7 @@ Usuario.crear = (newObjUsuario, res)=>{
     let buscarCorreo = `select correo from usuario where correo='${newObjUsuario.correo}'`
     let token = jwt.sign({correo: newObjUsuario.correo},process.env.JWT_SECRET)
     //let insertQuery = `insert into usuario (idRol, nombre, apellido, correo, direccion, departamento, contrasenia, estado, telefono) VALUES (2, '${newObjUsuario.nombre}', '${newObjUsuario.apellido}', '${newObjUsuario.correo}','${newObjUsuario.direccion}','${newObjUsuario.departamento}','${newObjUsuario.contraseña}','activado','${newObjUsuario.telefono}')`;
-    let insertQuery = `insert into usuario (idRol, nombre, apellido, correo, direccion, departamento, contrasenia, estado, telefono, token) VALUES (2, '${newObjUsuario.nombre}', '${newObjUsuario.apellido}', '${newObjUsuario.correo}','${newObjUsuario.direccion}','${newObjUsuario.departamento}',AES_ENCRYPT('${newObjUsuario.contraseña}','${newObjUsuario.contraseña}'),'activado','${newObjUsuario.telefono}', '${token}')`;
+    let insertQuery = `insert into usuario (idRol, nombre, apellido, correo, direccion, departamento, contrasenia, estado, telefono, token) VALUES (3, '${newObjUsuario.nombre}', '${newObjUsuario.apellido}', '${newObjUsuario.correo}','${newObjUsuario.direccion}','${newObjUsuario.departamento}',AES_ENCRYPT('${newObjUsuario.contraseña}','${newObjUsuario.contraseña}'),'activado','${newObjUsuario.telefono}', '${token}')`;
 
 
     conexion.query(buscarCorreo, (err, resUsuario)=>{

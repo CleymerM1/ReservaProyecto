@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Categoria } from '../interfaces/Categorias';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,7 @@ export class CategoriasService {
     return this.http.get(urlC)
 
   }
+
   eliminarCategoria(idCategoria:number): Observable<any>{
     let UrlEl= `http://localhost:3000/categoria/eliminar/${idCategoria}`;
     return this.http.delete(UrlEl)

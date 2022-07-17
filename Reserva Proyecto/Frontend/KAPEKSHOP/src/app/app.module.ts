@@ -35,26 +35,48 @@ import { RecuperarContraseniaComponent } from './Components/recuperar-contraseni
 import { SolicitarRecuperarContraseniaComponent } from './Components/solicitar-recuperar-contrasenia/solicitar-recuperar-contrasenia.component';
 import { CategoriasComponent } from './Components/categorias/categorias.component';
 import { ProductoComponent } from './Components/producto/producto.component';
+import { formDenunciaComponent } from './Components/formDenuncia/formDenuncia.component';
 import { CardCategoriaComponent } from './Components/card-categoria/card-categoria.component';
 import { DialogoUsuarioComponent } from './Components/dialogo-usuario/dialogo-usuario.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-import { MatTooltipModule} from '@angular/material/tooltip';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { ModalNuevaCategoriaComponent } from './Components/modal-nueva-categoria/modal-nueva-categoria.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BtnImagenComponent } from './Components/btn-imagen/btn-imagen.component';
-
-import { actualizarProductoComponent } from './Components/actualizarProducto/actualizarProducto.component';
-
 import { ImagenesProductoComponent } from './Components/imagenes-producto/imagenes-producto.component';
-import { MatListModule} from '@angular/material/list';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { AdminComponent } from './Components/admin/admin.component';
 import { AnunciosComponent } from './Components/admin/anuncios/anuncios.component';
 import { CategoriasAdminComponent } from './Components/admin/categorias-admin/categorias-admin.component';
 import { DenunciasComponent } from './Components/admin/denuncias/denuncias.component';
 import { EstadisticasComponent } from './Components/admin/estadisticas/estadisticas.component';
 import { SidebarComponent } from './Components/admin/sidebar/sidebar.component';
+import { BarrasComponent } from './Components/admin/estadisticas/barras/barras.component';
+import { CircularComponent } from './Components/admin/estadisticas/circular/circular.component';
+import { DonaComponent } from './Components/admin/estadisticas/dona/dona.component';
+import { LinealComponent } from './Components/admin/estadisticas/lineal/lineal.component';
+import { PolarComponent } from './Components/admin/estadisticas/polar/polar.component';
+import { ScatterComponent } from './Components/admin/estadisticas/scatter/scatter.component';
+import { NgChartsModule } from 'ng2-charts';
+import { ModalConfirmacionComponent } from './Components/modal-confirmacion/modal-confirmacion.component';
+import { actualizarProductoComponent } from './Components/actualizar-producto/actualizar-producto.component';
+//import { ProductoComponent } from './Components/producto/producto.component';
+/*
+import { AdminComponent } from './Components/admin/admin.component';
+import { AnunciosComponent } from './Components/admin/anuncios/anuncios.component';
+import { CategoriasAdminComponent } from './Components/admin/categorias-admin/categorias-admin.component';
+import { DenunciasComponent } from './Components/admin/denuncias/denuncias.component';
+import { EstadisticasComponent } from './Components/admin/estadisticas/estadisticas.component';
+import { SidebarComponent } from './Components/admin/sidebar/sidebar.component';
+import { CircularComponent } from './Components/admin/estadisticas/circular/circular.component';
+import { NgChartsModule } from 'ng2-charts';
+import { PolarComponent } from './Components/admin/estadisticas/polar/polar.component';
+import { BarrasComponent } from './Components/admin/estadisticas/barras/barras.component';
+import { DonaComponent } from './Components/admin/estadisticas/dona/dona.component';
+import { ScatterComponent } from './Components/admin/estadisticas/scatter/scatter.component';
+import { LinealComponent } from './Components/admin/estadisticas/lineal/lineal.component';
+*/
+
 //import { ListarUsuariosComponent } from './components/listar-usuarios/listar-usuarios.component';
 
 @NgModule({
@@ -81,6 +103,8 @@ import { SidebarComponent } from './Components/admin/sidebar/sidebar.component';
     CardCategoriaComponent,
     DialogoUsuarioComponent,
     ModalNuevaCategoriaComponent,
+    ProductoComponent,
+    formDenunciaComponent,
     BtnImagenComponent,
     ImagenesProductoComponent,
     AdminComponent,
@@ -89,7 +113,29 @@ import { SidebarComponent } from './Components/admin/sidebar/sidebar.component';
     DenunciasComponent,
     EstadisticasComponent,
     SidebarComponent,
+    BarrasComponent,
+    CircularComponent,
+    DonaComponent,
+    LinealComponent,
+    PolarComponent,
+    ScatterComponent,
+    
+    AdminComponent,
+    AnunciosComponent,
+    CategoriasAdminComponent,
+    DenunciasComponent,
+    EstadisticasComponent,
+    SidebarComponent,
+    CircularComponent,
+    PolarComponent,
+    BarrasComponent,
+    DonaComponent,
+    ScatterComponent,
+    LinealComponent,
+    ModalConfirmacionComponent,
     actualizarProductoComponent
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -111,8 +157,8 @@ import { SidebarComponent } from './Components/admin/sidebar/sidebar.component';
     MatSelectModule,
     MatTooltipModule,
     MatToolbarModule,
-    MatSidenavModule,
-    MatListModule
+    NgChartsModule
+    
 
   ],
   providers: [],

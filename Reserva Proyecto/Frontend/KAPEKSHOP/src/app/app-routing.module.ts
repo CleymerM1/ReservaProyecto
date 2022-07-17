@@ -14,8 +14,7 @@ import { IniciarSesionComponent } from './Components/iniciar-sesion/iniciar-sesi
 import { SolicitarRecuperarContraseniaComponent } from './Components/solicitar-recuperar-contrasenia/solicitar-recuperar-contrasenia.component';
 import { CategoriasComponent } from './Components/categorias/categorias.component';
 import { ProductoComponent } from './Components/producto/producto.component';
-import { actualizarProductoComponent } from './Components/actualizarProducto/actualizarProducto.component';
-
+import { formDenunciaComponent } from './Components/formDenuncia/formDenuncia.component';
 
 //componentes
 const routes: Routes = [
@@ -23,19 +22,18 @@ const routes: Routes = [
   {path: 'inicio', component:IniciarSesionComponent},
   {path:'registrar-usuario',component:RegistrarUsuarioComponent},
   {path:'producto',component:ProductoComponent},
+  {path:'formDenuncia',component:formDenunciaComponent},
   {path:'editar-usuario/:id', component:RegistrarUsuarioComponent, canActivate:[AuthGuard]},
   {path:'listar-productos', component:ListarProductosComponent},
   {path:'confirmar/:token', component:ValidarCorreoComponent},
   {path:'tienda', component:TiendaComponent, canActivate:[AuthGuard]},
   {path:'recuperar-contrasenia/:token', component:RecuperarContraseniaComponent},
   {path:'recuperar-contrasenia', component:SolicitarRecuperarContraseniaComponent},
-  //se modificó las rutas de categorias
+  //{path:'tienda/:tipoUsuario/categorias', component:CategoriasComponent, canActivate:[AuthGuard]},
+  {path:'categorias/:idCategoria', component:CategoriaComponent, canActivate:[AuthGuard]},
   {path:'categorias',component:CategoriasComponent},
-  {path:'tienda/categorias/:idCategoria', component:CategoriasComponent, canActivate:[AuthGuard]},
-  {path:'tienda/mostrarProductos', component:CategoriaComponent, canActivate:[AuthGuard]},
-  {path:'producto/actualizarProducto/:id', component:actualizarProductoComponent},
+  {path:'tienda/categorias/:idCategoria', component:CategoriaComponent, canActivate:[AuthGuard]},
   {path:'**', redirectTo:'',pathMatch:'full'},
-  
 ];
 
 @NgModule({

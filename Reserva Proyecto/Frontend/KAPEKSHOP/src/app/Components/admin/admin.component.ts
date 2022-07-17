@@ -9,7 +9,7 @@ export class AdminComponent implements OnInit {
 
   @Input() sidebarShow: boolean = false;
   @Output() sidebarShowChange = new EventEmitter<boolean>();
-  itemActual = 0
+  itemActual = 3
 
 
 
@@ -28,3 +28,4 @@ export class AdminComponent implements OnInit {
     this.itemActual = value
   }
 }
+

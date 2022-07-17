@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import leerToken from 'src/app/helpers/decodificarToken';
 import {AuthService} from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit {
     this.authService.cerrarSesion();
     this.router.navigateByUrl('/inicio')
   }
+
   clickBurguer() {
     this.onClickBurguer.emit(true)
 

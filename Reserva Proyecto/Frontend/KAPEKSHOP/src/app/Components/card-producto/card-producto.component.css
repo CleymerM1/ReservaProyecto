@@ -1,5 +1,6 @@
 .card-producto {
     cursor: pointer;
+    margin-bottom: 15px;
 }
 .descripcion {
     display: -webkit-box;
