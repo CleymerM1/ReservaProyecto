@@ -26,17 +26,11 @@
                     <li *ngIf="comprobarUsuarioAdmin()" [ngClass]="urlItemActual == '/tienda' ? 'item-seleccionado nav-item': 'nav-item'" >
                         <a class="nav-link" routerLink="/tienda">Tienda</a>
                     </li>
-
                     <li *ngIf="comprobarUsuario()" style="cursor: pointer;" class="nav-item">
-                        <div ngbDropdown class="d-inline-block">
-                          <a class="nav-link" class="nav-link dropdown-toggle" id="dropdownCategorias" ngbDropdownToggle>Categorias</a>
-                          <ul ngbDropdownMenu aria-labelledby="dropdownCategorias">
-
-                            <button routerLink="/producto"  ngbDropdownItem>Productos</button>
-                            <button routerLink="/categorias" ngbDropdownItem>Categorias</button>
-                            <button routerLink="/formDenuncia" ngbDropdownItem>Denuncias</button>
-                          </ul>
-                        </div>
+                        <a class="nav-link" routerLink="/categorias">Categorias</a>
+                    </li>
+                    <li *ngIf="comprobarUsuario()" style="cursor: pointer;" class="nav-item">
+                        <a class="nav-link" routerLink="/formDenuncias">Denuncias</a>
                     </li>
                     
                     <li *ngIf="!token?.correo" class="nav-item">
