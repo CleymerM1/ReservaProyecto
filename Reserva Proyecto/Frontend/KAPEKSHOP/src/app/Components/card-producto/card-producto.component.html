@@ -1,27 +1,6 @@
-<!--
-<div (click)="mostrarProducto()" class="card h-100">
-    
-    <div class="card-body">
-        <ul class="list-unstyled d-flex justify-content-between">
-            <li>{{listarProducto.imagen}}</li>
-            <li  >
-                <i *ngFor="let item of estrellas"  class="text-warning fa fa-star"></i>
-            </li>
-            <li class="text-muted text-right">{{listarProducto.costo}}</li>
-        </ul>
-        <a href="#" class="h2 text-decoration-none text-dark">{{listarProducto.nombre}}</a>
-        <p class="card-text">
-            {{listarProducto.descripcion}}
-        </p>
-        <p class="text-muted">Reviews (24)</p>
-        <button style= "background-color:orange"
-        mat-button color="white">Agregar al Carrito</button>
-    </div>
-</div>-->
-
 <mat-card class="card-producto" >
     <div class="row">
-      <div  class="col-12 float-start">
+      <div *ngIf="comprobarEsVendedor(listarProducto)"  class="col-12 float-start">
         <svg (click)="modalEliminar()" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 float-end" fill="none" viewBox="0 0 24 24" style="width: 15px;"  stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -30,7 +9,7 @@
         </svg>
       </div>
     </div>
-    <div (click)="mostrarProducto()" class="">
+    <div class="" (click)="mostrarProducto()">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{listarProducto?.nombre}}</mat-card-title>
@@ -41,7 +20,7 @@
           {{listarProducto?.descripcion}}
         </p>
         <p class="descripcion">
-            Precio: {{listarProducto?.costo}} lps
+            Precio: {{formatoDinero(listarProducto?.costo)}}
         </p>
       </mat-card-content>
     </div>
