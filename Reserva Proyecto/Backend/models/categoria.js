@@ -3,6 +3,8 @@ const generarHTML = require('../helpers/generarHTML.js')
 const enviarCorreo = require('../helpers/email.js')
 var pdf = require('html-pdf');
 var fs = require('fs');
+const nombrePdf = require('../helpers/generarNombre.js')
+
 const Categoria = function(objCategoria){
     this.nombre = objCategoria.nombre;
     this.descripcion = objCategoria.descripcion;
@@ -68,6 +70,24 @@ Categoria.editarCategoria = (req, res) =>{
     } )
 };
 
+Categoria.suscribirse = (idCategoria, idUsuario, corroUsuario, resultado) =>{
+    let consulta = `INSERT INTO suscripcion (idCategoria, idUsuario, correoUsuario) VALUES ('${idCategoria}','${idUsuario}','${corroUsuario}')`;
+    let select = `SELECT * FROM suscripcion WHERE idCategoria = '${idCategoria}' AND idUsuario = '${idUsuario}'`;
+    conexion.query(select, (err, data)=>{
+        if(err) return resultado(err, null)
+        if(data.length){
+            return resultado({msj: 'Ya estas suscrito a esta categoria'}, null)
+        }else{
+            conexion.query(consulta, (err, data)=>{
+                if(err) return resultado(err, null)
+                return resultado(null, {msj: 'Suscrito correctamente'})
+            }
+            )
+        }
+    })
+
+}
+
 Categoria.desinscribirse = (idCategoria, idUsuario, resultado) =>{
     let consulta = `DELETE FROM suscripcion WHERE idCategoria = '${idCategoria}' AND idUsuario = '${idUsuario}'`;
     conexion.query(consulta, (err, data)=>{
@@ -121,8 +141,8 @@ Categoria.generarPdf = async (resultado) => {
                     if(productos.length){
                         var options = { format: 'A4' };
                         let html = generarHTML(productos[0].nombreCategoria, usuario[0].nombre, productos)
-
-                        pdf.create(html, options).toFile(`./public/pdf/ ${suscripcion.idCategoria}.pdf`, async (error, res) => {
+                        let nombreArchivo = `${nombrePdf.generarNombre(productos[0].nombreCategoria)}.pdf`
+                        pdf.create(html, options).toFile(`./public/pdf/${nombreArchivo}`, async (error, res) => {
                             if(error) {
                                 console.log(error)
                                 resultado(error, null);
@@ -130,7 +150,7 @@ Categoria.generarPdf = async (resultado) => {
                             if(res){
 
                                 //console.log(res)
-                                let datos = {correo: usuario[0].correo, nombre: usuario[0].nombre, nombreCategoria: suscripcion.idCategoria}
+                                let datos = {correo: usuario[0].correo, nombre: usuario[0].nombre, nombreArchivo: nombreArchivo, nombreCategoria:productos[0].nombreCategoria}
 
                                 await enviarCorreo.emailProductosMasVisitados(datos)
                                 resultado(null, productos);
@@ -146,6 +166,7 @@ Categoria.generarPdf = async (resultado) => {
         });
     })  
 }
+
 
         
 module.exports = Categoria;
