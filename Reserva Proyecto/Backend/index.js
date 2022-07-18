@@ -5,6 +5,9 @@ const dotenv=require('dotenv');
 dotenv.config();
 const conexion = require('./config/conexion');
 const cors = require('cors')
+path = require("path")
+fs = require("fs");
+const {v4: uuidv4} = require("uuid")
 
 app.use(express.json({limit: '50mb'}));
 
@@ -40,3 +43,74 @@ app.listen(port,()=>{
 
 
 
+//VER PRODUCTO
+const indiceDeProducto = (idProducto) => {
+   
+  }
+  const existeProducto = ( producto) => {
+    return indiceDeProducto(producto.id) !== -1;
+  }
+  
+  
+  const DOMINIO_PERMITIDO_CORS = "http://localhost:4200",
+    DIRECTORIO_FOTOS = path.join(__dirname, "fotos_productos"),
+    DIRECTORIO_DIST = path.join(__dirname, "dist"),
+    PUERTO = 3000;
+
+  // Fotos
+  app.use("/foto_producto", express.static(DIRECTORIO_FOTOS));
+  // Estático
+  app.use("/", express.static(DIRECTORIO_DIST));
+  
+  if (!fs.existsSync(DIRECTORIO_FOTOS)) {
+    fs.mkdirSync(DIRECTORIO_FOTOS);
+  }
+  app.use((req, res, next) => {
+    res.set("Access-Control-Allow-Credentials", "true");
+    res.set("Access-Control-Allow-Origin", DOMINIO_PERMITIDO_CORS);
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+    res.set("Access-Control-Allow-Methods", "DELETE");
+    next();
+  });
+  app.delete("/producto", async (req, res) => {
+  
+    if (!req.query.id) {
+      res.end("Not found");
+      return;
+    }
+    const idProducto = req.query.id;
+    await productoModel.eliminar(idProducto);
+    res.json(true);
+  });
+
+  app.post('/fotos_producto', (req, res) => {
+    const form = formidable({
+      multiples: true,
+      uploadDir: DIRECTORIO_FOTOS,
+    });
+  
+    form.parse(req, async (err, fields, files) => {
+      const idProducto = fields.idProducto;
+      for (let clave in files) {
+        const file = files[clave];
+        const nombreArchivo = file.name;
+        await productoModel.agregarFoto(idProducto, nombreArchivo)
+      }
+    });
+  
+    form.on("fileBegin", (name, file) => {
+      const extension = path.extname(file.name);
+      const nuevoNombre = uuidv4().concat(extension);
+      file.path = path.join(DIRECTORIO_FOTOS, nuevoNombre);
+      file.name = nuevoNombre;
+    })
+  
+    form.on("end", () => {
+      res.json({
+        respuesta: true,
+      })
+    })
+  
+  });
+
+  

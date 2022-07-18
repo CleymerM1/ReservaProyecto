@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import leerToken from 'src/app/helpers/decodificarToken';
 import { Categoria } from 'src/app/interfaces/Categorias';
+import { Producto } from 'src/app/models/producto';
 import { ProductosService } from 'src/app/Services/productos.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 
@@ -26,6 +27,7 @@ export class ProductoComponent implements OnInit {
   ngOnInit(): void {
     this.formularioCrear.get('categoriaFormControl')?.setValue(this.categoriaActual.nombreCategoria)
     console.log(this.categoriaActual.nombreCategoria)
+    this.productosService.crearProducto(Producto);
     this.obtenerUsuarioActual()
     //this.editarProducto()
     console.log(this.editandoProducto)
@@ -57,7 +59,6 @@ export class ProductoComponent implements OnInit {
         ubicacion: this.formularioCrear.get('ubicacionFormControl')?.value,
         idUsuario: this.usuarioActual.idUsuario,
         imagen: this.imagenB64
-        
         
       }
 
@@ -114,7 +115,6 @@ export class ProductoComponent implements OnInit {
       this.usuarioActual = res;
     })
   }
-  /*
   editarProducto(): void {
     this.activatedRoute.params.subscribe(
       (      e: { [x: string]: any; })=>{
@@ -125,7 +125,7 @@ export class ProductoComponent implements OnInit {
         );
       }      }
     );
-  }*/
+  }
 
   editarProductobeta(){
 
