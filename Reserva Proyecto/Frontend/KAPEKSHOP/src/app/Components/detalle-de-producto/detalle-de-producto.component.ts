@@ -13,12 +13,13 @@ import { environment } from 'src/environments/environment';
 export class DetalleDeProductoComponent implements OnInit {
     public producto = {
         id: 0,
-        imagen: [],
         nombre: "",
         ubicacion: "",
         estado: "",
         descripcion: "",
         precio: "",
+        imagen: [],
+        idUsuario: 0,
     };
 
     /*public fotoSeleccionada: string;
@@ -31,7 +32,7 @@ export class DetalleDeProductoComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    /*ublic resolverFoto(foto) {
+    /*Public resolverFoto(foto) {
       const baseUrl = environment.baseUrl;
       return `${baseUrl}/foto_producto/${foto}`;
     }

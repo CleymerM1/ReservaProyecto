@@ -5,8 +5,8 @@ const conexion = require('../config/conexion');
 
 /*------------------------------------------Creacion de clases---------------------------------------------*/
 const Producto = function (objProducto) {
+    this.categoria = objProducto.categoria;
     this.idProducto = objProducto.idProducto;
-    this.idCategoria = objProducto.idCategoria;
     this.nombre = objProducto.nombre;
     this.costo = objProducto.costo;
     this.estado = objProducto.estado;
@@ -20,9 +20,9 @@ const Producto = function (objProducto) {
 /*--------Crear Producto---------*/
 Producto.crear = (newObjProducto, res) => {
     //SE DEBE DE MANDAR LAS FOTOS A SU TABLA ESPECIFICA, RECORDAR QUE SON VARIAS Y SE DEBE DE ITERAR
-    let insertQuery = `insert into producto (idCategoria, nombre, costo, estado, descripcion, ubicacion, idCliente,imagen) 
-                VALUES ('${newObjProducto.categoria}', '${newObjProducto.nombre}', '${newObjProducto.costo}',
-                '${newObjProducto.estado}','${newObjProducto.descripcion}','${newObjProducto.ubicacion}','${newObjProducto.idUsuario}', '${newObjProducto.imagen}'))`;
+    let insertQuery = `insert into producto (idCategoria, nombre, costo, estado, descripcion, ubicacion, idUsuario,imagen) 
+                VALUES ( '${newObjProducto.categoria}','${newObjProducto.nombre}','${newObjProducto.costo}',
+                '${newObjProducto.estado}','${newObjProducto.descripcion}','${newObjProducto.ubicacion}','${newObjProducto.idUsuario}', '${newObjProducto.imagen}')`;
     conexion.query(insertQuery, (err, resRegistrarProducto) => {
         if (err) return res({ msj: 'El producto no pudo ser registrado' + err }, null)
 

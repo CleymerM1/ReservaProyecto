@@ -113,6 +113,7 @@ export class ProductoComponent implements OnInit {
   obtenerUsuarioActual(){
     this.usuarioService.obtenerUsuarioActual().subscribe( (res:any) => {
       this.usuarioActual = res;
+      console.log(res);
     })
   }
   editarProducto(): void {
