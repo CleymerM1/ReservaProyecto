@@ -4,7 +4,9 @@ const app = express();
 const dotenv=require('dotenv');
 dotenv.config();
 const conexion = require('./config/conexion');
-const cors = require('cors')
+const cors = require('cors');
+var cron = require('node-cron');
+const Categoria = require('./models/categoria.js');
 path = require("path")
 fs = require("fs");
 const {v4: uuidv4} = require("uuid")
@@ -25,6 +27,33 @@ const corsOptions = {
     }
 }
 */
+
+
+//MANDA UN CORREO AL USUARIO SUSCRITO A UNA CATEGORIA
+
+ // Ejecutar una tarea cada minuto
+ cron.schedule('* * * * *', () => {
+     Categoria.generarPdf( (err, data) => {
+         if(err){
+             console.log(err)
+         }else{
+             console.log("Se envio el correo")
+         }
+     } )
+
+})
+
+
+// Ejecutar una tarea todos los lunes a las 7 de la mañana
+cron.schedule('0 7 * * 1', () => {
+    Categoria.generarPdf( (err, data) => {
+        if(err){
+            console.log(err)
+        }else{
+            console.log("Se envio el correo")
+        }
+    } )
+})
 
 //rutas
 app.use(cors())
