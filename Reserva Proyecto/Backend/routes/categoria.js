@@ -10,6 +10,9 @@ router.get('/', CategoriaController.obtenerCategorias);
 router.get('/:id', CategoriaController.obtenerCategoria)
 router.delete('/eliminar/:id',CategoriaController.eliminarCategoria );
 router.put('/editar/:id', CategoriaController.editarCategoria);
+router.post('/desinscribirse', CategoriaController.desinscribirseCategoria);
+router.put('/suscribirse', CategoriaController.suscripcionCategoria);
+router.get('/comprobarSuscripcion/:idCategoria/:correoUsuario',CategoriaController.verificarSuscripcion)
 
 
 module.exports = router;
