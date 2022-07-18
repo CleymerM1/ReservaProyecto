@@ -32,6 +32,7 @@ const corsOptions = {
 //MANDA UN CORREO AL USUARIO SUSCRITO A UNA CATEGORIA
 
  // Ejecutar una tarea cada minuto
+ /*
  cron.schedule('* * * * *', () => {
      Categoria.generarPdf( (err, data) => {
          if(err){
@@ -41,7 +42,7 @@ const corsOptions = {
          }
      } )
 
-})
+})*/
 
 
 // Ejecutar una tarea todos los lunes a las 7 de la mañana
