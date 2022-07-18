@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import leerToken from 'src/app/helpers/decodificarToken';
 import { Categoria } from 'src/app/interfaces/Categorias';
 import { CategoriasService } from 'src/app/Services/categorias.service';
 import { ProductosService } from 'src/app/Services/productos.service';
@@ -22,8 +24,10 @@ export class CategoriaComponent implements OnInit {
 
   @Input() categoriaActual:Categoria | undefined;
   @Input() editandoProducto =false;
-  productoActual:any
-  
+  productoActual:any;
+  inicio:number = 0
+  final:number = 12;
+  selectMisProductos = new FormControl('1');
 
   constructor( private route: ActivatedRoute, private categoriaService:CategoriasService, private productosService:ProductosService) { }
 
@@ -37,21 +41,22 @@ export class CategoriaComponent implements OnInit {
 
   }
 
-
+  /*
   obtenerProductosPorId() {
     console.log(`Obteniendo los productos para la categoría: `)
     console.log(this.categoriaActual)
     this.mostarFormulario=false
     this.productosService.getProductoPorCategoria(this.categoriaActual?.idCategoria).subscribe((res:any)=>{
-      this.listarProductos = res;
+      //this.listarProductos = res;
       this.editandoProducto=false
-      
+      this.listarProductos = res.filter( (producto:any) => !this.comprobarEsVendedor(producto))
+      this.selectMisProductos.setValue('1')
       console.log(res)
     }, (err:any)=>{
-      console.log(this.listarProductos)
+      
     })
     
-  }
+  }*/
 
   editarProducto(objProducto:any){
     this.mostarFormulario=true
@@ -68,9 +73,45 @@ export class CategoriaComponent implements OnInit {
   obtenerCategoria(idCategoria:number) {
     this.categoriaService.getCategoria(idCategoria).subscribe( (res:any) => {
       this.categoriaActual = res;
-      this.obtenerProductosPorId()
-      console.log(res)
+      this.mostrarProductos()
+      //this.obtenerProductosPorId()
+      //console.log(res)
     })
   }
+
+  paginacionProductos(inicioI:number, finalI:number){
+    return this.listarProductos.slice(inicioI,finalI)
+  }
+
+  cambiarPagina(event:any) {
+    this.inicio = event.pageIndex * event.pageSize
+    this.final = this.inicio + event.pageSize
+  }
+
+  comprobarEsVendedor(objProducto:any){
+    let token = leerToken()
+    //console.log(objProducto)
+    if(!token || !objProducto) return false;
+    
+    return objProducto?.idCliente == token.idUsuario
+    
+  }
+
+  mostrarProductos(){
+    console.log(this.selectMisProductos)
+    this.mostarFormulario=false
+    this.productosService.getProductoPorCategoria(this.categoriaActual?.idCategoria).subscribe((res:any)=>{
+      this.editandoProducto=false
+      if(this.selectMisProductos.value == 2){
+        this.listarProductos = res.filter( (producto:any) => this.comprobarEsVendedor(producto))
+      }else{
+        this.listarProductos = res.filter( (producto:any) => !this.comprobarEsVendedor(producto))
+      }
+      console.log(res)
+    }, (err:any)=>{
+      
+    })
+  }
+  
 
 }
