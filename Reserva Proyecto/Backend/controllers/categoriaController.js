@@ -1,9 +1,6 @@
 const conexion = require('../config/conexion');
 const Categoria= require('../models/categoria');
-const generarHTML = require('../helpers/generarHTML.js')
-const enviarCorreo = require('../helpers/email.js')
-var pdf = require('html-pdf');
-var fs = require('fs');
+
 
 exports.crearCategoria = (req,res)=>{
 
