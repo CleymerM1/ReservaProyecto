@@ -1,5 +1,8 @@
 const conexion = require('../config/conexion');
-
+const generarHTML = require('../helpers/generarHTML.js')
+const enviarCorreo = require('../helpers/email.js')
+var pdf = require('html-pdf');
+var fs = require('fs');
 const Categoria = function(objCategoria){
     this.nombre = objCategoria.nombre;
     this.descripcion = objCategoria.descripcion;
