@@ -65,6 +65,84 @@ Categoria.editarCategoria = (req, res) =>{
     } )
 };
 
+Categoria.desinscribirse = (idCategoria, idUsuario, resultado) =>{
+    let consulta = `DELETE FROM suscripcion WHERE idCategoria = '${idCategoria}' AND idUsuario = '${idUsuario}'`;
+    conexion.query(consulta, (err, data)=>{
+        if(err) return resultado(err, null)
+        return resultado(null, {msj: 'Suscripción eliminada'})
+    })
+}
+
+Categoria.comprobarSuscripcion = (idCategoria, correoUsuario, resultado) =>{
+    
+    let verificarSup = `select * from suscripcion where idCategoria = '${idCategoria}' AND correoUsuario = '${correoUsuario}'`;
+    conexion.query(verificarSup, (err, data)=>{
+        if(err) return resultado(err, null)
+        if(data.length){
+            return resultado(null, true)
+        }
+        return resultado(null, false)
+        
+    })
+}
+
+Categoria.obtenerDiezProductosMasVisitados = (idCategoria, departamento, res) => {
+    //let searchQuery = `SELECT categoria.idCategoria, nombreCategoria, departamento, contador FROM categoria JOIN usuario ON idUsuario = usuario.idUsuario JOIN producto on producto.idCategoria = categoria.idCategoria WHERE (departamento = '${departamento}' AND categoria.idCategoria = ${idCategoria}) order by contador desc limit 10;`
+    let searchQuery = `SELECT categoria.idCategoria, nombreCategoria, ubicacion, contador, idProducto, nombre, costo, producto.descripcion, producto.imagen FROM categoria JOIN producto on producto.idCategoria = categoria.idCategoria WHERE (ubicacion = '${departamento}' AND categoria.idCategoria = ${idCategoria}) order by contador desc limit 10;`
+    conexion.query(searchQuery, (err, rows) => {
+        if(err) return res({msj: 'Hubo un error' + err}, null);
+
+        return res(null, rows);
+    }
+    )
+};
+
+Categoria.generarPdf = async (resultado) => {
+
+    // Obtener las suscripciones
+    let searchQuery = `SELECT * FROM suscripcion`;
+    conexion.query(searchQuery, (err, suscripciones) => {
+        if(err) return resultado(err, null);
+
+        suscripciones.forEach(suscripcion => {
+
+
+            // Obtener usuario por id
+            let queryUsuario = `SELECT nombre, apellido, correo, departamento FROM usuario WHERE idUsuario = '${suscripcion.idUsuario}'`;
+            conexion.query(queryUsuario, (err, usuario) => {
+                if(err) throw err;
+
+                Categoria.obtenerDiezProductosMasVisitados(suscripcion.idCategoria, usuario[0].departamento, async (err, productos) => {
+                    if(err) throw err;
+
+                    if(productos.length){
+                        var options = { format: 'A4' };
+                        let html = generarHTML(productos[0].nombreCategoria, usuario[0].nombre, productos)
+
+                        pdf.create(html, options).toFile(`./public/pdf/ ${suscripcion.idCategoria}.pdf`, async (error, res) => {
+                            if(error) {
+                                console.log(error)
+                                resultado(error, null);
+                            }
+                            if(res){
+
+                                //console.log(res)
+                                let datos = {correo: usuario[0].correo, nombre: usuario[0].nombre, nombreCategoria: suscripcion.idCategoria}
+
+                                await enviarCorreo.emailProductosMasVisitados(datos)
+                                resultado(null, productos);
+                            }else {
+                                resultado(null, {msj: "No se pudo enviar el correo"});
+                            }
+                        } )
+
+                    }
+                })
+            })
+    
+        });
+    })  
+}
 
         
 module.exports = Categoria;
