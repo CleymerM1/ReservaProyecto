@@ -47,5 +47,5 @@ ALTER TABLE producto ADD imagen LONGBLOB;
 --------------------------------------NUEVO 17/7/2022-----------------------------------------
 CREATE TABLE denuncias(	idDenuncia INT auto_increment, idDenunciado INT, nombreDenunciado VARCHAR(50), apellidoDenunciado VARCHAR(50), correoDenunciado VARCHAR(50),
 						idDenunciante INT, nombreDenunciante VARCHAR(50), apellidoDenunciante VARCHAR(50), correoDenunciante VARCHAR(50), idProducto INT, nombreProducto VARCHAR(50),
-                        descripcion TEXT, estado VARCHAR(50), fecha date,
+                        opcion VARCHAR(256), razon TEXT, otro TEXT, estado VARCHAR(50) default "pendiente", fecha date,
 primary key (idDenuncia));
