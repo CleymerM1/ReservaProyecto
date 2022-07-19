@@ -42,7 +42,7 @@ const emailRecuperarContrasenia = async (datos) => {
 const emailProductosMasVisitados = async (datos) => {
 
     
-    const { correo, nombre, nombreCategoria, html } = datos;
+    const { correo, nombre, nombreArchivo, nombreCategoria } = datos;
     console.log(datos.nombreCategoria)
         // Información del email
         const info = await transport.sendMail({
@@ -53,7 +53,7 @@ const emailProductosMasVisitados = async (datos) => {
                 <p>Hola ${nombre}, aquí tienes un pdf con los 10  productos más visitados en la categoría de ${nombreCategoria}</P>
             `,
             attachments: [
-                {filename: `${nombreCategoria}.pdf`, filePath:`./public/pdf/${nombreCategoria}.pdf`, contentType: 'application/pdf'}
+                {filename: `${nombreCategoria}.pdf`, path:`./public/pdf/${nombreArchivo}`, contentType: 'application/pdf'}
                 //{filePath:`./public/pdf/${nombreCategoria}.pdf`, contentType: 'application/pdf'}
             ]
         })
