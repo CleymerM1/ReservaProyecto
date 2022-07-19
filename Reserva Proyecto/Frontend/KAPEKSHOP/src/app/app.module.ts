@@ -65,6 +65,7 @@ import { DetalleDeProductoComponent } from './Components/detalle-de-producto/det
 import { PaginadorComponent } from './Components/paginador/paginador.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 //import { ListarUsuariosComponent } from './components/listar-usuarios/listar-usuarios.component';
+import { MisProductosComponent } from './Components/mis-productos/mis-productos.component';
 
 @NgModule({
   declarations: [
@@ -122,7 +123,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     LinealComponent,
     ModalConfirmacionComponent,
     PaginadorComponent,
-    actualizarProductoComponent
+    actualizarProductoComponent,
+    MisProductosComponent,
     
     
   ],
