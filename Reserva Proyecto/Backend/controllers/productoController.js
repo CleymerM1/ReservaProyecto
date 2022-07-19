@@ -157,13 +157,17 @@ exports.eliminarProducto = (req, res) => {
 /*----------------Funcion para las denuncias----------------*/
 exports.denunciarUsuario = (req, res) => {
     idP = req.params.id
-    idU = 8
+    idU = req.body.idUsuario
+    opcion = req.body.opcion
+    razon = req.body.razon
+    otro = req.body.otro
+    console.log(idU)
     //asunto = req.body.asunto
     Producto.denuncia(idP, idU, (err, data) => {
         if(err)
             return res.status(502).send({msj: err})
         else
-            Producto.crearDenuncia(data[0], data[1], (err, data1) => {
+            Producto.crearDenuncia(data[0], data[1], opcion, razon, otro, (err, data1) => {
                 if(err)
                     return res.status(502).send({msj: err})
                 else

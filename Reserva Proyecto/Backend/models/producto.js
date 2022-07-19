@@ -1,7 +1,5 @@
 /*-------------------------------Import para la conexion con la base de datos------------------------------*/
 const conexion = require('../config/conexion');
-
-
 /*------------------------------------------Creacion de clases---------------------------------------------*/
 const Producto = function (objProducto) {
     this.categoria = objProducto.categoria;
@@ -158,15 +156,13 @@ Producto.obtenerDiezProductosMasVisitados = (idCategoria, departamento, res) => 
 };
 
 /*Funciones para las denuncias*/
-Producto.crearDenuncia = (obj1, obj2, res) => {
-    let fecha = new Date();
-    let fechaActual = fecha.getDate() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getFullYear()
-    console.log(fechaActual)
+Producto.crearDenuncia = (obj1, obj2, opcion, razon, otro, res) => {
     let insertQuery = `insert into denuncias (  idDenunciado, nombreDenunciado, apellidoDenunciado, correoDenunciado, idDenunciante, 
-                                                nombreDenunciante, apellidoDenunciante, correoDenunciante, idProducto, nombreProducto, fecha) 
+                                                nombreDenunciante, apellidoDenunciante, correoDenunciante, idProducto, nombreProducto, 
+                                                opcion, razon, otro, fecha) 
                                                 values (${obj1.idU}, '${obj1.nombre}', '${obj1.apellido}', '${obj1.correo}',
                                                         ${obj2.idUsuario}, '${obj2.nombre}', '${obj2.apellido}', '${obj2.correo}',
-                                                        ${obj1.idP}, '${obj1.nombreP}', ${fechaActual})`
+                                                        ${obj1.idP}, '${obj1.nombreP}', '${opcion}', '${razon}', '${otro}', now())`
     conexion.query(insertQuery, (err, data) => {
         if(err)
             return res({msj:err}, null)
