@@ -212,7 +212,16 @@ Usuario.obtenerPorCorreo = ( req, respuesta ) => {
     })
 }
 
-
+/*Funcion usada en producto controller para las denuncias*/
+Usuario.obtenerPorId = (id, resultado) => {
+    let obtenerQuery = `select * from usuario where idUsuario = ${id}`
+    conexion.query(obtenerQuery, (err, res) => {
+        if(err)
+            return resultado(err, null)
+        else  
+            return resultado(null, res)
+    })
+}
 
 
 
