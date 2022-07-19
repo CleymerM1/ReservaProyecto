@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import leerToken from 'src/app/helpers/decodificarToken';
 import { Categoria } from 'src/app/interfaces/Categorias';
@@ -7,12 +6,12 @@ import { CategoriasService } from 'src/app/Services/categorias.service';
 import { ProductosService } from 'src/app/Services/productos.service';
 
 @Component({
-  selector: 'app-categoria',
-  templateUrl: './categoria.component.html',
-  styleUrls: ['./categoria.component.css']
+  selector: 'app-mis-productos',
+  templateUrl: './mis-productos.component.html',
+  styleUrls: ['./mis-productos.component.css']
 })
-export class CategoriaComponent implements OnInit {
-  //agregada 
+export class MisProductosComponent implements OnInit {
+
   listarProductos:any=[]
   categorias:Categoria[] = [
 
@@ -27,21 +26,21 @@ export class CategoriaComponent implements OnInit {
   productoActual:any;
   inicio:number = 0
   final:number = 12;
-  selectMisProductos = new FormControl('1');
+  
+  constructor(private route: ActivatedRoute, private categoriaService:CategoriasService, private productosService:ProductosService) { }
 
-  constructor( private route: ActivatedRoute, private categoriaService:CategoriasService, private productosService:ProductosService) { }
 
   mostarFormulario = false;
 
   ngOnInit(): void {
-    let idCategoria = parseInt(this.route.snapshot.paramMap.get('idCategoria') || "")
+    //let idCategoria = parseInt(this.route.snapshot.paramMap.get('idCategoria') || "")
     //this.categoriaActual = this.categorias.filter(cat => cat.idCategoria == idCategoria)[0]
-    this.obtenerCategoria(idCategoria)
+    //this.obtenerCategoria(idCategoria)
     
 
   }
 
-  /*
+
   obtenerProductosPorId() {
     console.log(`Obteniendo los productos para la categoría: `)
     console.log(this.categoriaActual)
@@ -50,13 +49,13 @@ export class CategoriaComponent implements OnInit {
       //this.listarProductos = res;
       this.editandoProducto=false
       this.listarProductos = res.filter( (producto:any) => !this.comprobarEsVendedor(producto))
-      this.selectMisProductos.setValue('1')
+      
       console.log(res)
     }, (err:any)=>{
       
     })
     
-  }*/
+  }
 
   editarProducto(objProducto:any){
     this.mostarFormulario=true
@@ -73,8 +72,7 @@ export class CategoriaComponent implements OnInit {
   obtenerCategoria(idCategoria:number) {
     this.categoriaService.getCategoria(idCategoria).subscribe( (res:any) => {
       this.categoriaActual = res;
-      this.mostrarProductos()
-      //this.obtenerProductosPorId()
+      this.obtenerProductosPorId()
       //console.log(res)
     })
   }
@@ -96,22 +94,5 @@ export class CategoriaComponent implements OnInit {
     return objProducto?.idCliente == token.idUsuario
     
   }
-
-  mostrarProductos(){
-    console.log(this.selectMisProductos)
-    this.mostarFormulario=false
-    this.productosService.getProductoPorCategoria(this.categoriaActual?.idCategoria).subscribe((res:any)=>{
-      this.editandoProducto=false
-      if(this.selectMisProductos.value == 2){
-        this.listarProductos = res.filter( (producto:any) => this.comprobarEsVendedor(producto))
-      }else{
-        this.listarProductos = res.filter( (producto:any) => !this.comprobarEsVendedor(producto))
-      }
-      console.log(res)
-    }, (err:any)=>{
-      
-    })
-  }
-  
 
 }

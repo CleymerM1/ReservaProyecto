@@ -69,3 +69,36 @@ exports.editarCategoria = (req, res) =>{
         }
     })
 };
+
+exports.suscripcionCategoria = (req,res)=>{
+    let {idCategoria, idUsuario, correoUsuario} = req.body;
+    Categoria.suscribirse(idCategoria, idUsuario, correoUsuario, (error,data)=>{
+        if(error){
+            res.status(404).json({mensaje: 'Error al suscribirse a la categoria'})
+        }else{
+            res.status(200).json(data);
+        }
+    })
+}
+
+exports.desinscribirseCategoria = (req,res)=>{
+    let {idCategoria, idUsuario} = req.body;
+    Categoria.desinscribirse(idCategoria, idUsuario, (error,data)=>{
+        if(error){
+            res.status(404).json({mensaje: 'No se pudo desinscribir'})
+        }else{
+            res.status(200).json(data);
+        }
+    })
+}
+
+exports.verificarSuscripcion = (req,res)=>{
+    let {idCategoria, correoUsuario} = req.params;
+    Categoria.comprobarSuscripcion(idCategoria,correoUsuario, (error, data)=>{
+        if(error){
+            res.status(404).json({mensaje: 'Error'})
+        }else{
+            res.status(200).json(data);
+        }
+    })
+}

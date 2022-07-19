@@ -39,7 +39,30 @@ const emailRecuperarContrasenia = async (datos) => {
     })
 }
 
+const emailProductosMasVisitados = async (datos) => {
+
+    
+    const { correo, nombre, nombreArchivo, nombreCategoria } = datos;
+    console.log(datos.nombreCategoria)
+        // Información del email
+        const info = await transport.sendMail({
+            from: '"KAPEKSHOP - Productos más visitados" <registro@kapekshop.com>',
+            to: correo,
+            subject: `KAPEKSHOP - Productos más visitados en ${nombreCategoria}`,
+            html: `
+                <p>Hola ${nombre}, aquí tienes un pdf con los 10  productos más visitados en la categoría de ${nombreCategoria}</P>
+            `,
+            attachments: [
+                {filename: `${nombreCategoria}.pdf`, path:`./public/pdf/${nombreArchivo}`, contentType: 'application/pdf'}
+                //{filePath:`./public/pdf/${nombreCategoria}.pdf`, contentType: 'application/pdf'}
+            ]
+        })
+
+
+}
+
 module.exports = {
     emailRegistro,
-    emailRecuperarContrasenia
+    emailRecuperarContrasenia,
+    emailProductosMasVisitados
 };

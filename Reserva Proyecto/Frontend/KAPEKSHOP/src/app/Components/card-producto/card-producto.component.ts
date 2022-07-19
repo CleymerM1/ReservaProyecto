@@ -5,6 +5,8 @@ import { ConfigModal } from 'src/app/interfaces/config-modal';
 import { ProductosService } from 'src/app/Services/productos.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import { ModalConfirmacionComponent } from '../modal-confirmacion/modal-confirmacion.component';
+import formatearDinero  from 'src/app/helpers/formatoMoneda';
+import leerToken from 'src/app/helpers/decodificarToken'
 
 @Component({
   selector: 'app-card-producto',
@@ -25,14 +27,14 @@ export class CardProductoComponent implements OnInit {
   constructor(private productoService: ProductosService, private usuarioService:UsuarioService, private modalService:NgbModal) { }
 
   ngOnInit(): void {
-    console.log(this.listarProducto)
     
-    //this.estrellas = new Array(this.producto.valoracion).fill(1)
   }
 
   mostrarProducto(){
+    //ESTO ES PARA MANDAR PUBLICIDAD DE LOS PRODUCTOS MAS VISTOS
     this.productoService.actualizarContador(this.listarProducto.idProducto).subscribe( res => {
-      console.log(res)
+      //console.log(res)
+      
     }, err => {
       console.log(err)
     })
@@ -68,6 +70,19 @@ export class CardProductoComponent implements OnInit {
   editarProducto(){
     
     this.onEditarProducto.emit(this.listarProducto)
+  }
+
+  formatoDinero(cantidad:any){
+    return formatearDinero(cantidad)
+  }
+
+  comprobarEsVendedor(objProducto:any){
+    let token = leerToken()
+    //console.log(objProducto)
+    if(!token || !objProducto) return false;
+    
+    return objProducto?.idCliente == token.idUsuario
+    
   }
 
 }
