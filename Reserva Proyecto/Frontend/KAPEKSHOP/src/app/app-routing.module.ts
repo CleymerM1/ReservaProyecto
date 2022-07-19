@@ -15,7 +15,8 @@ import { SolicitarRecuperarContraseniaComponent } from './Components/solicitar-r
 import { CategoriasComponent } from './Components/categorias/categorias.component';
 import { ProductoComponent } from './Components/producto/producto.component';
 import { formDenunciaComponent } from './Components/formDenuncia/formDenuncia.component';
-import { DetalleDeProductoComponent } from './Components/detalle-de-producto/detalle-de-producto.component';
+
+//import { DetalleDeProductoComponent } from './Components/detalle-de-producto/detalle-de-producto.component';
 
 //componentes
 const routes: Routes = [
@@ -34,7 +35,7 @@ const routes: Routes = [
   {path:'categorias/:idCategoria', component:CategoriaComponent, canActivate:[AuthGuard]},
   {path:'categorias',component:CategoriasComponent},
   {path:'tienda/categorias/:idCategoria', component:CategoriaComponent, canActivate:[AuthGuard]},
-  {path: 'producto/detalle/:id', component: DetalleDeProductoComponent},
+//  {path: 'producto/detalle/:id', component: DetalleDeProductoComponent},
   {path:'**', redirectTo:'',pathMatch:'full'},
 ];
 

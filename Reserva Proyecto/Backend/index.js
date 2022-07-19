@@ -43,7 +43,7 @@ app.listen(port,()=>{
 
 
 
-//VER PRODUCTO
+/*VER PRODUCTO
 const indiceDeProducto = (idProducto) => {
    
   }
@@ -112,5 +112,5 @@ const indiceDeProducto = (idProducto) => {
     })
   
   });
-
+*/
   

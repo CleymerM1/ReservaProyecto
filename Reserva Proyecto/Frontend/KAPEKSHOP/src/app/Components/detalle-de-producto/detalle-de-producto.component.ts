@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/*import { Component, OnInit } from '@angular/core';
 import { ProductosService } from 'src/app/Services/productos.service';
 import { ActivatedRoute } from "@angular/router";
 import { Producto } from 'src/app/models/producto';
@@ -24,7 +24,7 @@ export class DetalleDeProductoComponent implements OnInit {
 
     /*public fotoSeleccionada: string;
     public indiceSeleccionado = 0;
-    public yaExiste: boolean;*/
+    public yaExiste: boolean;
 
     constructor(private ProductosService: ProductosService, private activatedRoute: ActivatedRoute) {
 
@@ -49,6 +49,9 @@ export class DetalleDeProductoComponent implements OnInit {
         this.seleccionarImagen(0);
       }
       this.refrescarEstado();
-    }*/
-
+    }
+    
+    
 }
+    */
+

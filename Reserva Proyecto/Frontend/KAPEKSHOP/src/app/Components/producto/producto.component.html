@@ -31,9 +31,9 @@
                         <mat-label>Selecciona un estado</mat-label>
                         <select formControlName="estadoFormControl" matNativeControl required>
                             <option value="">--Seleccione una opción--</option>
-                          <option value="Atlántida">Nuevo</option>
-                          <option value="Choluteca">Usado</option>
-                          <option value="Colón">Aceptable</option>
+                          <option value="Nuevo">Nuevo</option>
+                          <option value="Usado">Usado</option>
+                          <option value="Aceptable">Aceptable</option>
                         </select>
                         <mat-error *ngIf="formularioCrear.get('estadoFormControl')?.invalid">Seleccione un estado</mat-error>
                       </mat-form-field>
