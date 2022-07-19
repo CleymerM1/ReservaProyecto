@@ -212,14 +212,14 @@ Usuario.obtenerPorCorreo = ( req, respuesta ) => {
     })
 }
 
-/*Funcion usada en producto controller para las denuncias*/
-Usuario.obtenerPorId = (id, resultado) => {
-    let obtenerQuery = `select * from usuario where idUsuario = ${id}`
-    conexion.query(obtenerQuery, (err, res) => {
+/*Funcion para obtener denuncias pendientes*/
+Usuario.obtenerDenunciasP = (resultado) => {
+    let obtenerQuery = 'select * from denuncias where estado = "pendiente"'
+    conexion.query(obtenerQuery, (err, rows) => {
         if(err)
             return resultado(err, null)
-        else  
-            return resultado(null, res)
+        else
+            return resultado(null, rows)
     })
 }
 

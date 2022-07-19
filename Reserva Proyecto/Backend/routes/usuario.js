@@ -16,5 +16,7 @@ router.put('/recuperar-contrasenia/nueva-contrasenia', usuarioController.restabl
 router.get('/', checkAuth,  usuarioController.obtenerUsuario); // Obtener todos los usuarios
 router.get('/:correo', checkAuth,  usuarioController.obtenerUsuarioPorCorreo);  // Obtener el usuario por correo
 
+router.get('/denuncias', usuarioController.obtenerDenunciasP) //obtiene todas las denuncias pendientes
+
 
 module.exports = router;
