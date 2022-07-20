@@ -20,7 +20,6 @@ export class DetalleDeProductoComponent implements OnInit {
   imagenB64:any = null;
 
   idProducto: number;
-
   producto: any[] = [];
 
   @Output() cerrar: any = null;
