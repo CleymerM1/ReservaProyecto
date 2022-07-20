@@ -35,7 +35,7 @@ import { RecuperarContraseniaComponent } from './Components/recuperar-contraseni
 import { SolicitarRecuperarContraseniaComponent } from './Components/solicitar-recuperar-contrasenia/solicitar-recuperar-contrasenia.component';
 import { CategoriasComponent } from './Components/categorias/categorias.component';
 import { ProductoComponent } from './Components/producto/producto.component';
-import { formDenunciaComponent } from './Components/formDenuncia/formDenuncia.component';
+//import { formDenunciaComponent } from './Components/formDenuncia/formDenuncia.component';
 import { CardCategoriaComponent } from './Components/card-categoria/card-categoria.component';
 import { DialogoUsuarioComponent } from './Components/dialogo-usuario/dialogo-usuario.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -60,6 +60,7 @@ import { ScatterComponent } from './Components/admin/estadisticas/scatter/scatte
 import { NgChartsModule } from 'ng2-charts';
 import { ModalConfirmacionComponent } from './Components/modal-confirmacion/modal-confirmacion.component';
 import { actualizarProductoComponent } from './Components/actualizar-producto/actualizar-producto.component';
+<<<<<<< HEAD
 import { DetalleDeProductoComponent } from './Components/detalle-de-producto/detalle-de-producto.component';
 /*
 import { AdminComponent } from './Components/admin/admin.component';
@@ -76,8 +77,16 @@ import { DonaComponent } from './Components/admin/estadisticas/dona/dona.compone
 import { ScatterComponent } from './Components/admin/estadisticas/scatter/scatter.component';
 import { LinealComponent } from './Components/admin/estadisticas/lineal/lineal.component';
 */
+=======
+>>>>>>> 7f443007d922b64116d99f5b0b76161494ab49b9
 
+ 
+//import { DetalleDeProductoComponent } from './Components/detalle-de-producto/detalle-de-producto.component';
+//import { ProductoComponent } from './Components/producto/producto.component';
+import { PaginadorComponent } from './Components/paginador/paginador.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 //import { ListarUsuariosComponent } from './components/listar-usuarios/listar-usuarios.component';
+import { MisProductosComponent } from './Components/mis-productos/mis-productos.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +113,7 @@ import { LinealComponent } from './Components/admin/estadisticas/lineal/lineal.c
     DialogoUsuarioComponent,
     ModalNuevaCategoriaComponent,
     ProductoComponent,
-    formDenunciaComponent,
+   // formDenunciaComponent,
     BtnImagenComponent,
     ImagenesProductoComponent,
     AdminComponent,
@@ -119,7 +128,7 @@ import { LinealComponent } from './Components/admin/estadisticas/lineal/lineal.c
     LinealComponent,
     PolarComponent,
     ScatterComponent,
-    DetalleDeProductoComponent,
+  //  DetalleDeProductoComponent,
     
     AdminComponent,
     AnunciosComponent,
@@ -134,7 +143,9 @@ import { LinealComponent } from './Components/admin/estadisticas/lineal/lineal.c
     ScatterComponent,
     LinealComponent,
     ModalConfirmacionComponent,
-    actualizarProductoComponent
+    PaginadorComponent,
+    actualizarProductoComponent,
+    MisProductosComponent,
     
     
   ],
@@ -158,7 +169,8 @@ import { LinealComponent } from './Components/admin/estadisticas/lineal/lineal.c
     MatSelectModule,
     MatTooltipModule,
     MatToolbarModule,
-    NgChartsModule
+    NgChartsModule,
+    MatPaginatorModule
     
 
   ],

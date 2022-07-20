@@ -1,5 +1,6 @@
 const { json } = require('express');
 const Producto = require('../models/producto');
+const Usuario = require('../models/usuario');
 
 /*---------------Crear Producto---------------*/
 exports.crearProducto = (req,res)=>{
@@ -153,7 +154,24 @@ exports.eliminarProducto = (req, res) => {
             })
 }
 
-/*---------Eliminar todos por usuario--------
-exports.eliminarTodoPorUsuario = (req, res) => {
-    Producto.eliminarTodosPorUsuario((err, data) => {})
-}*/
+/*----------------Funcion para las denuncias----------------*/
+exports.denunciarUsuario = (req, res) => {
+    idP = req.params.idP
+    idU = req.params.idU
+    opcion = req.body.opcion
+    razon = req.body.razon
+    otro = req.body.otro
+    console.log(idU)
+    //asunto = req.body.asunto
+    Producto.denuncia(idP, idU, (err, data) => {
+        if(err)
+            return res.status(502).send({msj: err})
+        else
+            Producto.crearDenuncia(data[0], data[1], opcion, razon, otro, (err, data1) => {
+                if(err)
+                    return res.status(502).send({msj: err})
+                else
+                    return res.json(data1)
+            })
+    })
+}

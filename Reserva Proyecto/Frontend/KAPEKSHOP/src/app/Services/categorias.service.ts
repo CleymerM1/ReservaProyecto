@@ -36,4 +36,21 @@ export class CategoriasService {
     let UrlEl= `http://localhost:3000/categoria/editar/${idCategoria}`;
     return this.http.put(UrlEl,objCategoria)
   }
+  
+  suscribirse(idCategoria:number, idUsuario:number, correoUsuario:string):Observable<any>{
+    let urlC = `http://localhost:3000/categoria/suscribirse`;
+    return this.http.put(urlC, {idCategoria, idUsuario, correoUsuario})
+  }
+  
+  desuscribirse(idCategoria:number, idUsuario:number):Observable<any>{
+
+    let urlC = `http://localhost:3000/categoria/desinscribirse/`;
+    return this.http.post(urlC, {idCategoria, idUsuario})
+  }
+
+  verificarSuscripcion(idCategoria:number, correoUsuario:string):Observable<any>{
+    let urlC = `http://localhost:3000/categoria/comprobarSuscripcion/${idCategoria}/${correoUsuario}`;
+    return this.http.get(urlC)
+  }
+  
 }

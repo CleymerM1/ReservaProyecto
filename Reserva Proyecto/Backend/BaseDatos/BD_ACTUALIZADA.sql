@@ -43,3 +43,9 @@ ALTER TABLE producto ADD idCliente int;
 Alter TABLE producto ADD contador int DEFAULT 0;
 CREATE TABLE suscripcion(idSuscripcion INT PRIMARY KEY AUTO_INCREMENT, idCategoria INT, idUsuario INT , correoUsuario VARCHAR(50), FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria));
 ALTER TABLE producto ADD imagen LONGBLOB;
+
+--------------------------------------17/7/2022-----------------------------------------
+CREATE TABLE denuncias(	idDenuncia INT auto_increment, idDenunciado INT, nombreDenunciado VARCHAR(50), apellidoDenunciado VARCHAR(50), correoDenunciado VARCHAR(50),
+						idDenunciante INT, nombreDenunciante VARCHAR(50), apellidoDenunciante VARCHAR(50), correoDenunciante VARCHAR(50), idProducto INT, nombreProducto VARCHAR(50),
+                        opcion VARCHAR(256), razon TEXT, otro TEXT, estado VARCHAR(50) default "pendiente", fecha date,
+primary key (idDenuncia));
