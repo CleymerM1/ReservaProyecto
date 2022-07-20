@@ -60,7 +60,6 @@ import { ScatterComponent } from './Components/admin/estadisticas/scatter/scatte
 import { NgChartsModule } from 'ng2-charts';
 import { ModalConfirmacionComponent } from './Components/modal-confirmacion/modal-confirmacion.component';
 import { actualizarProductoComponent } from './Components/actualizar-producto/actualizar-producto.component';
-<<<<<<< HEAD
 import { DetalleDeProductoComponent } from './Components/detalle-de-producto/detalle-de-producto.component';
 /*
 import { AdminComponent } from './Components/admin/admin.component';
@@ -77,11 +76,8 @@ import { DonaComponent } from './Components/admin/estadisticas/dona/dona.compone
 import { ScatterComponent } from './Components/admin/estadisticas/scatter/scatter.component';
 import { LinealComponent } from './Components/admin/estadisticas/lineal/lineal.component';
 */
-=======
->>>>>>> 7f443007d922b64116d99f5b0b76161494ab49b9
 
  
-//import { DetalleDeProductoComponent } from './Components/detalle-de-producto/detalle-de-producto.component';
 //import { ProductoComponent } from './Components/producto/producto.component';
 import { PaginadorComponent } from './Components/paginador/paginador.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -128,7 +124,7 @@ import { MisProductosComponent } from './Components/mis-productos/mis-productos.
     LinealComponent,
     PolarComponent,
     ScatterComponent,
-  //  DetalleDeProductoComponent,
+    DetalleDeProductoComponent,
     
     AdminComponent,
     AnunciosComponent,

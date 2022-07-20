@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from 'src/app/interfaces/Categorias';
 import { Producto } from 'src/app/models/producto';
@@ -15,16 +15,21 @@ import { ListarProductosComponent } from '../listar-productos/listar-productos.c
 })
 export class DetalleDeProductoComponent implements OnInit {
 
-  imagenes:any=[]
   activatedRoute: any;
   imagenB64:any = null;
+  listarProductos:any=[]
+  categorias:Categoria[] = []
+
+  productos:any = [ ];
 
   idProducto: number;
   producto: any[] = [];
+  productoActual:any;
 
-  @Output() cerrar: any = null;
+  @Input() imagenes:any = []
+  mostarFormulario: boolean | undefined;
 
-  constructor(private route: ActivatedRoute, private productosService: ProductosService, private route1: Router) {
+  constructor(private route: ActivatedRoute, private productosService: ProductosService) {
     this.idProducto = this.route.snapshot.params["id"];
   }
 
@@ -42,7 +47,7 @@ export class DetalleDeProductoComponent implements OnInit {
       next: (data) => {
         console.log(data)
         this.producto=data;
-        this.imagenB64
+        imagen: this.imagenB64
       }
     })
 
@@ -54,10 +59,7 @@ export class DetalleDeProductoComponent implements OnInit {
     }
     //console.log(event.length)
     
-
   }
-
-  
 
   //para varias imagenes
   async convertirImagen(evento:any){
@@ -72,6 +74,10 @@ export class DetalleDeProductoComponent implements OnInit {
     //esto s ele debe de mandar al backend
     
   }
+  setActualizarImagenes(imagenes:any) {
+    // Esta función se dispara cuando se borra una imagen desde el componente de visualización de imagenes
+    this.imagenes = imagenes
+  }
 
   toBase64 = (file:any) => new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -80,10 +86,18 @@ export class DetalleDeProductoComponent implements OnInit {
     reader.onerror = error => reject(error);
 });
 
-  onCerrar() {
-    this.cerrar.emit();
+setMostrarFormulario() {
+  this.mostarFormulario = !this.mostarFormulario;
+}
 
-  }
+mostrarProductos(){
+  this.mostarFormulario=false
+  this.productosService.obtenerProductoActual(this.productoActual.idProducto).subscribe((res:any)=>{
+    console.log(res)
+  }, (err:any)=>{
+    
+  })
+}
 
 
 }

@@ -1,6 +1,5 @@
 <!--OTRO FORMULARIO MÁS BONITO :V-->
 <div class="container mt-5 mb-5 contenedor">
-<<<<<<< HEAD
   <div class="row">
     <div class="col-lg-12">
       <div class="card">
@@ -18,50 +17,6 @@
                     <mat-error *ngIf="formularioCrear.get('nombreFormControl')?.invalid">El nombre es requerido
                     </mat-error>
                   </mat-form-field>
-=======
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card">
-          <div class="card-header text-center">
-            <h3>{{editandoProducto ? 'Editar producto' : 'Agregar Producto' }} </h3>
-          </div>
-          <div class="card-body border border-info">
-            <form class="row" [formGroup]="formularioCrear">
-              <div class="col-sm-12 col-lg-6">
-                <div class="row">
-                  <div class="col-12 mb-3">
-                    <mat-form-field class="input-full" class="input-full" style="width: 100%" appearance="fill" >
-                      <mat-label>Nombre</mat-label>
-                      <input matInput formControlName="nombreFormControl"  placeholder="Ex. Juan" value="">
-                      <mat-error *ngIf="formularioCrear.get('nombreFormControl')?.invalid">El nombre es requerido</mat-error>
-                    </mat-form-field>
-                  </div>
-                  <div class="col-12 mb-3">
-                    <mat-form-field class="input-full" style="width: 100%" appearance="fill">
-                      <mat-label>Categoria</mat-label>
-                      <input type="text" matInput placeholder="categoria" formControlName="categoriaFormControl" required>
-                      <mat-icon matSuffix></mat-icon>
-                    </mat-form-field>
-                  </div>
-                  <div class="col-12 mb-3">
-                    <mat-form-field class="input-full" style="width: 100%" appearance="fill">
-                        <mat-label>Selecciona un estado</mat-label>
-                        <select formControlName="estadoFormControl" matNativeControl required>
-                            <option value="">--Seleccione una opción--</option>
-                          <option value="Nuevo">Nuevo</option>
-                          <option value="Usado">Usado</option>
-                          <option value="Aceptable">Aceptable</option>
-                        </select>
-                        <mat-error *ngIf="formularioCrear.get('estadoFormControl')?.invalid">Seleccione un estado</mat-error>
-                      </mat-form-field>
-                  </div>
-                  <div class="col-12 mb-3">
-                   <!--En onchange podemos llamar a una funcion para hacer lo que queramos. OBS//convertirlas a base64--> 
-                    <app-btn-imagen (onChange)="fileChangeEvent($event)"></app-btn-imagen>
-                    
-                    
-                  </div>
->>>>>>> 7f443007d922b64116d99f5b0b76161494ab49b9
                 </div>
                 <div class="col-12 mb-3">
                   <mat-form-field class="input-full" style="width: 100%" appearance="fill">

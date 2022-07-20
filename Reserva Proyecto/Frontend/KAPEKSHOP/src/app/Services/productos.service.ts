@@ -13,10 +13,11 @@ export class ProductosService {
     let urlStr = `http://localhost:3000/producto/registro/`
       return this.http.post(urlStr, objUsuario)
   }
-  crearDenuncia(idP:any, idUsuario: any, opcion:any, razon:any, otro:any){
+  /*crearDenuncia(idP:any, idUsuario: any, opcion:any, razon:any, otro:any){
     let url = `http://localhost:3000/producto/denuncia/${idP}`
     return this.http.post(url, idUsuario, opcion, razon, otro)
-  }
+  }*/
+  
   getProductos(): Observable<any>{
     let url = 'http://localhost:3000/producto/';
     return this.http.get(url);

@@ -14,18 +14,16 @@ import { IniciarSesionComponent } from './Components/iniciar-sesion/iniciar-sesi
 import { SolicitarRecuperarContraseniaComponent } from './Components/solicitar-recuperar-contrasenia/solicitar-recuperar-contrasenia.component';
 import { CategoriasComponent } from './Components/categorias/categorias.component';
 import { ProductoComponent } from './Components/producto/producto.component';
-//import { formDenunciaComponent } from './Components/formDenuncia/formDenuncia.component';
-
-//import { DetalleDeProductoComponent } from './Components/detalle-de-producto/detalle-de-producto.component';
+//import { DenunciasComponent } from './Components/admin/denuncias/denuncias.component';
+import { DetalleDeProductoComponent } from './Components/detalle-de-producto/detalle-de-producto.component';
 
 //componentes
 const routes: Routes = [
-<<<<<<< HEAD
+
   { path: '', component: LandingComponent },
   { path: 'inicio', component: IniciarSesionComponent },
   { path: 'registrar-usuario', component: RegistrarUsuarioComponent },
   { path: 'producto', component: ProductoComponent },
-  { path: 'formDenuncia', component: formDenunciaComponent },
   { path: 'editar-usuario/:id', component: RegistrarUsuarioComponent, canActivate: [AuthGuard] },
   { path: 'listar-productos', component: ListarProductosComponent },
   { path: 'confirmar/:token', component: ValidarCorreoComponent },
@@ -38,7 +36,7 @@ const routes: Routes = [
   { path: 'tienda/categorias/:idCategoria', component: CategoriaComponent, canActivate: [AuthGuard] },
   { path: 'producto/detalle/:id', component: DetalleDeProductoComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '', pathMatch: 'full' },
-=======
+
   {path: '', component:LandingComponent},
   {path: 'inicio', component:IniciarSesionComponent},
   {path:'registrar-usuario',component:RegistrarUsuarioComponent},
@@ -54,9 +52,8 @@ const routes: Routes = [
   {path:'categorias/:idCategoria', component:CategoriaComponent, canActivate:[AuthGuard]},
   {path:'categorias',component:CategoriasComponent},
   {path:'tienda/categorias/:idCategoria', component:CategoriaComponent, canActivate:[AuthGuard]},
-//  {path: 'producto/detalle/:id', component: DetalleDeProductoComponent},
-  {path:'**', redirectTo:'',pathMatch:'full'},
->>>>>>> 7f443007d922b64116d99f5b0b76161494ab49b9
+  {path: 'producto/detalle/:id', component: DetalleDeProductoComponent},
+  {path:'**', redirectTo:'',pathMatch:'full'}
 ];
 
 @NgModule({

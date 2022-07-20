@@ -1,36 +1,47 @@
 <app-header></app-header>
-
-<mat-card class="detalle-de-producto" >
-    <div class="" *ngFor="let detalle of producto">
-      <mat-card-header >
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{detalle?.nombre}}</mat-card-title>
-      </mat-card-header>
-      <img height="200" width="50" mat-card-image src="{{detalle?.imagen}}" alt="">
-      <mat-card-content>
-        <p class="descripcion">
-          Descripcion: {{detalle?.descripcion}}
-        </p>
-        <p class="estado">
-           Estado:  {{detalle?.estado}}
-          </p>
-          <p class="ubicacion">
-            Ubicacion: {{detalle?.ubicacion}}
-          </p>
-          <p class="precio">
-           Precio: {{detalle?.costo}} lps
-          </p>
-      </mat-card-content>
+<div class="container mt-5">
+  <div class="row">
+    <div *ngIf="!mostarFormulario" (click)="setMostrarFormulario()" class="col-12" style="cursor: pointer;">
+      <div mat-raised-button class="float-left" matTooltip="Regresar" aria-label="Pulsa el boton para cancelar"
+        style="width: 50px ; height: 50px ; background-color: black; border-radius: 100% ; margin-left: auto;">
+        <svg style="color:white" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </div>
     </div>
-    </mat-card>
-<thead>
-    <tr *ngFor="let detalle of producto" class="list-group-item-list-group">
-        <td>{{detalle.nombre}}</td>
-        <td>{{detalle.categoria}}</td>
-        <td>{{detalle.estado}}</td>
-        <td>{{detalle.descripcion}}</td>
-        <td>{{detalle.ubicacion}}</td>
-        <td>{{detalle.costo}}</td>
-        <td>{{detalle.imagen}}</td>
-    </tr>
-</thead>
+  </div>
+  <div class="row">
+    <div class="col-lg-7 offset-lg-2">
+      <div class="card">
+        <div class="card-body text-center">
+          <mat-card class="detalle-de-producto">
+            <div class="lg-4-mg-5" *ngFor="let detalle of producto">
+              <mat-card-header>
+                <div mat-card-avatar class="example-image"></div>
+                <mat-card-title>{{detalle?.nombre}}</mat-card-title>
+              </mat-card-header>
+              <img height="200" width="50" mat-card-image src="{{detalle?.imagen}}" alt="">
+              <mat-card-content>
+                <p class="descripcion">
+                  Descripcion: {{detalle?.descripcion}}
+                </p>
+                <p class="estado">
+                  Estado: {{detalle?.estado}}
+                </p>
+                <p class="ubicacion">
+                  Ubicacion: {{detalle?.ubicacion}}
+                </p>
+                <p class="precio">
+                  Precio: L.{{detalle?.costo}} 
+                </p>
+              </mat-card-content>
+            </div>
+          </mat-card>
+          <button type="button" class=" btn btn-danger btn-sm justify-end" routerLink="/formDenuncia" mat-stroked-button
+            color="danger">Denunciar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
