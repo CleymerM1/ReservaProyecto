@@ -14,7 +14,7 @@ import { IniciarSesionComponent } from './Components/iniciar-sesion/iniciar-sesi
 import { SolicitarRecuperarContraseniaComponent } from './Components/solicitar-recuperar-contrasenia/solicitar-recuperar-contrasenia.component';
 import { CategoriasComponent } from './Components/categorias/categorias.component';
 import { ProductoComponent } from './Components/producto/producto.component';
-import { formDenunciaComponent } from './Components/formDenuncia/formDenuncia.component';
+//import { formDenunciaComponent } from './Components/formDenuncia/formDenuncia.component';
 
 //import { DetalleDeProductoComponent } from './Components/detalle-de-producto/detalle-de-producto.component';
 
@@ -24,7 +24,7 @@ const routes: Routes = [
   {path: 'inicio', component:IniciarSesionComponent},
   {path:'registrar-usuario',component:RegistrarUsuarioComponent},
   {path:'producto',component:ProductoComponent},
-  {path:'formDenuncia',component:formDenunciaComponent},
+ // {path:'formDenuncia',component:formDenunciaComponent},
   {path:'editar-usuario/:id', component:RegistrarUsuarioComponent, canActivate:[AuthGuard]},
   {path:'listar-productos', component:ListarProductosComponent},
   {path:'confirmar/:token', component:ValidarCorreoComponent},

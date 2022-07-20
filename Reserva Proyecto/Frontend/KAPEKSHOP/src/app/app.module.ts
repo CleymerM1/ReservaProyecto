@@ -35,7 +35,7 @@ import { RecuperarContraseniaComponent } from './Components/recuperar-contraseni
 import { SolicitarRecuperarContraseniaComponent } from './Components/solicitar-recuperar-contrasenia/solicitar-recuperar-contrasenia.component';
 import { CategoriasComponent } from './Components/categorias/categorias.component';
 import { ProductoComponent } from './Components/producto/producto.component';
-import { formDenunciaComponent } from './Components/formDenuncia/formDenuncia.component';
+//import { formDenunciaComponent } from './Components/formDenuncia/formDenuncia.component';
 import { CardCategoriaComponent } from './Components/card-categoria/card-categoria.component';
 import { DialogoUsuarioComponent } from './Components/dialogo-usuario/dialogo-usuario.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -94,7 +94,7 @@ import { MisProductosComponent } from './Components/mis-productos/mis-productos.
     DialogoUsuarioComponent,
     ModalNuevaCategoriaComponent,
     ProductoComponent,
-    formDenunciaComponent,
+   // formDenunciaComponent,
     BtnImagenComponent,
     ImagenesProductoComponent,
     AdminComponent,

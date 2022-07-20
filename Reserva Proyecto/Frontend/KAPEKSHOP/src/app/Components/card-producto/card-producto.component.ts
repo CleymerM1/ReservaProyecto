@@ -5,7 +5,7 @@ import { ConfigModal } from 'src/app/interfaces/config-modal';
 import { ProductosService } from 'src/app/Services/productos.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import { ModalConfirmacionComponent } from '../modal-confirmacion/modal-confirmacion.component';
-import formatearDinero  from 'src/app/helpers/formatoMoneda';
+//import formatearDinero  from 'src/app/helpers/formatoMoneda';
 import leerToken from 'src/app/helpers/decodificarToken'
 
 @Component({
@@ -72,8 +72,8 @@ export class CardProductoComponent implements OnInit {
     this.onEditarProducto.emit(this.listarProducto)
   }
 
-  formatoDinero(cantidad:any){
-    return formatearDinero(cantidad)
+ formatoDinero(cantidad:any){
+   // return formatearDinero(cantidad)
   }
 
   comprobarEsVendedor(objProducto:any){
