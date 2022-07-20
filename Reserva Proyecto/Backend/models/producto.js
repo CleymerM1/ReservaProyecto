@@ -1,8 +1,5 @@
 /*-------------------------------Import para la conexion con la base de datos------------------------------*/
 const conexion = require('../config/conexion');
-
-
-
 /*------------------------------------------Creacion de clases---------------------------------------------*/
 const Producto = function (objProducto) {
     this.categoria = objProducto.categoria;
@@ -32,7 +29,7 @@ Producto.crear = (newObjProducto, res) => {
 
 /*-------Obtener Productos------*/
 Producto.obtenerTodos = (resultado)=>{
-    conexion.query("select * from producto", (err, rows)=>{
+    conexion.query("select * from producto", (err, obj1)=>{
         if(err) throw err;
         rows = rows.map( producto => {
             producto.imagen = producto.imagen?.toString('ascii')
@@ -46,9 +43,10 @@ Producto.obtenerTodos = (resultado)=>{
 Producto.obtenerPorId = (id, resultado) => {
     let obtenerQuery = `select * from producto where idProducto = ${id}`
     conexion.query(obtenerQuery, (err, res) => {
-        if (err) return resultado({ msj: 'Hubo un error' + err }, null)
-
-        return resultado(null, res)
+        if (err) 
+            return resultado({ msj: 'Hubo un error' + err }, null)
+        else
+            return resultado(null, res)
     })
 }
 Producto.obtenerPorUbi = (departamento, resultado) => {
@@ -156,4 +154,40 @@ Producto.obtenerDiezProductosMasVisitados = (idCategoria, departamento, res) => 
     }
     )
 };
+
+/*Funciones para las denuncias*/
+Producto.crearDenuncia = (obj1, obj2, opcion, razon, otro, res) => {
+    let insertQuery = `insert into denuncias (  idDenunciado, nombreDenunciado, apellidoDenunciado, correoDenunciado, idDenunciante, 
+                                                nombreDenunciante, apellidoDenunciante, correoDenunciante, idProducto, nombreProducto, 
+                                                opcion, razon, otro, fecha) 
+                                                values (${obj1.idU}, '${obj1.nombre}', '${obj1.apellido}', '${obj1.correo}',
+                                                        ${obj2.idUsuario}, '${obj2.nombre}', '${obj2.apellido}', '${obj2.correo}',
+                                                        ${obj1.idP}, '${obj1.nombreP}', '${opcion}', '${razon}', '${otro}', now())`
+    conexion.query(insertQuery, (err, data) => {
+        if(err)
+            return res({msj:err}, null)
+        else
+            return res(null, {msj:'Se pudo registrar la denuncia'})
+    })
+}
+/*idP es el id del producto
+  Cada columna tiene su nombre propio nombre porque al solo dejarlas llamadas hay columnas que el select no trae*/
+Producto.denuncia = (idP, idU, res) => {
+    //este obtiene datos del producto y su vendedor
+    let obtenerQuery = `select usuario.idUsuario idU, usuario.nombre nombre, usuario.apellido apellido, usuario.correo correo, producto.idProducto idP, producto.nombre nombreP from producto 
+                        inner join usuario on producto.idUsuario = usuario.idUsuario where producto.idProducto = ${idP}`
+    //este obtiene datos del comprador que esta denunciando
+    let obtenerUsuario = `select idUsuario, nombre, apellido, correo from usuario where idUsuario = ${idU}`
+    conexion.query(obtenerQuery, (err, obj1) => {
+        if(err)
+            return res(err, null)
+        else
+            conexion.query(obtenerUsuario, (err, obj2) => {
+                if(err)
+                    return res(err, null)
+                else
+                    return res(null, [obj1[0], obj2[0]])
+            })
+    })
+}
 module.exports = Producto;

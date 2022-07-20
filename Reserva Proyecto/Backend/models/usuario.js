@@ -212,7 +212,16 @@ Usuario.obtenerPorCorreo = ( req, respuesta ) => {
     })
 }
 
-
+/*Funcion para obtener denuncias pendientes*/
+Usuario.obtenerDenunciasP = (resultado) => {
+    let obtenerQuery = 'select * from denuncias where estado = "pendiente"'
+    conexion.query(obtenerQuery, (err, rows) => {
+        if(err)
+            return resultado(err, null)
+        else
+            return resultado(null, rows)
+    })
+}
 
 
 

@@ -166,3 +166,13 @@ exports.inicioSesion = (req, res) => {
     })
 }
 
+exports.obtenerDenunciasP = (req, res) => {
+    Usuario.obtenerDenunciasP((err, data) => {
+        if(err)
+            return res.status(404).send({msj: err.msj || 'Error al buscar en la base d datos'})
+        else if(data.error)
+            return res.status(502).send({msj: data.error})
+        else
+            return res.status(200).json(data)
+    })
+}
