@@ -5,7 +5,7 @@ const productoController = require('../controllers/productoController');
 
 /*---------------------------------------CRUD------------------------------------*/
 router.post('/registro', productoController.crearProducto);
-router.post('/denuncia/:id', productoController.denunciarUsuario);
+router.post('/denuncia/:idP/:idU', productoController.denunciarUsuario);
 router.get('/', productoController.obtenerProductos);
 router.get('/:filter/:value1', productoController.filtrarProductos);
 router.get('/:id', productoController.obtenerPorCategoria);

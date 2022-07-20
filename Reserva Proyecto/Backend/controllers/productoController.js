@@ -156,8 +156,8 @@ exports.eliminarProducto = (req, res) => {
 
 /*----------------Funcion para las denuncias----------------*/
 exports.denunciarUsuario = (req, res) => {
-    idP = req.params.id
-    idU = req.body.idUsuario
+    idP = req.params.idP
+    idU = req.params.idU
     opcion = req.body.opcion
     razon = req.body.razon
     otro = req.body.otro
