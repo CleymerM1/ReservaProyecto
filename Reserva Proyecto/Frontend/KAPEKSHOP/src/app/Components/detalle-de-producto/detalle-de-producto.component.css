@@ -1,0 +1,13 @@
+.detalle-de-producto { 
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+.descripcion {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+.h-5 {
+    margin-right: 5px;
+}

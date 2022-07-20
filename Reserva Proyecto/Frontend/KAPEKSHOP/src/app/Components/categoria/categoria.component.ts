@@ -12,13 +12,9 @@ import { ProductosService } from 'src/app/Services/productos.service';
 export class CategoriaComponent implements OnInit {
   //agregada 
   listarProductos:any=[]
-  categorias:Categoria[] = [
+  categorias:Categoria[] = []
 
-  ]
-
-  productos:any = [
-    {imagen: 'camara.jpg', valoracion: 4, precio:1000},
-  ];
+  productos:any = [ ];
 
   @Input() categoriaActual:Categoria | undefined;
   @Input() editandoProducto =false;

@@ -22,6 +22,7 @@ export class ProductoComponent implements OnInit {
   @Input() categoriaActual: Categoria | any = {};
   @Input() editandoProducto = false
   @Input() productoActual:any
+
   usuarioActual:any;
 
   ngOnInit(): void {
@@ -165,7 +166,8 @@ export class ProductoComponent implements OnInit {
     this.formularioCrear.get('costoFormControl')?.setValue(this.productoActual.costo),
     this.formularioCrear.get('estadoFormControl')?.setValue(this.productoActual.estado),
     this.formularioCrear.get('descripcionFormControl')?.setValue(this.productoActual.descripcion),
-    this.formularioCrear.get('ubicacionFormControl')?.setValue(this.productoActual.ubicacion)
+    this.formularioCrear.get('ubicacionFormControl')?.setValue(this.productoActual.ubicacion),
+    this.formularioCrear.get('imagenFormControl')?.setValue(this.productoActual.imagen)
     console.log(this.formularioCrear.value)
     console.log(this.productoActual)
   }

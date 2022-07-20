@@ -32,7 +32,7 @@ Producto.crear = (newObjProducto, res) => {
 
 /*-------Obtener Productos------*/
 Producto.obtenerTodos = (resultado)=>{
-    conexion.query("select * from producto", (err, rows)=>{
+    conexion.query("select * from producto", (err, obj1)=>{
         if(err) throw err;
         rows = rows.map( producto => {
             producto.imagen = producto.imagen?.toString('ascii')
@@ -41,7 +41,6 @@ Producto.obtenerTodos = (resultado)=>{
         resultado(null, rows);
     });
 };
-
 /*--------------------Funciones de Busqueda--------------------*/
 Producto.obtenerPorId = (id, resultado) => {
     let obtenerQuery = `select * from producto where idProducto = ${id}`

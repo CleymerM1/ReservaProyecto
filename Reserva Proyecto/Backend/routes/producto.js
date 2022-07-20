@@ -6,6 +6,7 @@ const productoController = require('../controllers/productoController');
 /*---------------------------------------CRUD------------------------------------*/
 router.post('/registro', productoController.crearProducto);
 router.get('/', productoController.obtenerProductos);
+router.get('/detalle/:id', productoController.obtenerProducto);
 router.get('/:filter/:value1', productoController.filtrarProductos);
 router.get('/:id', productoController.obtenerPorCategoria);
 router.put('/actualizar/:id', productoController.actualizarProducto);

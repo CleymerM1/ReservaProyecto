@@ -1,54 +1,92 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductosService } from 'src/app/Services/productos.service';
-import { ActivatedRoute } from "@angular/router";
+import { Component, Input, Output, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Categoria } from 'src/app/interfaces/Categorias';
 import { Producto } from 'src/app/models/producto';
-import { environment } from 'src/environments/environment';
+import { CategoriasService } from 'src/app/Services/categorias.service';
+import { ProductosService } from 'src/app/Services/productos.service';
+import { UsuarioService } from 'src/app/Services/usuario.service';
+import { ListarProductosComponent } from '../listar-productos/listar-productos.component';
 
 
 @Component({
-    selector: 'app-detalle-de-producto',
-    templateUrl: './detalle-de-producto.component.html',
-    styleUrls: ['./detalle-de-producto.component.css']
+  selector: 'app-detalle-de-producto',
+  templateUrl: './detalle-de-producto.component.html',
+  styleUrls: ['./detalle-de-producto.component.css']
 })
 export class DetalleDeProductoComponent implements OnInit {
-    public producto = {
-        id: 0,
-        nombre: "",
-        ubicacion: "",
-        estado: "",
-        descripcion: "",
-        precio: "",
-        imagen: [],
-        idUsuario: 0,
-    };
 
-    /*public fotoSeleccionada: string;
-    public indiceSeleccionado = 0;
-    public yaExiste: boolean;*/
+  imagenes:any=[]
+  activatedRoute: any;
+  imagenB64:any = null;
 
-    constructor(private ProductosService: ProductosService, private activatedRoute: ActivatedRoute) {
+  idProducto: number;
 
-    }
-    ngOnInit(): void {
-    }
+  producto: any[] = [];
 
-    /*Public resolverFoto(foto) {
-      const baseUrl = environment.baseUrl;
-      return `${baseUrl}/foto_producto/${foto}`;
-    }
-  
-    public seleccionarImagen(indice) {
-      this.indiceSeleccionado = indice;
-      this.fotoSeleccionada = this.producto.fotos[this.indiceSeleccionado].foto;
-    }*/
+  @Output() cerrar: any = null;
 
-    /*async ngOnInit() {
-      const id = this.activatedRoute.snapshot.paramMap.get("id")
-      this.producto = await this.productosService.obtenerProductoConFotosPorId(id);
-      if (this.producto.fotos.length >= 0) {
-        this.seleccionarImagen(0);
+  constructor(private route: ActivatedRoute, private productosService: ProductosService, private route1: Router) {
+    this.idProducto = this.route.snapshot.params["id"];
+  }
+
+  ngOnInit() {
+    this.obtenerPorId()
+
+  }
+
+
+  obtenerPorId() {
+    this.productosService.obtenerPorId(this.idProducto).subscribe({
+      error: (error) => {
+        console.log(error)
+      },
+      next: (data) => {
+        console.log(data)
+        this.producto=data;
+        this.imagenB64
       }
-      this.refrescarEstado();
-    }*/
+    })
+
+  }
+
+  async fileChangeEvent(event:any) {
+    if(event.length != 0){
+      this.imagenB64 = await this.toBase64(event[0])
+    }
+    //console.log(event.length)
+    
+
+  }
+
+  
+
+  //para varias imagenes
+  async convertirImagen(evento:any){
+    
+    console.log(evento);
+    //creamos variable para convertir imagen a base64. Si no se puede pues se hace un for xD
+    for(let i=0;i<evento.length;i++){
+
+      let base64 = await this.toBase64(evento[i]);
+      this.imagenes.push( {name: evento[i].name, base64: base64})
+    }
+    //esto s ele debe de mandar al backend
+    
+  }
+
+  toBase64 = (file:any) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+
+  onCerrar() {
+    this.cerrar.emit();
+
+  }
+
 
 }
+
+

@@ -1,24 +1,3 @@
-<!--
-<div (click)="mostrarProducto()" class="card h-100">
-    
-    <div class="card-body">
-        <ul class="list-unstyled d-flex justify-content-between">
-            <li>{{listarProducto.imagen}}</li>
-            <li  >
-                <i *ngFor="let item of estrellas"  class="text-warning fa fa-star"></i>
-            </li>
-            <li class="text-muted text-right">{{listarProducto.costo}}</li>
-        </ul>
-        <a href="#" class="h2 text-decoration-none text-dark">{{listarProducto.nombre}}</a>
-        <p class="card-text">
-            {{listarProducto.descripcion}}
-        </p>
-        <p class="text-muted">Reviews (24)</p>
-        <button style= "background-color:orange"
-        mat-button color="white">Agregar al Carrito</button>
-    </div>
-</div>-->
-
 <mat-card class="card-producto" >
     <div class="row">
       <div  class="col-12 float-start">
@@ -38,7 +17,7 @@
       <img height="200" mat-card-image src="{{listarProducto?.imagen}}" alt="Photo of a Shiba Inu">
       <mat-card-content>
         <p class="descripcion">
-          {{listarProducto?.descripcion}}
+        {{listarProducto?.descripcion}}
         </p>
         <p class="descripcion">
             Precio: {{listarProducto?.costo}} lps
@@ -46,13 +25,36 @@
       </mat-card-content>
     </div>
     <div>
-      <button click()="producto/detalle/:id" mat-stroked-button color="warn">Ver detalles ></button>
+      <button routerLink = "/producto/detalle/{{listarProducto.idProducto}}"
+      mat-stroked-button color="warn">Ver detalles ></button>
+
+
     </div>
     <div>
       <mat-card-actions>
-        <button  style="background-color: orange;" mat-button>Lista de deseos</button>
+        <button  style="background-color: rgb(255, 123, 0);" mat-button>Lista de deseos</button>
       </mat-card-actions>
     </div>
     </mat-card>
 
-    <!--RECORDAR PONER EL CLICK EN VER DETALLES-->
+
+    <!--<div class="modal fade" id="detalles-{{listarProducto._idProducto}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel" >Detalle Producto{{listarProducto.nombre}} </h3>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"   ></button>
+          </div>
+          <div class="modal-body" >
+            <p>{{listarProducto.nombre}}</p>
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>   routerLink = "/producto/detalle/{{listarProducto.idProducto}}" 
+    data-toggle="modal" data-bs-toggle="modal" [attr.data-target]="'#detalles-'+listarProducto._idProducto"-->

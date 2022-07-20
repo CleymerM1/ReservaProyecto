@@ -1,19 +1,36 @@
+<app-header></app-header>
 
-        <div class="izquierda">
-  
-          <!--<img *ngFor="let foto of producto.fotos; let i = index" (mouseenter)="seleccionarImagen(i)"
-               class="imagen-izquierda"
-               [class.seleccionada]="i==indiceSeleccionado"
-               [src]="resolverFoto(foto.foto)" alt="Foto">-->
-        </div>
-        <div>
-          <!--<img *ngIf="fotoSeleccionada" [src]="resolverFoto(fotoSeleccionada)" alt="">-->
-        </div>
-        <br>
-        <h1 class="mat-display-2">{{producto.nombre}}</h1>
-        <p>{{producto.descripcion}}</p>
-        <strong>Precio</strong>
-        <h1 class="mat-display-2">{{producto.precio}}</h1>
-        <a routerLink="producto/detalle/:id" class="comprar" mat-raised-button color="primary">
-          Seguir comprando
-        </a>
+<mat-card class="detalle-de-producto" >
+    <div class="" *ngFor="let detalle of producto">
+      <mat-card-header >
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{detalle?.nombre}}</mat-card-title>
+      </mat-card-header>
+      <img height="200" width="50" mat-card-image src="{{detalle?.imagen}}" alt="">
+      <mat-card-content>
+        <p class="descripcion">
+          Descripcion: {{detalle?.descripcion}}
+        </p>
+        <p class="estado">
+           Estado:  {{detalle?.estado}}
+          </p>
+          <p class="ubicacion">
+            Ubicacion: {{detalle?.ubicacion}}
+          </p>
+          <p class="precio">
+           Precio: {{detalle?.costo}} lps
+          </p>
+      </mat-card-content>
+    </div>
+    </mat-card>
+<thead>
+    <tr *ngFor="let detalle of producto" class="list-group-item-list-group">
+        <td>{{detalle.nombre}}</td>
+        <td>{{detalle.categoria}}</td>
+        <td>{{detalle.estado}}</td>
+        <td>{{detalle.descripcion}}</td>
+        <td>{{detalle.ubicacion}}</td>
+        <td>{{detalle.costo}}</td>
+        <td>{{detalle.imagen}}</td>
+    </tr>
+</thead>

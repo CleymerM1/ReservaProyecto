@@ -29,6 +29,11 @@ export class ProductosService {
     return this.http.get(`http://localhost:3000/producto/${id}`, headers);
   }
 
+  obtenerPorId(idProducto:number):Observable<any>{
+    let url = `http://localhost:3000/producto/detalle/${idProducto}`;
+    return this.http.get(url)
+  }
+
   getProductoPorCategoria(id: any): Observable<any>{
     let url = `http://localhost:3000/producto/${id}`;
     return this.http.get(url);
@@ -47,4 +52,5 @@ export class ProductosService {
   eliminarProducto(id: number): Observable<any>{
     return this.http.delete(`http://localhost:3000/producto/${id}`);
   }
+
 }
