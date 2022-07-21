@@ -24,7 +24,7 @@
                     </li>
                     
                     <li *ngIf="comprobarUsuarioAdmin()" [ngClass]="urlItemActual == '/tienda' ? 'item-seleccionado nav-item': 'nav-item'" >
-                        <a class="nav-link" routerLink="/tienda">Tienda</a>
+                        <a class="nav-link" routerLink="/admin">Admin</a>
                     </li>
                     <li *ngIf="comprobarUsuario()" style="cursor: pointer;" class="nav-item">
                         <a class="nav-link" routerLink="/categorias">Categorias</a>
