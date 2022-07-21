@@ -1,4 +1,5 @@
 
+
 const express = require('express');
 const conexion = require('../config/conexion');
 const router = express.Router();
@@ -6,6 +7,7 @@ const checkAuth = require('../middleware/checkAuth.js')
 const usuarioController = require('../controllers/usuarioController');
 
 router.post('/registro', usuarioController.crearUsuario);
+router.delete('/eliminar/:id', usuarioController.eliminarUsuario);
 router.post('/login', usuarioController.inicioSesion);
 router.put('/registro/:token', usuarioController.validarTokenRegistro);
 
