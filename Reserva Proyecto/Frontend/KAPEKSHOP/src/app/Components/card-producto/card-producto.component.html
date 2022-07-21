@@ -20,7 +20,7 @@
             </button>
             <mat-menu #menu="matMenu">
               <button mat-menu-item>
-                <span routerLink="/formDenuncia">Denunciar</span>
+                <span routerLink="/form-Denuncia">Denunciar</span>
               </button>
             </mat-menu>
 
@@ -39,19 +39,32 @@
                 {{listarProducto?.descripcion}}
               </p>
               <p class="precio">
-                Precio: L. {{listarProducto?.costo}}
+               Precio: {{formatoDinero(listarProducto?.costo)}}
               </p>
+              <div>
+                <span>
+                  Calificación: 
+                </span>
+                <ul class="list-unstyled d-flex justify-content-between">
+                  <li>
+                      <!-- <i class="text-warning fa fa-star"></i>
+                      <i class="text-warning fa fa-star"></i>
+                      <i class="text-warning fa fa-star"></i> -->
+                      
+                      <i style="cursor: pointer;" *ngFor="let estrella of estrellas; index as i" [class]="estrella"></i>
+      
+      
+                  </li>
+              </ul>
+              </div>
+
             </mat-card-content>
           </div>
           <div>
             <button routerLink="/producto/detalle/{{listarProducto.idProducto}}" mat-stroked-button color="warn">Ver
-              detalles ></button>
+              detalles </button>
           </div>
-          <div>
-            <mat-card-actions>
-              <button style="background-color: rgb(255, 123, 0);" mat-button>Lista de deseos</button>
-            </mat-card-actions>
-          </div>
+          
         </div>
 
       </mat-card>
