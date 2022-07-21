@@ -5,7 +5,7 @@ import { ConfigModal } from 'src/app/interfaces/config-modal';
 import { ProductosService } from 'src/app/Services/productos.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import { ModalConfirmacionComponent } from '../modal-confirmacion/modal-confirmacion.component';
-//import formatearDinero  from 'src/app/helpers/formatoMoneda';
+import formatearDinero  from 'src/app/helpers/formatoMoneda';
 import leerToken from 'src/app/helpers/decodificarToken'
 
 @Component({
@@ -21,13 +21,13 @@ export class CardProductoComponent implements OnInit {
   @Output() onEvento = new EventEmitter<boolean>();
   @Output() onEditarProducto = new EventEmitter<any>();
  
-  estrellas:any
+  estrellas:any = []
   usuarioActual: any
 
   constructor(private productoService: ProductosService, private usuarioService:UsuarioService, private modalService:NgbModal) { }
 
   ngOnInit(): void {
-    
+    this.obtenerCalificacionProducto()
   }
 
   mostrarProducto(){
@@ -72,8 +72,8 @@ export class CardProductoComponent implements OnInit {
     this.onEditarProducto.emit(this.listarProducto)
   }
 
- formatoDinero(cantidad:any){
-   // return formatearDinero(cantidad)
+  formatoDinero(cantidad:any){
+    return formatearDinero(cantidad)
   }
 
   comprobarEsVendedor(objProducto:any){
@@ -81,8 +81,28 @@ export class CardProductoComponent implements OnInit {
     //console.log(objProducto)
     if(!token || !objProducto) return false;
     
-    return objProducto?.idCliente == token.idUsuario
+    return objProducto?.idUsuario == token.idUsuario
     
   }
+  generarEstrellas(rango:number) {
+    let estrellas = []
+    for(let i=0;i<5;i++){
+      if(i+1 <= rango){
+        estrellas.push('text-warning fa fa-star')
+      }else {
+        estrellas.push('text-muted fa fa-star')
+      }
+    }
+    return estrellas
+  
+  }
 
+  obtenerCalificacionProducto(){
+    this.productoService.obtenerCalificacionProducto(this.listarProducto.idProducto).subscribe( (res:any) => {
+        this.estrellas = this.generarEstrellas(res)
+        console.log(this.estrellas)
+    }, err => {
+      console.log(err)
+    })
+  }
 }
