@@ -62,9 +62,12 @@ export class ProductoComponent implements OnInit {
         imagen: this.imagenB64
         
       }
-
+      
+      
       this.productosService.crearProducto(producto).subscribe( (res:any) => {
-        console.log(res)
+
+        let idProducto = res.data.insertId
+        this.subirImagenes(idProducto)
         this.actualizarProducto.emit(true)
       })
 
@@ -73,13 +76,31 @@ export class ProductoComponent implements OnInit {
     
   }
 
+  subirImagenes(idProducto:number) {
+    this.imagenes.forEach( (imagen:any) => {
+      // try {
+      //   await this.productosService.subirImagenProducto(idProducto, imagen.base64 ).toPromise()
+      // } catch (error) {
+      //   console.log(error)
+      // }
+      this.productosService.subirImagenProducto(idProducto, imagen.base64 ).subscribe( (res:any) => {
+        console.log(res)
+      }, err => {
+        console.log(err)
+      })
+    });
+  }
+
   async fileChangeEvent(event:any) {
     if(event.length != 0){
       this.imagenB64 = await this.toBase64(event[0])
+      //console.log(event.length)
+      for (let index = 0; index < event.length; index++) {
+        const file = event[index];
+        this.imagenes.push( {name: file.name, base64: await this.toBase64(file)})
+        
+      }
     }
-    //console.log(event.length)
-    
-
   }
 
   
@@ -173,3 +194,4 @@ export class ProductoComponent implements OnInit {
   }
 
 }
+
