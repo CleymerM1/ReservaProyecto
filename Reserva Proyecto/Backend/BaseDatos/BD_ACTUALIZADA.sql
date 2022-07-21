@@ -4,14 +4,16 @@ USE Pagina_Web;
 CREATE TABLE privilegios (idPrivilegio INT PRIMARY KEY AUTO_INCREMENT, visualizar BOOLEAN, agregar BOOLEAN, editar BOOLEAN,  eliminar BOOLEAN );
 
 CREATE TABLE categoria (idCategoria INT PRIMARY KEY AUTO_INCREMENT, nombreCategoria VARCHAR(50), descripcion VARCHAR(50));
-DROP TABLE producto;
+
 
 CREATE TABLE producto(idProducto INT auto_increment,idCategoria INT,nombre VARCHAR(50), costo INT,
 estado VARCHAR(50), ubicacion VARCHAR(50), descripcion VARCHAR(50),
 primary key (idProducto, idCategoria),
-FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria));
+FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria)
+);
 
-CREATE TABLE foto(idFoto int primary key auto_increment, idProducto int, descripcion varchar(150), foreign key (idProducto) references producto(idProducto));
+CREATE TABLE foto(idFoto int primary key auto_increment, idProducto int, descripcion varchar(150), foreign key (idProducto) references producto(idProducto)    ON DELETE CASCADE
+    ON UPDATE CASCADE);
 
 CREATE TABLE rol(idRol INT AUTO_INCREMENT, idPrivilegio INT,nombreRol VARCHAR(50), estado VARCHAR(50),
 primary key (idRol),
@@ -23,29 +25,53 @@ primary key (idUsuario, idRol),
 FOREIGN KEY (idRol) REFERENCES rol(idRol));
 
 
+CREATE TABLE denuncias(	idDenuncia INT auto_increment, idDenunciado INT, nombreDenunciado VARCHAR(50), apellidoDenunciado VARCHAR(50), correoDenunciado VARCHAR(50),
+						idDenunciante INT, nombreDenunciante VARCHAR(50), apellidoDenunciante VARCHAR(50), correoDenunciante VARCHAR(50), idProducto INT, nombreProducto VARCHAR(50),
+                        opcion VARCHAR(256), razon TEXT, otro TEXT, estado VARCHAR(50) default "pendiente", fecha date,
+primary key (idDenuncia));
+
+CREATE TABLE suscripcion(idSuscripcion INT PRIMARY KEY AUTO_INCREMENT, idCategoria INT, idUsuario INT , correoUsuario VARCHAR(50), FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria));
+
+CREATE TABLE calificacion (
+    idCalificacion INT auto_increment PRIMARY KEY,
+    idProducto INT,
+    idUsuario INT,
+    calificacion INT,
+    FOREIGN KEY (idProducto) REFERENCES producto(idProducto)     ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    FOREIGN KEY (idUsuario) REFERENCES usuario(idUsuario)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+    );
+    
+    
 insert into privilegios (visualizar, agregar, editar, eliminar) Values
 	(1,0,0,0),
     (1,1,1,1);
     
-select * from privilegios;
 insert into rol (idPrivilegio, nombreRol, estado) values (1,'comprador', 'activo'),(2,'vendedor', 'activo');
-select * from rol;
+
+select * from foto;
 select * from usuario;
-delete from usuario where idUsuario =1;
+select * from producto;
+ALTER TABLE producto RENAME COLUMN idCliente TO idUsuario;
+select * from categoria;
+select * from suscripcion;
+delete from usuario where idUsuario =2;
 
 ALTER TABLE usuario MODIFY contrasenia blob;
 ALTER TABLE usuario ADD token TEXT;
-ALTER TABLE usuario ADD confirmado ENUM('1','0') DEFAULT '0'
+ALTER TABLE usuario ADD confirmado ENUM('1','0') DEFAULT '0';
 ALTER TABLE categoria ADD imagen LONGBLOB;
 ALTER TABLE producto ADD ubicacion VARCHAR(50);
 insert into rol (idPrivilegio, nombreRol, estado) values (2,'admin', 'activo');
 ALTER TABLE producto ADD idCliente int;
 Alter TABLE producto ADD contador int DEFAULT 0;
-CREATE TABLE suscripcion(idSuscripcion INT PRIMARY KEY AUTO_INCREMENT, idCategoria INT, idUsuario INT , correoUsuario VARCHAR(50), FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria));
-ALTER TABLE producto ADD imagen LONGBLOB;
 
---------------------------------------17/7/2022-----------------------------------------
-CREATE TABLE denuncias(	idDenuncia INT auto_increment, idDenunciado INT, nombreDenunciado VARCHAR(50), apellidoDenunciado VARCHAR(50), correoDenunciado VARCHAR(50),
-						idDenunciante INT, nombreDenunciante VARCHAR(50), apellidoDenunciante VARCHAR(50), correoDenunciante VARCHAR(50), idProducto INT, nombreProducto VARCHAR(50),
-                        opcion VARCHAR(256), razon TEXT, otro TEXT, estado VARCHAR(50) default "pendiente", fecha date,
-primary key (idDenuncia));
+ALTER TABLE producto ADD imagen LONGBLOB;
+ALTER TABLE categoria MODIFY descripcion text;
+
+
+ALTER TABLE producto MODIFY descripcion TEXT;
+ALTER TABLE foto MODIFY imagen LONGBLOB;
+ALTER TABLE foto RENAME COLUMN descripcion TO imagen;
