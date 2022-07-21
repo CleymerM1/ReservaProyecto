@@ -165,6 +165,12 @@ exports.inicioSesion = (req, res) => {
         
     })
 }
+exports.eliminarUsuario =(req,res)=>{
+    Usuario.eliminarUsuario(req.params.id, (err,data)=>{
+        if(err) return res.status(500).send({msj:err})
+        return res.status(200).json(data)
+    })
+};
 
 exports.obtenerDenunciasP = (req, res) => {
     Usuario.obtenerDenunciasP((err, data) => {
