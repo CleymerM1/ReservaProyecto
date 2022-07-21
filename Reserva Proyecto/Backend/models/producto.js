@@ -20,16 +20,18 @@ Producto.crear = (newObjProducto, res) => {
     let insertQuery = `insert into producto (idCategoria, nombre, costo, estado, descripcion, ubicacion, idUsuario,imagen) 
                 VALUES ( '${newObjProducto.categoria}','${newObjProducto.nombre}','${newObjProducto.costo}',
                 '${newObjProducto.estado}','${newObjProducto.descripcion}','${newObjProducto.ubicacion}','${newObjProducto.idUsuario}', '${newObjProducto.imagen}')`;
+    
     conexion.query(insertQuery, (err, resRegistrarProducto) => {
+        console.log(err)
         if (err) return res({ msj: 'El producto no pudo ser registrado' + err }, null)
 
-        return res(null, { msj: 'El producto fue registrado correctamente' })
+        return res(null, { msj: 'El producto fue registrado correctamente', data: resRegistrarProducto })
     })
 };
 
 /*-------Obtener Productos------*/
 Producto.obtenerTodos = (resultado)=>{
-    conexion.query("select * from producto", (err, obj1)=>{
+    conexion.query("select * from producto", (err, rows)=>{
         if(err) throw err;
         rows = rows.map( producto => {
             producto.imagen = producto.imagen?.toString('ascii')
@@ -44,8 +46,13 @@ Producto.obtenerPorId = (id, resultado) => {
     conexion.query(obtenerQuery, (err, res) => {
         if (err) 
             return resultado({ msj: 'Hubo un error' + err }, null)
-        else
+        else {
+            res = res.map( producto => {
+                producto.imagen = producto.imagen?.toString('ascii')
+                return producto;
+            } )
             return resultado(null, res)
+        }
     })
 }
 Producto.obtenerPorUbi = (departamento, resultado) => {
@@ -62,7 +69,7 @@ Producto.obtenerPorUbi = (departamento, resultado) => {
 Producto.obtenerPorCat = (idC, resultado) => {
     
     let obtenerQuery = `select * from producto where idCategoria = '${idC}'`  //Hay que definir que columnas se quieren de la tabla producto
-    console.log(obtenerQuery)
+
     conexion.query(obtenerQuery, (err, rows) => {
         if (err) throw err
         rows = rows.map( producto => {
@@ -87,8 +94,7 @@ Producto.obtenerPorCosto = (inter1, inter2, resultado) => {
 
 /*-------Actualizar por id------*/
 Producto.actualizarPorId = (id, newObjProducto, resultado) => {
-console.log("Id",id)
-console.log("Esto recibe de frontend ",newObjProducto)
+
 //SE QUITO IDCATEGORIA PARA QUE FUNCIONE EL ACTUALIZAR
     let actualizarQuery = `UPDATE producto SET nombre = '${newObjProducto.nombre}', 
                             costo = '${newObjProducto.costo}', estado = '${newObjProducto.estado}', descripcion = '${newObjProducto.descripcion}', 
@@ -189,4 +195,111 @@ Producto.denuncia = (idP, idU, res) => {
             })
     })
 }
+
+Producto.subirImagen = (req, res) => {
+    let {idProducto, imagen } = req.body;
+    let query = `INSERT INTO foto (idProducto, imagen) VALUES (${idProducto}, '${imagen}');`
+    conexion.query( query, (err, data) => {
+        if(err)
+            return res({msj:err}, null)
+        else
+            return res(null, {msj:'Imagen subida correctamente'})
+    })
+}
+
+Producto.obtenerImagenes = (idProducto, res) => {
+    let query = `SELECT imagen FROM foto WHERE idProducto = ${idProducto}`
+    conexion.query(query, (err, data) => {
+
+        if(err)
+            return res({msj:err}, null)
+        else {
+            data = data.map(imagen => {
+                imagen.imagen = imagen.imagen?.toString('ascii')
+                return imagen
+            });
+            
+            return res(null, data)
+
+        }
+    })
+}
+
+Producto.calificar = (idProducto, idUsuario, calificacion, res) => {
+    let query = `INSERT INTO calificacion (idProducto, idUsuario, calificacion) VALUES (${idProducto}, ${idUsuario}, ${calificacion});`
+    let buscarCalificacion = `SELECT * FROM calificacion WHERE idProducto = ${idProducto} AND idUsuario = ${idUsuario}`;
+
+    conexion.query(buscarCalificacion, (err, rowsCalificacion) => {
+        if(err) throw err;
+        if(rowsCalificacion.length) {
+            // Actualizar la calificación
+            let queryUpdate = `UPDATE calificacion SET calificacion = ${calificacion} WHERE idProducto = ${idProducto} AND idUsuario = ${idUsuario}`;
+            conexion.query(queryUpdate, (err, data) => {
+                if(err) throw err;
+                return res(null, {msj:'Calificación actualizada'})
+            })
+        }else {
+            conexion.query(query, (err, data) => {
+                if(err)
+                    return res({msj:err}, null)
+                else
+                    return res(null, {msj:'Calificacion registrada correctamente'})
+            })
+        }
+    })
+
+}
+Producto.obtenerDenuncias = (res)=>{
+    let obtener = `select * from denuncias;`
+    conexion.query(obtener,(error, rows)=>{
+        if(error) return res(error,null)
+        if(rows.length){
+            return res(null,rows)
+        }
+        return res(null, [])
+
+    })
+}
+
+Producto.eliminarDenuncia = (id, res)=>{
+    let eliminarD = `delete from denuncias where idDenuncia = ${id};`
+    conexion.query(eliminarD, (err, resultado)=>{
+        if(err) return res(err, null)
+        return res(null,{msj:'Denuncia eliminada'})
+    })
+}
+
+Producto.obtenerCalificacionUsuario = (idProducto, idUsuario, res) => {
+    let query = `SELECT calificacion FROM calificacion WHERE idProducto = ${idProducto} AND idUsuario = ${idUsuario}`
+    conexion.query(query, (err, data) => {
+        if(err)
+            return res({msj:err}, null)
+        else {
+            if(data.length) {
+                return res(null, data[0].calificacion)
+            }else {
+                return res(null, 0)
+            }
+        }
+
+    })
+}
+
+Producto.obtenerCalificacionProducto = (idProducto, res) => {
+    // Consulta para obtener el promedio de calificaciones de un producto
+    let query = `SELECT AVG(calificacion) AS promedio FROM calificacion WHERE idProducto = ${idProducto}`;
+    conexion.query(query, (err, data) => {
+        if(err)
+            return res({msj:err}, null)
+        else {
+            if(data.length) {
+                return res(null, data[0].promedio)
+            }else {
+                return res(null, 0)
+            }
+        }
+    })
+}
+
 module.exports = Producto;
+
