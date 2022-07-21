@@ -28,10 +28,10 @@ exports.crearProducto = (req,res)=>{
             });
         }
         if(data.error){
-            console.log(data)
             return res.status(502).send({msj: data.error})
         }else{
-            return res.status(200).json({msj:'El producto se registro correctamente'})
+            console.log(data)
+            return res.status(200).json(data)
         }
     })    
 };
@@ -99,6 +99,7 @@ exports.filtrarProductos = (req, res) => {
     let filter = req.params.filter
     let value1 = req.params.value1
     let producto = req.body
+    let data;
     if(!filter || !value1)
         return console.log('hay parametros vacios')
     else
@@ -147,6 +148,7 @@ exports.eliminarProducto = (req, res) => {
             return res.status(404).send({msj: 'Error del cliente'})
         else
             Producto.eliminarPorId(id, (err, data) => {
+               console.log(err)
                 if(err)
                     return res.status(502).send({msj: `Error al eliminar el producto con el id = '${id}'`})
                 else
@@ -156,10 +158,10 @@ exports.eliminarProducto = (req, res) => {
 
 /*----------------Funcion para las denuncias----------------*/
 exports.denunciarUsuario = (req, res) => {
-    idP = req.params.idP
-    idU = req.params.idU
+    idP = req.params.id
+    idU = req.body.idU
     opcion = req.body.opcion
-    razon = req.body.razon
+    razon = req.body.motivo
     otro = req.body.otro
     console.log(idU)
     //asunto = req.body.asunto
@@ -173,5 +175,75 @@ exports.denunciarUsuario = (req, res) => {
                 else
                     return res.json(data1)
             })
+    })
+}
+
+exports.subirImagen = (req, res) => {
+    Producto.subirImagen(req, (err, data) => {
+        if(err)
+            return res.status(502).send({msj: err})
+        else
+            return res.json(data)
+    })
+}
+
+exports.obtenerImagenes = (req, res) => {
+
+    let idProducto = req.params.idProducto
+
+    Producto.obtenerImagenes( idProducto, (err, data) => {
+
+
+        if(err)
+            return res.status(502).send({msj: err})
+        else
+            return res.status(200).json(data)
+    })
+}
+
+exports.calificarProducto = (req, res) => {
+    let { idProducto, idUsuario, calificacion } = req.body;
+    Producto.calificar(idProducto, idUsuario, calificacion, (err, data) => {
+        if(err)
+            return res.status(502).send({msj: err})
+        else
+            return res.json(data)
+    })
+}
+
+exports.obtenerCalificacionUsuario = (req, res) => {
+
+    let { idProducto, idUsuario } = req.params;
+    Producto.obtenerCalificacionUsuario(idProducto, idUsuario, (err, data) => {
+        if(err)
+            return res.status(502).send({msj: err})
+        else
+            return res.json(data)
+    })
+}
+exports.obtenerCalificacionProducto = ( req, res ) => {
+    let { idProducto } = req.params;
+    Producto.obtenerCalificacionProducto(idProducto, (err, data) => {
+        if(err)
+            return res.status(502).send({msj: err})
+        else
+            return res.json(data)
+    })
+}
+exports.obtenerDenuncias = (req,res)=>{
+    Producto.obtenerDenuncias((err,data)=>{
+        if(err){
+            return res.status(502).send({msj:err})
+        } 
+        else{ 
+            return res.status(200).json(data)
+        }
+    })
+}
+
+exports.eliminarDenuncia = (req,res)=>{
+    Producto.eliminarDenuncia(req.params.id,(err, data)=>{
+        if(err) return res.status(502).send({msj:err})
+        return res.status(200).json(data)
     })
 }
