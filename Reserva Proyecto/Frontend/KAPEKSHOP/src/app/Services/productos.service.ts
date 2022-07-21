@@ -58,4 +58,43 @@ export class ProductosService {
     return this.http.delete(`http://localhost:3000/producto/${id}`);
   }
 
+  subirImagenProducto(idProducto:number, imagen:any): Observable<any>{
+    let url = `http://localhost:3000/producto/subir-imagen/`;
+    return this.http.post(url, {idProducto, imagen});
+  }
+
+  obtenerImagenesProducto(idProducto:number): Observable<any>{
+    let url = `http://localhost:3000/producto/imagenes/${idProducto}`;
+    console.log(url)
+    return this.http.get(url);
+  }
+
+  actualizarCalificacion(idProducto:number, idUsuario:number, calificacion:number):Observable<any> {
+    let url = `http://localhost:3000/producto/calificar`;
+    return this.http.post(url,{idProducto, idUsuario, calificacion} );
+  }
+  obtenerCalificacionUsuarioProducto(idProducto:number, idUsuario:number):Observable<any> {
+    let url = `http://localhost:3000/producto/calificar/obtener-calificacion/${idProducto}/${idUsuario}`;
+    return this.http.get(url );
+  }
+  obtenerCalificacionProducto(idProducto:number):Observable<any> {
+    let url = `http://localhost:3000/producto/calificar/obtener-calificacion/${idProducto}`;
+    return this.http.get(url );
+  }
+  denunciaProducto(idProducto:number, objetoDenuncia:any){
+    let url=`http://localhost:3000/producto/denuncia/${idProducto}`;
+    return this.http.post(url,objetoDenuncia);
+  }
+
+  obtenerDenuncias(): Observable<any>{
+    let url = `http://localhost:3000/producto/denuncia/obtenerDenuncias`;
+    return this.http.get(url)
+  }
+
+  eliminarDenuncia(id:number): Observable<any>{
+    let url=`http://localhost:3000/producto/denuncia/eliminar/${id}`;
+    return this.http.delete(url)
+  }
+
 }
+
