@@ -171,6 +171,14 @@ Usuario.restablecerContrasenia = (req, respuesta) => {
     
 }
 
+Usuario.eliminarUsuario = (id, res)=>{
+    let eliminar =`delete from usuario where idUsuario =${id}`;
+    conexion.query(eliminar, (err, data)=>{
+        if(err) return res(err, null)
+        return res(null, {msj:'Usuario eliminado por picaro'})
+    })
+}
+
 Usuario.obtener = (resultado)=>{
     conexion.query("select * from usuario", (err, rows)=>{
         if(err) throw err;
