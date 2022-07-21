@@ -1,119 +1,66 @@
-/*
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormControl,FormGroup,FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
-import { ModalErrorComponent} from 'src/app/Components/modal-error/modal-error.component'
-import { ModalExitoComponent } from 'src/app/Components/modal-exito/modal-exito.component';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
-import { Denuncias } from 'src/app/models/denuncias';
-import { DenunciasService } from 'src/app/Services/denuncias.service'
-import { ConfigModal} from 'src/app/interfaces/config-modal'
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductosService } from 'src/app/Services/productos.service';
+import { UsuarioService } from 'src/app/Services/usuario.service';
 
 @Component({
-  selector: 'app-formDenuncia',
-  templateUrl: './formDenuncia.component.html',
-  styleUrls: ['./formDenuncia.component.css']
+  selector: 'app-form-denuncia',
+  templateUrl: './form-denuncia.component.html',
+  styleUrls: ['./form-denuncia.component.css']
 })
-export class formDenunciaComponent implements OnInit {
-    checked = false;
-    hide = true;
-  
-    constructor( private modalService: NgbModal, private router: Router, private denunciasService:DenunciasService ) { 
-    }
-    abrirModal( modal:any ){
-  
-      this.modalService.open(
-        modal,
-        {
-          size: 'xs',
-          centered: true
-        }
-        );
-  
-      }
-      formularioRegistro = new FormGroup( {
-        opcionFormControl: new FormControl("", [Validators.required]),
-        razonFormControl: new FormControl("", [Validators.required]),
-        otrosFormControl: new FormControl('',[Validators.required]),
-      })
-      enviarFormulario(){
-      
-        if( !this.formularioRegistro.invalid) {
-  
-          let usuario = {
-            opcion:this.formularioRegistro.get('opcionFormControl')?.value,
-            razon: this.formularioRegistro.get('razonFormControl')?.value,
-            otros:this.formularioRegistro.get('otrosCompletoFormControl')?.value,
-          }
-  
-  
-          this.denunciasService.crearDenuncia(Denuncias).subscribe( (res:any) => {
-            console.log(res)
-            let config:ConfigModal = {
-              titulo1: '¡Excelente!',
-              titulo2: res.msj
-            }
-            this.open('exito',config )
-            this.router.navigateByUrl('/inicio')
-          }, (err:any) => {
-            let config:ConfigModal = {
-              titulo1: '¡Error!',
-              titulo2: err.error.msj ||'No se pudo registrar el usuario'
-            }
-            console.log(err)
-            this.open('error',config )
-          })
-        }
-  
-        
-      }
-      
-      enviarAInicio(modal:any){
-        modal.close('Close click')
-        this.router.navigateByUrl("/login");
+export class FormDenunciaComponent implements OnInit {
+
+
+  idProducto:number;
+  producto:any;
+  productoActual:any;
+  usuarioActual:any;
+
+  constructor(private route: ActivatedRoute,private productoService: ProductosService, private usuarioService: UsuarioService, private router: Router) {
+    this.idProducto = this.route.snapshot.params["id"];
+   }
+
+  ngOnInit(): void {
+    this.obtenerUsuarioActual()
     
-      }
-      matcher = new MyErrorStateMatcher();
-    ngOnInit(): void {
-    }
-
-    open(tipoModal:string, config:ConfigModal) {
-
-
-      let modalRef:NgbModalRef;
-      switch (tipoModal) {
-  
-        case 'exito':
-          modalRef = this.modalService.open(ModalExitoComponent)
-          modalRef.componentInstance.mensaje = config
-  
-          break;
-        case 'error':
-          modalRef = this.modalService.open(ModalErrorComponent)
-          modalRef.componentInstance.mensaje = config
-          break;
-      
-        default:
-          break;
-      }
-    }
-   
-  
-
-
   }
- 
 
-*/
+  formularioDenuncia = new FormGroup({
+    opcionDenuncia: new FormControl("", [Validators.required]),
+    motivoDenuncia: new FormControl("",[Validators.required]),
+    otrosDenuncia:new FormControl("",[Validators.required])
+  })
+
+  guardarDenuncia(){
+    if(!this.formularioDenuncia.invalid){
+      let denuncia = {
+        idU: this.usuarioActual.idUsuario,
+        opcion : this.formularioDenuncia.get('opcionDenuncia')?.value,
+        motivo : this.formularioDenuncia.get('motivoDenuncia')?.value,
+        otro : this.formularioDenuncia.get('otrosDenuncia')?.value
+      }
+      this.productoService.denunciaProducto(this.idProducto,denuncia).subscribe(res=>{
+       console.log(res) 
+       this.router.navigateByUrl(`producto/detalle/${this.idProducto}`)
+      },error =>{
+        console.log(error)
+      })
+      
+    }
+    
+  }
+
+  obtenerUsuarioActual() {
+    this.usuarioService.obtenerUsuarioActual().subscribe( (res:any) => {
+      this.usuarioActual = res;
+    })
+  }
+
+
+  
+
+}
 
 
 
