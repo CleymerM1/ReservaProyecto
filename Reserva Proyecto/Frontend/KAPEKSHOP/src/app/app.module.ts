@@ -61,21 +61,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { ModalConfirmacionComponent } from './Components/modal-confirmacion/modal-confirmacion.component';
 import { actualizarProductoComponent } from './Components/actualizar-producto/actualizar-producto.component';
 import { DetalleDeProductoComponent } from './Components/detalle-de-producto/detalle-de-producto.component';
-/*
-import { AdminComponent } from './Components/admin/admin.component';
-import { AnunciosComponent } from './Components/admin/anuncios/anuncios.component';
-import { CategoriasAdminComponent } from './Components/admin/categorias-admin/categorias-admin.component';
-import { DenunciasComponent } from './Components/admin/denuncias/denuncias.component';
-import { EstadisticasComponent } from './Components/admin/estadisticas/estadisticas.component';
-import { SidebarComponent } from './Components/admin/sidebar/sidebar.component';
-import { CircularComponent } from './Components/admin/estadisticas/circular/circular.component';
-import { NgChartsModule } from 'ng2-charts';
-import { PolarComponent } from './Components/admin/estadisticas/polar/polar.component';
-import { BarrasComponent } from './Components/admin/estadisticas/barras/barras.component';
-import { DonaComponent } from './Components/admin/estadisticas/dona/dona.component';
-import { ScatterComponent } from './Components/admin/estadisticas/scatter/scatter.component';
-import { LinealComponent } from './Components/admin/estadisticas/lineal/lineal.component';
-*/
+
 
  
 //import { ProductoComponent } from './Components/producto/producto.component';
@@ -83,6 +69,8 @@ import { PaginadorComponent } from './Components/paginador/paginador.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 //import { ListarUsuariosComponent } from './components/listar-usuarios/listar-usuarios.component';
 import { MisProductosComponent } from './Components/mis-productos/mis-productos.component';
+import { CarouselComponent } from './Components/carousel/carousel.component';
+import { NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -142,6 +130,7 @@ import { MisProductosComponent } from './Components/mis-productos/mis-productos.
     PaginadorComponent,
     actualizarProductoComponent,
     MisProductosComponent,
+    CarouselComponent
     
     
   ],
@@ -166,7 +155,8 @@ import { MisProductosComponent } from './Components/mis-productos/mis-productos.
     MatTooltipModule,
     MatToolbarModule,
     NgChartsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+     NgbCarouselModule
     
 
   ],
