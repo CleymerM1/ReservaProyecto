@@ -24,6 +24,10 @@ export class UsuarioService {
       return this.http.post(urlStr, objUsuario)
   }
 
+  eliminarUsuario(id:number){
+    return this.http.delete(`http://localhost:3000/usuario/eliminar/${id}`);
+  }
+
   loginUsuario(data:any): Observable<any> {
     return this.http.post('http://localhost:3000/usuario/login', data)
   }
@@ -82,3 +86,4 @@ export class UsuarioService {
 
 
 }
+
