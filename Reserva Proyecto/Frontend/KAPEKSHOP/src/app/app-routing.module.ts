@@ -35,6 +35,7 @@ const routes: Routes = [
   { path: 'categorias', component: CategoriasComponent },
   { path: 'tienda/categorias/:idCategoria', component: CategoriaComponent, canActivate: [AuthGuard] },
   { path: 'producto/detalle/:id', component: DetalleDeProductoComponent, canActivate: [AuthGuard] },
+  {path:'form-denuncia/:id',component:FormDenunciaComponent},
   { path: '**', redirectTo: '', pathMatch: 'full' },
 
   {path: '', component:LandingComponent},
