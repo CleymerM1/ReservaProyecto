@@ -13,11 +13,7 @@ export class ProductosService {
     let urlStr = `http://localhost:3000/producto/registro/`
       return this.http.post(urlStr, objUsuario)
   }
-  /*crearDenuncia(idP:any, idUsuario: any, opcion:any, razon:any, otro:any){
-    let url = `http://localhost:3000/producto/denuncia/${idP}`
-    return this.http.post(url, idUsuario, opcion, razon, otro)
-  }*/
-  
+
   getProductos(): Observable<any>{
     let url = 'http://localhost:3000/producto/';
     return this.http.get(url);
@@ -70,7 +66,7 @@ export class ProductosService {
   }
 
   actualizarCalificacion(idProducto:number, idUsuario:number, calificacion:number):Observable<any> {
-    let url = `http://localhost:3000/producto/calificar`;
+    let url = `http://localhost:3000/producto/calificar/`;
     return this.http.post(url,{idProducto, idUsuario, calificacion} );
   }
   obtenerCalificacionUsuarioProducto(idProducto:number, idUsuario:number):Observable<any> {

@@ -7,6 +7,7 @@ import { UsuarioService } from 'src/app/Services/usuario.service';
 import { ModalConfirmacionComponent } from '../modal-confirmacion/modal-confirmacion.component';
 import formatearDinero  from 'src/app/helpers/formatoMoneda';
 import leerToken from 'src/app/helpers/decodificarToken'
+import { ListaDeseosService } from 'src/app/Services/lista-de-deseos.services';
 
 @Component({
   selector: 'app-card-producto',
@@ -23,11 +24,16 @@ export class CardProductoComponent implements OnInit {
  
   estrellas:any = []
   usuarioActual: any
+  productoActual: any
+  AgregadoALista: boolean = false;
 
-  constructor(private productoService: ProductosService, private usuarioService:UsuarioService, private modalService:NgbModal) { }
+  constructor(private productoService: ProductosService, private usuarioService:UsuarioService, private modalService:NgbModal,
+    private ListaDeseosService: ListaDeseosService) { }
 
   ngOnInit(): void {
-    this.obtenerCalificacionProducto()
+    this.obtenerCalificacionProducto();
+    this.agregarAListaDeseos();
+    this.eliminarDeListaDeseos();
   }
 
   mostrarProducto(){
@@ -105,4 +111,24 @@ export class CardProductoComponent implements OnInit {
       console.log(err)
     })
   }
+
+  
+agregarAListaDeseos(){
+  this.ListaDeseosService.agregarAListaDeseos(this.productoActual.idProducto).subscribe(() => {
+  this.AgregadoALista = true;
+  })
+}
+
+eliminarDeListaDeseos(){
+  this.ListaDeseosService.eliminarDeListaDeseos(this.productoActual.idProducto).subscribe(() => {
+    this.AgregadoALista = false;
+  })
+
+}
+
+
+
+
+
+
 }

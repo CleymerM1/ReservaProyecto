@@ -71,6 +71,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MisProductosComponent } from './Components/mis-productos/mis-productos.component';
 import { CarouselComponent } from './Components/carousel/carousel.component';
 import { NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
+import { FormDenunciaComponent } from './Components/form-denuncia/form-denuncia.component';
+import { ListaDeDeseosComponent } from './Components/lista-de-deseos/lista-de-deseos.component';
+
 
 @NgModule({
   declarations: [
@@ -97,7 +100,6 @@ import { NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
     DialogoUsuarioComponent,
     ModalNuevaCategoriaComponent,
     ProductoComponent,
-   // formDenunciaComponent,
     BtnImagenComponent,
     ImagenesProductoComponent,
     AdminComponent,
@@ -113,6 +115,7 @@ import { NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
     PolarComponent,
     ScatterComponent,
     DetalleDeProductoComponent,
+    FormDenunciaComponent,
     
     AdminComponent,
     AnunciosComponent,
@@ -130,7 +133,8 @@ import { NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
     PaginadorComponent,
     actualizarProductoComponent,
     MisProductosComponent,
-    CarouselComponent
+    CarouselComponent,
+    ListaDeDeseosComponent
     
     
   ],
@@ -156,7 +160,7 @@ import { NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
     MatToolbarModule,
     NgChartsModule,
     MatPaginatorModule,
-     NgbCarouselModule
+    NgbCarouselModule
     
 
   ],

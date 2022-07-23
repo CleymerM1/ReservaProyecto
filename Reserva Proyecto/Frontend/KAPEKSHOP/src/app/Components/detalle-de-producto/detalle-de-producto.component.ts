@@ -9,6 +9,7 @@ import { ListarProductosComponent } from '../listar-productos/listar-productos.c
 import { Route } from '@angular/router';
 import decodificarToken  from 'src/app/helpers/decodificarToken';
 import formatearDinero  from 'src/app/helpers/formatoMoneda';
+import { ListaDeseosService } from 'src/app/Services/lista-de-deseos.services';
 
 @Component({
   selector: 'app-detalle-de-producto',
@@ -28,13 +29,15 @@ export class DetalleDeProductoComponent implements OnInit {
   producto:any;
   productoActual:any;
 
+  AgregadoALista: boolean = false;
+
   @Input() imagenes:any = []
   mostarFormulario: boolean | undefined;
   calificacion = 0;
   estrellas:any = []
   usuarioActual:any;
 
-  constructor(private route: ActivatedRoute, private productosService: ProductosService, private router:Router, private usuarioService:UsuarioService) {
+  constructor(private route: ActivatedRoute, private productosService: ProductosService, private router:Router, private usuarioService:UsuarioService, private ListaDeseosService: ListaDeseosService) {
     this.idProducto = this.route.snapshot.params["id"];
   }
 
@@ -42,9 +45,6 @@ export class DetalleDeProductoComponent implements OnInit {
     this.obtenerPorId()
     this.obtenerImagenes(this.idProducto)
     this.obtenerUsuarioActual()
-    
-
-
 
   }
 
@@ -199,6 +199,18 @@ obtenerUsuarioActual(){
 }
 
 
+/*agregarAListaDeseos(){
+  this.ListaDeseosService.agregarAListaDeseos(this.producto.idProducto).subscribe(() => {
+  this.AgregadoALista = true;
+  })
+}
+
+eliminarDeListaDeseos(){
+  this.ListaDeseosService.eliminarDeListaDeseos(this.producto.idProducto).subscribe(() => {
+    this.AgregadoALista = false;
+  })
+
+}*/
 
 
 }

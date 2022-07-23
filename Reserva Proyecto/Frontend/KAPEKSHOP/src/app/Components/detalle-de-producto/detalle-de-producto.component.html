@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="container mt-5 ">
   <div class="row">
-    <div  (click)="mostrarCategoria()" class="col-12" style="cursor: pointer;">
+    <div (click)="mostrarCategoria()" class="col-12" style="cursor: pointer;">
       <div mat-raised-button class="float-left" matTooltip="Regresar" aria-label="Pulsa el boton para cancelar"
         style="width: 50px ; height: 50px ; background-color: black; border-radius: 100% ; margin-left: auto;">
         <svg style="color:white" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -22,7 +22,7 @@
                 <mat-card-title>{{producto?.nombre}}</mat-card-title>
               </mat-card-header>
               <mat-card-content>
-                <app-carousel [images]="imagenes" ></app-carousel>
+                <app-carousel [images]="imagenes"></app-carousel>
                 <p class="descripcion mt-3">
                   Descripción: {{producto?.descripcion}}
                 </p>
@@ -38,26 +38,23 @@
               </mat-card-content>
             </div>
           </mat-card>
-          <ul *ngIf="usuarioActual && !comprobarEsVendedor(producto) && !comprobarEsAdmin()" class="list-unstyled d-flex justify-content-between">
+          <ul *ngIf="usuarioActual && !comprobarEsVendedor(producto) && !comprobarEsAdmin()"
+            class="list-unstyled d-flex justify-content-between">
             <li>
-                <!-- <i class="text-warning fa fa-star"></i>
-                <i class="text-warning fa fa-star"></i>
-                <i class="text-warning fa fa-star"></i> -->
-                
-                <i style="cursor: pointer;" *ngFor="let estrella of estrellas; index as i"  (click)="calificarProducto(i+1)" [class]="estrella"></i>
+              <i class="text-warning fa fa-star"></i>
+              <i class="text-warning fa fa-star"></i>
+              <i class="text-warning fa fa-star"></i>
+
+              <i style="cursor: pointer;" *ngFor="let estrella of estrellas; index as i"
+                (click)="calificarProducto(i+1)" [class]="estrella"></i>
 
 
             </li>
-        </ul>
-        
-          
-            <button class="float-start" style="background-color: rgb(255, 123, 0);" mat-button>Lista de deseos</button>
-          
-        
-          <button type="button" class=" btn btn-danger btn-sm justify-end float-end" (click)="denuncia()" mat-stroked-button
-            color="danger">Denunciar</button>
+          </ul>
+          <button class="float-start" style="background-color: rgb(255, 123, 0);" mat-button>Lista de deseos</button>
+          <button type="button" class=" btn btn-danger btn-sm justify-end float-end" (click)="denuncia()"
+            mat-stroked-button color="danger">Denunciar</button>
         </div>
-
       </div>
     </div>
   </div>
