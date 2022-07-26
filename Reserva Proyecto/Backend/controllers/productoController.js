@@ -247,3 +247,38 @@ exports.eliminarDenuncia = (req,res)=>{
         return res.status(200).json(data)
     })
 }
+
+/*funciones para las listas*/
+exports.aniadirFavoritos = (req, res) => {
+    let idU = req.body.idUsuario
+    let idP = req.body.idProducto
+    Producto.aniadirFavoritos(idU, idP, (err, data) => {
+        if(err) 
+            return res.status(500).send({msj:err})
+        else
+            return res.status(200).json(data)
+    })
+}
+
+exports.obtenerFavoritos = (req, res) => {
+    let idU = req.params.idUsuario
+    Producto.obtenerFavoritos(idU, (err, data) => {
+        if(err)
+            return res.status(404).send({msj: err.msj || 'Error al buscar en la base d datos'})
+        else if(data.error)
+            return res.status(502).send({msj: data.error})
+        else
+            return res.status(200).json(data)
+    })
+}
+
+exports.eliminarFavorito = (req, res) => {
+    let idU = req.params.idUsuario
+    let idP = req.params.idProducto
+    Producto.eliminarFavorito(idU, idP, (err, data) => {
+        if(err) 
+            return res.status(500).send({msj:err})
+        else
+            return res.status(200).json(data)
+    })
+}

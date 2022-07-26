@@ -9,6 +9,11 @@ router.post('/denuncia/:id',productoController.denunciarUsuario);
 router.get('/', productoController.obtenerProductos);
 router.get('/detalle/:id', productoController.obtenerProducto);
 //router.get('/:filter/:value1', productoController.filtrarProductos);
+
+router.post('/aniadirDeseos', productoController.aniadirFavoritos);
+router.get('/lista-de-deseos/:idUsuario', productoController.obtenerFavoritos);
+router.delete('/eliminarDeseos/:idUsuario/:idProducto', productoController.eliminarFavorito);
+
 router.get('/:id', productoController.obtenerPorCategoria);
 router.put('/actualizar/:id', productoController.actualizarProducto);
 router.delete('/:idP', productoController.eliminarProducto);

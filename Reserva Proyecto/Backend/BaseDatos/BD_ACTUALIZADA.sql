@@ -75,3 +75,8 @@ ALTER TABLE categoria MODIFY descripcion text;
 ALTER TABLE producto MODIFY descripcion TEXT;
 ALTER TABLE foto MODIFY imagen LONGBLOB;
 ALTER TABLE foto RENAME COLUMN descripcion TO imagen;
+
+-------------------------------------------nuevo 25/7/2022--------------------------------------------
+CREATE TABLE listas (idLista INT primary key auto_increment, idUsuario INT, idProducto INT, tipoLista VARCHAR(50),
+foreign key (idUsuario) references usuario(idUsuario),
+foreign key (idProducto) references producto(idProducto));
