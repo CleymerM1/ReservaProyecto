@@ -332,5 +332,39 @@ Producto.eliminarFavorito = (idU, idP, resultado) => {
     })
 }
 
+/*-----------------Anuncios----------------*/
+Producto.crearAnuncios = (resultado) => {
+    conexion.query('delete from anuncio', (err, res) => {
+        if(err)
+            return resultado({ msj: 'No se puediron eliminar los datos de la tabla anuncio' + err }, null)
+        else
+            conexion.query('select * from producto order by contador desc limit 10', (err, productos) => {
+                console.log(productos)
+                if(err)
+                    return resultado({ msj: 'No se puediron seleccionar los datos de la tabla anuncio' + err }, null)
+                else
+                    conexion.query( 'insert into anuncio values ?',
+                                    [productos.map(producto => [producto.idProducto, producto.idCategoria, producto.nombre, producto.descripcion, producto.costo, producto.idUsuario, producto.imagen])],
+                                    (err, res) => {
+                                        if(err)
+                                            return resultado({ msj: 'No se puediron crear los anuncios nuevos' + err }, null)
+                                        else
+                                            return resultado(null, { msj: 'Se crearon los anuncios exitosamete en la bd'})
+                    })
+            })
+    }) 
+}
+
+Producto.obtenerAnuncios = (resultado) => {
+    conexion.query('select * from anuncio', (err, rows) => {
+        if(err) throw err;
+        rows = rows.map(anuncio => {
+            anuncio.imagen = anuncio.imagen?.toString('ascii')
+            return anuncio;
+        } )
+        resultado(null, rows);
+    })
+}
+
 module.exports = Producto;
 
