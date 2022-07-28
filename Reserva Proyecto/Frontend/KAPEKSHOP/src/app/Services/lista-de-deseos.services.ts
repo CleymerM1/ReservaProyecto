@@ -12,17 +12,17 @@ export class ListaDeseosService {
     getListaDeseos(){}
 /*se tiene que mandar el id del producto y el id del usuario actual*/
     agregarAListaDeseos(idUsuario: any, idProducto: any): Observable<any> {
-        let url = `http://localhost:3000/usuario/aniadirDeseos/`;
-        return this.http.post(url, idUsuario, idProducto);
+        let url = `http://localhost:3000/producto/aniadirDeseos/`;
+        return this.http.post(url, {idUsuario, idProducto});
     }
 
     obtenerListaDeseos(idUsuario: any): Observable<any> {
-        let url = `http://localhost:3000/usuario/lista-de-deseos/${idUsuario}`
+        let url = `http://localhost:3000/producto/lista-de-deseos/${idUsuario}`
         return this.http.get(url)
     }
 
     eliminarDeListaDeseos(idUsuario: any, idProducto: any): Observable<any>{
-        let url = `http://localhost:300/usaurio/eliminarDeseos/${idUsuario}/${idProducto}`
+        let url = `http://localhost:300/producto/eliminarDeseos/${idUsuario}/${idProducto}`
         return this.http.delete(url);
     }
 
