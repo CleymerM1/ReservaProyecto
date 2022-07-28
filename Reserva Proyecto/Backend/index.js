@@ -59,6 +59,8 @@ app.use(express.json());
 app.use('/usuario', require('./routes/usuario'))
 app.use('/categoria',require('./routes/categoria'))
 app.use('/producto',require('./routes/producto'))
+app.use('/mensaje', require('./routes/mensajeRoutes'))
+
 
 
 const port= (process.env.port || 3000);
