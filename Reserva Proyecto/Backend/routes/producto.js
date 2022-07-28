@@ -16,6 +16,7 @@ router.delete('/eliminarDeseos/:idUsuario/:idProducto', productoController.elimi
 
 router.post('/anuncio', productoController.crearAnuncios)
 router.get('/obtenerAnuncios', productoController.obtenerAnuncios)
+router.delete('/eliminarAnuncio/:idProducto/:idUsuario', productoController.eliminarAnuncio)
 
 router.get('/:id', productoController.obtenerPorCategoria);
 router.put('/actualizar/:id', productoController.actualizarProducto);

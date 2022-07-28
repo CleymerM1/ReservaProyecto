@@ -1,5 +1,6 @@
 /*-------------------------------Import para la conexion con la base de datos------------------------------*/
 const conexion = require('../config/conexion');
+const { eliminar } = require('./categoria');
 /*------------------------------------------Creacion de clases---------------------------------------------*/
 const Producto = function (objProducto) {
     this.categoria = objProducto.categoria;
@@ -363,6 +364,18 @@ Producto.obtenerAnuncios = (resultado) => {
             return anuncio;
         } )
         resultado(null, rows);
+    })
+}
+
+Producto.eliminarAnuncioPorDuenio = (idP, idU, resultado) => {
+    let eliminarQuery = `delete from anuncio where idProducto = ${idP} AND idUsuario = ${idU}`
+    conexion.query(eliminarQuery, (err, rows) => {
+        if (err) 
+            return resultado({ msj: 'El anuncio no se pudo eliminar' + err }, null)
+        else if (rows.affectedRows == 0)
+            return resultado({ msj: 'Este usuario no tiene permiso de borrar el anuncio' }, null)
+        else
+            return resultado(null, { msj: 'El producto fue eliminado de los anuncios'})
     })
 }
 

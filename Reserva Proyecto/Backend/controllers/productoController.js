@@ -303,3 +303,14 @@ exports.obtenerAnuncios = (req, res) => {
             return res.status(200).json(data)
     })
 }
+
+exports.eliminarAnuncio = (req, res) => {
+    let idU = req.params.idUsuario
+    let idP = req.params.idProducto
+    Producto.eliminarAnuncioPorDuenio(idP, idU, (err, data) => {
+        if(err) 
+            return res.status(500).send({msj:err})
+        else
+            return res.status(200).json(data)
+    })
+}
