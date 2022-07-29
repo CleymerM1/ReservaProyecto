@@ -1,0 +1,12 @@
+.buscador {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    bottom: 0.56rem;
+    margin-top: 00.56rem;
+    margin-left: 0.56 rem;
+}
+  
+.example-full-width {
+width: 100%;
+}
