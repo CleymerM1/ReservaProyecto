@@ -334,7 +334,7 @@ Producto.eliminarFavorito = (idU, idP, resultado) => {
 }
 
 /*-----------------Anuncios----------------*/
-Producto.crearAnuncios = (resultado) => {
+Producto.crearAnuncios = async (resultado) => {
     conexion.query('delete from anuncio', (err, res) => {
         if(err)
             return resultado({ msj: 'No se puediron eliminar los datos de la tabla anuncio' + err }, null)

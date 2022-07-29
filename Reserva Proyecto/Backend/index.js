@@ -7,6 +7,7 @@ const conexion = require('./config/conexion');
 const cors = require('cors');
 var cron = require('node-cron');
 const Categoria = require('./models/categoria.js');
+const Producto = require('./models/producto.js');
 path = require("path")
 
 app.use(express.json({limit: '50mb'}));
@@ -39,8 +40,16 @@ const corsOptions = {
          }
      } )
 
+})
+para probar la creacion de nuevos anuncios
+cron.schedule('1 * 1-28 * *', () => {
+    Producto.crearAnuncios((err, data) => {
+        if(err)
+            console.log(err)
+        else
+            console.log("se crearon nuevos anuncios")
+    })
 })*/
-
 
 // Ejecutar una tarea todos los lunes a las 7 de la mañana
 cron.schedule('0 7 * * 1', () => {
@@ -51,6 +60,16 @@ cron.schedule('0 7 * * 1', () => {
             console.log("Se envio el correo")
         }
     } )
+})
+
+//Elimina los viejos anuncios y crea nuevos anuncios cada 60 dias
+cron.schedule('* * 20 January,March,May,July,September,November *', () => {
+    Producto.crearAnuncios((err, data) => {
+        if(err)
+            console.log(err)
+        else
+            console.log("se crearon nuevos anuncios")
+    })
 })
 
 //rutas

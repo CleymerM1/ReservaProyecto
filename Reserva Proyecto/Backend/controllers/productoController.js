@@ -289,6 +289,7 @@ exports.crearAnuncios = (req, res) => {
         if(err) 
             return res.status(500).send({msj:err})
         else
+            console.log('se ha usado la funcion Producto.crearAnuncios')
             return res.status(200).json(data)
     })
 }
