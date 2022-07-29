@@ -32,8 +32,7 @@ export class CardProductoComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerCalificacionProducto();
-    this.agregarAListaDeseos();
-    this.eliminarDeListaDeseos();
+    this.obtenerUsuarioActual();
   }
 
   mostrarProducto(){
@@ -45,7 +44,7 @@ export class CardProductoComponent implements OnInit {
       console.log(err)
     })
 
-    // Mostrar el componente producto
+    
   }
 
   
@@ -114,13 +113,13 @@ export class CardProductoComponent implements OnInit {
 
   
 agregarAListaDeseos(){
-  this.ListaDeseosService.agregarAListaDeseos(this.productoActual.idProducto).subscribe(() => {
+  this.ListaDeseosService.agregarAListaDeseos(this.usuarioActual.idUsuario,this.listarProducto.idProducto).subscribe(() => {
   this.AgregadoALista = true;
   })
 }
 
 eliminarDeListaDeseos(){
-  this.ListaDeseosService.eliminarDeListaDeseos(this.productoActual.idProducto).subscribe(() => {
+  this.ListaDeseosService.eliminarDeListaDeseos(this.usuarioActual.idUsuario,this.listarProducto.idProducto).subscribe(() => {
     this.AgregadoALista = false;
   })
 
