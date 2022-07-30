@@ -1,25 +1,30 @@
 
 
-<div class="row">
+<app-header></app-header>
+<div class="row ">
   <aside style="background-color: rgb(235, 243, 242); height: 100vh;" class="col-3">
     <app-buscar (userChat)="seleccionarDestinatario($event)"></app-buscar>
   </aside>
-  <div class="col-9">
+  <div class="col-9" *ngIf="chat_activo">
     <div class="card cardContainer" >
       <div class="card-header">
         <span class="material-symbols-outlined">
           face
         </span>
-        {{emisor?.nombre}}
+        {{receptor_seleccionado?.nombre}}
       </div>
       
       <div class="card-body">
-         
+         <div id="contenedorMensajes" class="contenedorMensajes h-100">
+            <p *ngFor="let mensaje of mensajes" class="msj p-2" [ngClass]="(usuarioActual.idUsuario==mensaje.emisor_id)? 'enviado': 'recibido'">
+              {{mensaje.mensaje}}
+            </p>
+         </div>
       </div>
       <form class="card-footer text-muted input-group" (ngSubmit)="enviarMensaje()">
         
-        <input type="text" class="form-control" placeholder="Ingrese su mensaje" [(ngModel)]="nuevoMensaje">
-        <div class="input-group-append">
+        <input type="text" class="form-control" placeholder="Ingrese su mensaje" [(ngModel)]="nuevoMensaje" [ngModelOptions]="{standalone: true}">
+        <div class="input-group-append" (click)="enviarMensaje()">
           <span class="input-group-text" id="basic-addon2"> 
             <span style="cursor: pointer;" class="material-symbols-outlined">
               send
@@ -32,7 +37,5 @@
       </form>
   </div>
   </div>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </div>
-
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
