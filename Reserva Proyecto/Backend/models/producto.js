@@ -327,9 +327,11 @@ Producto.eliminarFavorito = (idU, idP, resultado) => {
     let eliminarQuery = `delete from listas where idUsuario = ${idU} AND idProducto = ${idP}`
     conexion.query(eliminarQuery, (err, rows) => {
         if (err) 
-            return resultado({ msj: 'El producto no se eliminar de favoritos' + err }, null)
+            return resultado({ msj: 'El producto no se pudo eliminar de favoritos' + err }, null)
+        else if (rows.affectedRows == 0)
+            return resultado({ msj: 'Este usuario no tiene permiso de borrar el producto de favoritos' }, null)
         else
-            return resultado(null, { msj: 'El producto fue eliminado de favoritos'})
+            return resultado(null, { msj: 'El producto fue eliminado de la lista de favoritos'})
     })
 }
 
