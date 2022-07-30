@@ -25,6 +25,10 @@ export class HeaderComponent implements OnInit {
     this.authService.cerrarSesion();
     this.router.navigateByUrl('/inicio')
   }
+  
+  mensaje(){
+    this.router.navigateByUrl('/usuario/chat');
+  }
 
   clickBurguer() {
     this.onClickBurguer.emit(true)
