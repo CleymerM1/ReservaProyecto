@@ -302,8 +302,8 @@ Producto.obtenerCalificacionProducto = (idProducto, res) => {
 }
 
 /*--------------Funciones para las listas-----------------*/
-Producto.aniadirFavoritos = (idU, idP, resultado) => {
-let aniadirQuery = `insert into listas (idUsuario, idProducto, tipoLista) values (${idU}, ${idP}, 'favoritos')`
+Producto.aniadirFavoritos = (idUsuario, idProducto, resultado) => {
+let aniadirQuery = `insert into listas (idUsuario, idProducto, tipoLista) values (${idUsuario}, ${idProducto}, 'favoritos')`
     conexion.query(aniadirQuery, (err, rows) => {
         if (err) 
             return resultado({ msj: 'El producto no se pudo aniadir a favoritos' + err }, null)
@@ -312,9 +312,9 @@ let aniadirQuery = `insert into listas (idUsuario, idProducto, tipoLista) values
     })
 }
 
-Producto.obtenerFavoritos = (idU, resultado) => {
+Producto.obtenerFavoritos = (idUsuario, resultado) => {
     let obtenerQuery = `select producto.idProducto, producto.idCategoria, producto.nombre, producto.costo, producto.estado, producto.descripcion, producto.ubicacion 
-                        from listas inner join producto on listas.idProducto = producto.idProducto where listas.idUsuario = ${idU} AND listas.tipoLista = 'favoritos'`
+                        from listas inner join producto on listas.idProducto = producto.idProducto where listas.idUsuario = ${idUsuario} AND listas.tipoLista = 'favoritos'`
     conexion.query(obtenerQuery, (err, rows) => {
         if(err)
             return resultado(err, null)
@@ -322,8 +322,8 @@ Producto.obtenerFavoritos = (idU, resultado) => {
             return resultado(null, rows)
     })
 }
-Producto.eliminarFavorito = (idU, idP, resultado) => {
-    let eliminarQuery = `delete from listas where idUsuario = ${idU} AND idProducto = ${idP}`
+Producto.eliminarFavorito = (idUsuario, idProducto, resultado) => {
+    let eliminarQuery = `delete from listas where idUsuario = ${idUsuario} AND idProducto = ${idProducto};`
     conexion.query(eliminarQuery, (err, rows) => {
         if (err) 
             return resultado({ msj: 'El producto no se eliminar de favoritos' + err }, null)

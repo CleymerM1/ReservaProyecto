@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'tienda/categorias/:idCategoria', component: CategoriaComponent, canActivate: [AuthGuard] },
   { path: 'producto/detalle/:id', component: DetalleDeProductoComponent, canActivate: [AuthGuard] },
   { path: 'form-denuncia/:id', component: FormDenunciaComponent },
-  { path: 'producto/lista-de-deseos', component: ListaDeDeseosComponent},
+  { path: 'producto/lista-de-deseos/:id', component: ListaDeDeseosComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 
   { path: '', component: LandingComponent },
@@ -56,7 +56,7 @@ const routes: Routes = [
   { path: 'categorias', component: CategoriasComponent },
   { path: 'tienda/categorias/:idCategoria', component: CategoriaComponent, canActivate: [AuthGuard] },
   { path: 'producto/detalle/:id', component: DetalleDeProductoComponent },
-  { path: 'producto/lista-de-deseos', component: ListaDeDeseosComponent},
+  { path: 'producto/lista-de-deseos/:id', component: ListaDeDeseosComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 

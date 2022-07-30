@@ -11,6 +11,7 @@ router.delete('/eliminar/:id', usuarioController.eliminarUsuario);
 router.post('/login', usuarioController.inicioSesion);
 router.put('/registro/:token', usuarioController.validarTokenRegistro);
 
+
 router.put('/recuperar-contrasenia', usuarioController.enviarTokenRestablecerContrasenia);
 router.get('/recuperar-contrasenia/:token', usuarioController.validarTokenRestablecerContrasenia);
 router.put('/recuperar-contrasenia/nueva-contrasenia', usuarioController.restablecerContrasenia);

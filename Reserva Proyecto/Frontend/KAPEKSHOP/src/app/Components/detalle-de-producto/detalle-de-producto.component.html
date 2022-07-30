@@ -51,7 +51,8 @@
 
             </li>
           </ul>
-          <button class="float-start" style="background-color: rgb(255, 123, 0);" mat-button>Lista de deseos</button>
+          <button class="float-start" style="background-color: rgb(236, 159, 43);" mat-button  (click)="aniadirFavoritos()">Agregar a Favoritos</button>
+          <!--<button *ngIf="!AgregadoALista" class="float-end" style="background-color: rgb(236, 159, 43);" mat-button (click)="aniadirFavoritos()">Quitar de Favoritos</button>-->
           <button type="button" class=" btn btn-danger btn-sm justify-end float-end" (click)="denuncia()"
             mat-stroked-button color="danger">Denunciar</button>
         </div>

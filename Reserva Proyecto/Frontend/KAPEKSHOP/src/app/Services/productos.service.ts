@@ -8,88 +8,103 @@ import getHeaders from '../helpers/getHeaders';
 })
 export class ProductosService {
 
-  constructor(private http:HttpClient) { }
-  crearProducto(objUsuario:any): Observable<any> {
+  constructor(private http: HttpClient) { }
+  crearProducto(objUsuario: any): Observable<any> {
     let urlStr = `http://localhost:3000/producto/registro/`
-      return this.http.post(urlStr, objUsuario)
+    return this.http.post(urlStr, objUsuario)
   }
 
-  getProductos(): Observable<any>{
+  getProductos(): Observable<any> {
     let url = 'http://localhost:3000/producto/';
     return this.http.get(url);
   }
 
-  actualizarContador(id:any): Observable<any>{
+  actualizarContador(id: any): Observable<any> {
     let url = `http://localhost:3000/producto/contador/${id}`;
-    return this.http.put(url, {contador:1});
+    return this.http.put(url, { contador: 1 });
   }
 
-  obtenerProductoActual(id:any) {
+  obtenerProductoActual(id: any) {
     const token = localStorage.getItem('token') || '';
     const headers = getHeaders(token)
     return this.http.get(`http://localhost:3000/producto/${id}`, headers);
   }
 
-  obtenerPorId(idProducto:number):Observable<any>{
+  obtenerPorId(idProducto: number): Observable<any> {
     let url = `http://localhost:3000/producto/detalle/${idProducto}`;
     return this.http.get(url)
   }
 
-  getProductoPorCategoria(id: any): Observable<any>{
+  getProductoPorCategoria(id: any): Observable<any> {
     let url = `http://localhost:3000/producto/${id}`;
     return this.http.get(url);
   }
-  filtrarProductos(filtro: string, valor1: string, objProductos: any): Observable<any>{
+  filtrarProductos(filtro: string, valor1: string, objProductos: any): Observable<any> {
     let url = `http://localhost:3000/producto/${filtro}/${valor1}`;
     return this.http.get(url, objProductos);
   }
 
   /*-----------------------------Metodos UPDATE-----------------------------*/
-  editarProducto(id: any, objProducto: any): Observable<any>{
+  editarProducto(id: any, objProducto: any): Observable<any> {
     let url = `http://localhost:3000/producto/actualizar/${id}`;
     return this.http.put(url, objProducto);
   }
   /*-----------------------------Metodos DELETE-----------------------------*/
-  eliminarProducto(id: number): Observable<any>{
+  eliminarProducto(id: number): Observable<any> {
     return this.http.delete(`http://localhost:3000/producto/${id}`);
   }
 
-  subirImagenProducto(idProducto:number, imagen:any): Observable<any>{
+  subirImagenProducto(idProducto: number, imagen: any): Observable<any> {
     let url = `http://localhost:3000/producto/subir-imagen/`;
-    return this.http.post(url, {idProducto, imagen});
+    return this.http.post(url, { idProducto, imagen });
   }
 
-  obtenerImagenesProducto(idProducto:number): Observable<any>{
+  obtenerImagenesProducto(idProducto: number): Observable<any> {
     let url = `http://localhost:3000/producto/imagenes/${idProducto}`;
     console.log(url)
     return this.http.get(url);
   }
 
-  actualizarCalificacion(idProducto:number, idUsuario:number, calificacion:number):Observable<any> {
+  actualizarCalificacion(idProducto: number, idUsuario: number, calificacion: number): Observable<any> {
     let url = `http://localhost:3000/producto/calificar/`;
-    return this.http.post(url,{idProducto, idUsuario, calificacion} );
+    return this.http.post(url, { idProducto, idUsuario, calificacion });
   }
-  obtenerCalificacionUsuarioProducto(idProducto:number, idUsuario:number):Observable<any> {
+  obtenerCalificacionUsuarioProducto(idProducto: number, idUsuario: number): Observable<any> {
     let url = `http://localhost:3000/producto/calificar/obtener-calificacion/${idProducto}/${idUsuario}`;
-    return this.http.get(url );
+    return this.http.get(url);
   }
-  obtenerCalificacionProducto(idProducto:number):Observable<any> {
+  obtenerCalificacionProducto(idProducto: number): Observable<any> {
     let url = `http://localhost:3000/producto/calificar/obtener-calificacion/${idProducto}`;
-    return this.http.get(url );
+    return this.http.get(url);
   }
-  denunciaProducto(idProducto:number, objetoDenuncia:any){
-    let url=`http://localhost:3000/producto/denuncia/${idProducto}`;
-    return this.http.post(url,objetoDenuncia);
+  denunciaProducto(idProducto: number, objetoDenuncia: any) {
+    let url = `http://localhost:3000/producto/denuncia/${idProducto}`;
+    return this.http.post(url, objetoDenuncia);
   }
 
-  obtenerDenuncias(): Observable<any>{
+  obtenerDenuncias(): Observable<any> {
     let url = `http://localhost:3000/producto/denuncia/obtenerDenuncias`;
     return this.http.get(url)
   }
 
-  eliminarDenuncia(id:number): Observable<any>{
-    let url=`http://localhost:3000/producto/denuncia/eliminar/${id}`;
+  eliminarDenuncia(id: number): Observable<any> {
+    let url = `http://localhost:3000/producto/denuncia/eliminar/${id}`;
     return this.http.delete(url)
+  }
+
+  aniadirFavoritos(idUsuario: any, idProducto: any): Observable<any> {
+    let url = `http://localhost:3000/producto/aniadirDeseos/`;
+    return this.http.post(url, {"idUsuario":idUsuario, "idProducto":idProducto});
+  }
+
+  obtenerFavoritos(idUsuario: any): Observable<any> {
+    let url = `http://localhost:3000/producto/lista-de-deseos/${idUsuario}`
+    return this.http.get(url)
+  }
+
+  eliminarFavorito(idUsuario: any, idProducto: any): Observable<any> {
+    let url = `http://localhost:3000/producto/eliminarDeseos/${idUsuario}/${idProducto}`
+    return this.http.delete(url);
   }
 
 }

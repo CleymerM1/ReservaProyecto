@@ -58,6 +58,14 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  obtenerUsuarioActual() {
+
+    this.usuarioService.obtenerUsuarioActual().subscribe((res: any) => {
+      this.usuarioActual = res;
+    })
+
+  }
+
 
 
 }

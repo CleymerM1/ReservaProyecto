@@ -71,7 +71,7 @@ Categoria.editarCategoria = (req, res) =>{
 };
 
 Categoria.suscribirse = (idCategoria, idUsuario, corroUsuario, resultado) =>{
-    let consulta = `INSERT INTO suscripcion (idCategoria, idUsuario, correoUsuario) VALUES ('${idCategoria}','${idUsuario}','${corroUsuario}')`;
+    let consulta = `INSERT INTO suscripcion (idCategoria, idUsuario, correoUsuario) VALUES ('${idCategoria}','${idUsuario}','${correoUsuario}')`;
     let select = `SELECT * FROM suscripcion WHERE idCategoria = '${idCategoria}' AND idUsuario = '${idUsuario}'`;
     conexion.query(select, (err, data)=>{
         if(err) return resultado(err, null)
