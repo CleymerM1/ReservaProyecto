@@ -3,11 +3,11 @@ const Mensaje = require('../models/mensaje');
 
 
 exports.crearMensaje = (req,res) =>{
-    console.log(req)
+    
     const mensaje = new Mensaje({
-        mensaje : req.body.mensaje,
         emisor : req.body.emisor,
-        receptor : req.body.receptor   
+        receptor : req.body.receptor,
+        mensaje : req.body.texto,
     })
 
     Mensaje.crear(mensaje, (err, data)=>{
@@ -16,4 +16,12 @@ exports.crearMensaje = (req,res) =>{
     })
 
 
+}
+
+exports.obtenerMensajes = (req,res)=>{
+    let {emisor_id, receptor_id} = req.params
+    Mensaje.obtenerMensajes(emisor_id, receptor_id, (err,data)=>{
+        if(err) return res.status(500).send(err)
+        return res.status(202).json(data)
+    })
 }
