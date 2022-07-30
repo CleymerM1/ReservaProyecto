@@ -39,8 +39,16 @@ const corsOptions = {
          }
      } )
 
+})
+para probar la creacion de nuevos anuncios
+cron.schedule('1 * 1-28 * *', () => {
+    Producto.crearAnuncios((err, data) => {
+        if(err)
+            console.log(err)
+        else
+            console.log("se crearon nuevos anuncios")
+    })
 })*/
-
 
 // Ejecutar una tarea todos los lunes a las 7 de la mañana
 cron.schedule('0 7 * * 1', () => {
@@ -53,11 +61,23 @@ cron.schedule('0 7 * * 1', () => {
     } )
 })
 
+//Elimina los viejos anuncios y crea nuevos anuncios cada 60 dias
+cron.schedule('* * 20 January,March,May,July,September,November *', () => {
+    Producto.crearAnuncios((err, data) => {
+        if(err)
+            console.log(err)
+        else
+            console.log("se crearon nuevos anuncios")
+    })
+})
+
 //rutas
 app.use(cors())
 app.use('/usuario', require('./routes/usuario'))
 app.use('/categoria',require('./routes/categoria'))
 app.use('/producto',require('./routes/producto'))
+app.use('/mensaje', require('./routes/mensajeRoutes'))
+
 
 
 const port= (process.env.port || 3000);

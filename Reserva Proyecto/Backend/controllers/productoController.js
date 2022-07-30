@@ -281,3 +281,36 @@ exports.eliminarFavorito = (req, res) => {
             return res.status(200).json(data)
     })
 }
+
+/*Funciones de los anuncios*/
+exports.crearAnuncios = (req, res) => {
+    Producto.crearAnuncios((err, data) => {
+        if(err) 
+            return res.status(500).send({msj:err})
+        else
+            console.log('se ha usado la funcion Producto.crearAnuncios')
+            return res.status(200).json(data)
+    })
+}
+
+exports.obtenerAnuncios = (req, res) => {
+    Producto.obtenerAnuncios((err, data) => {
+        if(err)
+            return res.status(404).send({msj: err.msj || 'Error al buscar en la base d datos'})
+        else if(data.error)
+            return res.status(502).send({msj: data.error})
+        else
+            return res.status(200).json(data)
+    })
+}
+
+exports.eliminarAnuncio = (req, res) => {
+    let idU = req.params.idUsuario
+    let idP = req.params.idProducto
+    Producto.eliminarAnuncioPorDuenio(idP, idU, (err, data) => {
+        if(err) 
+            return res.status(500).send({msj:err})
+        else
+            return res.status(200).json(data)
+    })
+}

@@ -18,6 +18,7 @@ import { DenunciasComponent } from './Components/admin/denuncias/denuncias.compo
 import { DetalleDeProductoComponent } from './Components/detalle-de-producto/detalle-de-producto.component';
 import { FormDenunciaComponent } from './Components/form-denuncia/form-denuncia.component';
 import { ListaDeDeseosComponent } from './Components/lista-de-deseos/lista-de-deseos.component';
+import { MensajeComponent } from './Components/mensaje/mensaje.component';
 
 //componentes
 const routes: Routes = [

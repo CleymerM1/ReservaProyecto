@@ -49,7 +49,7 @@ export class CardProductoComponent implements OnInit {
       console.log(err)
     })
 
-    // Mostrar el componente producto
+    
   }
 
 

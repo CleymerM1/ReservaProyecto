@@ -1,5 +1,6 @@
 /*-------------------------------Import para la conexion con la base de datos------------------------------*/
 const conexion = require('../config/conexion');
+const { eliminar } = require('./categoria');
 /*------------------------------------------Creacion de clases---------------------------------------------*/
 const Producto = function (objProducto) {
     this.categoria = objProducto.categoria;
@@ -326,9 +327,57 @@ Producto.eliminarFavorito = (idUsuario, idProducto, resultado) => {
     let eliminarQuery = `delete from listas where idUsuario = ${idUsuario} AND idProducto = ${idProducto};`
     conexion.query(eliminarQuery, (err, rows) => {
         if (err) 
-            return resultado({ msj: 'El producto no se eliminar de favoritos' + err }, null)
+            return resultado({ msj: 'El producto no se pudo eliminar de favoritos' + err }, null)
+        else if (rows.affectedRows == 0)
+            return resultado({ msj: 'Este usuario no tiene permiso de borrar el producto de favoritos' }, null)
         else
-            return resultado(null, { msj: 'El producto fue eliminado de favoritos'})
+            return resultado(null, { msj: 'El producto fue eliminado de la lista de favoritos'})
+    })
+}
+
+/*-----------------Anuncios----------------*/
+Producto.crearAnuncios = async (resultado) => {
+    conexion.query('delete from anuncio', (err, res) => {
+        if(err)
+            return resultado({ msj: 'No se puediron eliminar los datos de la tabla anuncio' + err }, null)
+        else
+            conexion.query('select * from producto order by contador desc limit 10', (err, productos) => {
+                console.log(productos)
+                if(err)
+                    return resultado({ msj: 'No se puediron seleccionar los datos de la tabla anuncio' + err }, null)
+                else
+                    conexion.query( 'insert into anuncio values ?',
+                                    [productos.map(producto => [producto.idProducto, producto.idCategoria, producto.nombre, producto.descripcion, producto.costo, producto.idUsuario, producto.imagen])],
+                                    (err, res) => {
+                                        if(err)
+                                            return resultado({ msj: 'No se puediron crear los anuncios nuevos' + err }, null)
+                                        else
+                                            return resultado(null, { msj: 'Se crearon los anuncios exitosamete en la bd'})
+                    })
+            })
+    }) 
+}
+
+Producto.obtenerAnuncios = (resultado) => {
+    conexion.query('select * from anuncio', (err, rows) => {
+        if(err) throw err;
+        rows = rows.map(anuncio => {
+            anuncio.imagen = anuncio.imagen?.toString('ascii')
+            return anuncio;
+        } )
+        resultado(null, rows);
+    })
+}
+
+Producto.eliminarAnuncioPorDuenio = (idP, idU, resultado) => {
+    let eliminarQuery = `delete from anuncio where idProducto = ${idP} AND idUsuario = ${idU}`
+    conexion.query(eliminarQuery, (err, rows) => {
+        if (err) 
+            return resultado({ msj: 'El anuncio no se pudo eliminar' + err }, null)
+        else if (rows.affectedRows == 0)
+            return resultado({ msj: 'Este usuario no tiene permiso de borrar el anuncio' }, null)
+        else
+            return resultado(null, { msj: 'El producto fue eliminado de los anuncios'})
     })
 }
 

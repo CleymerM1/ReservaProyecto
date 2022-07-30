@@ -76,7 +76,44 @@ ALTER TABLE producto MODIFY descripcion TEXT;
 ALTER TABLE foto MODIFY imagen LONGBLOB;
 ALTER TABLE foto RENAME COLUMN descripcion TO imagen;
 
--------------------------------------------nuevo 25/7/2022--------------------------------------------
+-------------------------------------------25/7/2022--------------------------------------------
 CREATE TABLE listas (idLista INT primary key auto_increment, idUsuario INT, idProducto INT, tipoLista VARCHAR(50),
 foreign key (idUsuario) references usuario(idUsuario),
 foreign key (idProducto) references producto(idProducto));
+
+-------------------------------------------nuevo 28/07/2022-------------------------------------
+create table anuncio (idProducto INT, idCategoria INT, nombre VARCHAR(50), descripcion TEXT, costo INT, idUsuario INT, imagen LONGBLOB);
+
+CREATE TABLE conversacion (
+	id INTEGER AUTO_INCREMENT,
+    usuario1_id INTEGER,
+    usuario2_id INTEGER,
+    PRIMARY KEY(id),
+    FOREIGN KEY(usuario1_id) REFERENCES usuario(idUsuario)
+		ON DELETE CASCADE 
+        ON UPDATE CASCADE,
+    FOREIGN KEY(usuario2_id) REFERENCES usuario(idUsuario)
+		ON DELETE CASCADE 
+        ON UPDATE CASCADE	
+);
+
+CREATE TABLE mensaje(
+	id INTEGER AUTO_INCREMENT,
+    conversacion_id INTEGER,
+    mensaje TEXT,
+    emisor_id INTEGER,
+    receptor_id INTEGER,
+    fecha TIMESTAMP,
+    PRIMARY KEY(id),
+    FOREIGN KEY (emisor_id) REFERENCES usuario(idUsuario)
+		ON DELETE CASCADE
+        ON UPDATE CASCADE,
+	FOREIGN KEY (receptor_id) REFERENCES usuario(idUsuario)
+		ON DELETE CASCADE
+        ON UPDATE CASCADE,
+	FOREIGN KEY (conversacion_id) REFERENCES conversacion(id)
+		ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+alter table listas add unique (idProducto, idUsuario);

@@ -73,6 +73,7 @@ import { CarouselComponent } from './Components/carousel/carousel.component';
 import { NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormDenunciaComponent } from './Components/form-denuncia/form-denuncia.component';
 import { ListaDeDeseosComponent } from './Components/lista-de-deseos/lista-de-deseos.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -160,7 +161,8 @@ import { ListaDeDeseosComponent } from './Components/lista-de-deseos/lista-de-de
     MatToolbarModule,
     NgChartsModule,
     MatPaginatorModule,
-    NgbCarouselModule
+    NgbCarouselModule,
+    MatAutocompleteModule
     
 
   ],
