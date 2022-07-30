@@ -18,6 +18,7 @@ import { DenunciasComponent } from './Components/admin/denuncias/denuncias.compo
 import { DetalleDeProductoComponent } from './Components/detalle-de-producto/detalle-de-producto.component';
 import { FormDenunciaComponent } from './Components/form-denuncia/form-denuncia.component';
 import { ListaDeDeseosComponent } from './Components/lista-de-deseos/lista-de-deseos.component';
+import { MensajeComponent } from './Components/mensaje/mensaje.component';
 
 //componentes
 const routes: Routes = [
@@ -39,25 +40,11 @@ const routes: Routes = [
   { path: 'producto/detalle/:id', component: DetalleDeProductoComponent, canActivate: [AuthGuard] },
   { path: 'form-denuncia/:id', component: FormDenunciaComponent },
   { path: 'producto/lista-de-deseos', component: ListaDeDeseosComponent},
+  {path: 'usuario/chat',component: MensajeComponent},
+  
   { path: '**', redirectTo: '', pathMatch: 'full' },
 
-  { path: '', component: LandingComponent },
-  { path: 'inicio', component: IniciarSesionComponent },
-  { path: 'registrar-usuario', component: RegistrarUsuarioComponent },
-  { path: 'producto', component: ProductoComponent },
-  { path: 'editar-usuario/:id', component: RegistrarUsuarioComponent, canActivate: [AuthGuard] },
-  { path: 'listar-productos', component: ListarProductosComponent },
-  { path: 'confirmar/:token', component: ValidarCorreoComponent },
-  { path: 'tienda', component: TiendaComponent, canActivate: [AuthGuard] },
-  { path: 'recuperar-contrasenia/:token', component: RecuperarContraseniaComponent },
-  { path: 'recuperar-contrasenia', component: SolicitarRecuperarContraseniaComponent },
-  //{path:'tienda/:tipoUsuario/categorias', component:CategoriasComponent, canActivate:[AuthGuard]},
-  { path: 'categorias/:idCategoria', component: CategoriaComponent, canActivate: [AuthGuard] },
-  { path: 'categorias', component: CategoriasComponent },
-  { path: 'tienda/categorias/:idCategoria', component: CategoriaComponent, canActivate: [AuthGuard] },
-  { path: 'producto/detalle/:id', component: DetalleDeProductoComponent },
-  { path: 'producto/lista-de-deseos', component: ListaDeDeseosComponent},
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  
 ];
 
 @NgModule({
