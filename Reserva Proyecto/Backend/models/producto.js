@@ -314,7 +314,7 @@ let aniadirQuery = `insert into listas (idUsuario, idProducto, tipoLista) values
 }
 
 Producto.obtenerFavoritos = (idUsuario, resultado) => {
-    let obtenerQuery = `select producto.idProducto, producto.idCategoria, producto.nombre, producto.costo, producto.estado, producto.descripcion, producto.ubicacion 
+    let obtenerQuery = `select producto.idProducto, producto.idCategoria, producto.nombre, producto.costo, producto.estado, producto.descripcion, producto.ubicacion, producto.imagen 
                         from listas inner join producto on listas.idProducto = producto.idProducto where listas.idUsuario = ${idUsuario} AND listas.tipoLista = 'favoritos'`
     conexion.query(obtenerQuery, (err, rows) => {
         if(err)
