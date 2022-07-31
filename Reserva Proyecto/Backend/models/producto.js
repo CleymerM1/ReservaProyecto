@@ -317,10 +317,16 @@ Producto.obtenerFavoritos = (idUsuario, resultado) => {
     let obtenerQuery = `select producto.idProducto, producto.idCategoria, producto.nombre, producto.costo, producto.estado, producto.descripcion, producto.ubicacion, producto.imagen 
                         from listas inner join producto on listas.idProducto = producto.idProducto where listas.idUsuario = ${idUsuario} AND listas.tipoLista = 'favoritos'`
     conexion.query(obtenerQuery, (err, rows) => {
-        if(err)
+        /*if(err)
             return resultado(err, null)
         else
-            return resultado(null, rows)
+            return resultado(null, rows)*/
+        if(err) throw err;
+        rows = rows.map(favorito => {
+            favorito.imagen = favorito.imagen?.toString('ascii')
+            return favorito;
+        })
+        resultado(null, rows);
     })
 }
 Producto.eliminarFavorito = (idUsuario, idProducto, resultado) => {
