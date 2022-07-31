@@ -231,7 +231,13 @@ Usuario.obtenerDenunciasP = (resultado) => {
     })
 }
 
-
+Usuario.obtenerUsuarioPorId = (idUsuario, res) =>{
+    let query = `SELECT * FROM usuario WHERE idUsuario = ${idUsuario};`
+    conexion.query(query, (err,rows)=>{
+        if(err) return res(err,null)
+        return res(null, rows)
+    })
+}
 
 
 module.exports = Usuario;
