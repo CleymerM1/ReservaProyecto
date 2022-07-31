@@ -117,3 +117,4 @@ CREATE TABLE mensaje(
 );
 
 alter table listas add unique (idProducto, idUsuario);
+ALTER TABLE producto MODIFY descripcion TEXT;
