@@ -25,6 +25,7 @@ export class DetalleDeProductoComponent implements OnInit {
   producto: any = [];
 
   idProducto: number;
+  producto:any;
   productoActual: any;
 
   AgregadoALista: boolean = false;
@@ -196,6 +197,12 @@ export class DetalleDeProductoComponent implements OnInit {
     }
 
   }
+  
+  mensaje(idUsuario:any){
+  console.log(idUsuario);
+  this.router.navigateByUrl(`/usuario/chat/${idUsuario}`);
+  
+}
 
   aniadirFavoritos() {
     this.productosService.aniadirFavoritos(this.usuarioActual.idUsuario, this.producto.idProducto).subscribe((res: any) => {
