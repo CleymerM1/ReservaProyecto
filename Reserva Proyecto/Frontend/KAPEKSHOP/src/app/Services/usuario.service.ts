@@ -83,6 +83,11 @@ export class UsuarioService {
     const headers = getHeaders(token)
     return this.http.get(`http://localhost:3000/categoria`, headers);
   }
+  
+  obtenerUsuarioPorId(idUsuario:any): Observable<any> {
+    let url=`http://localhost:3000/usuario/obtenerUsuario/${idUsuario}`
+    return this.http.get(url)
+  }
 
 
 }
