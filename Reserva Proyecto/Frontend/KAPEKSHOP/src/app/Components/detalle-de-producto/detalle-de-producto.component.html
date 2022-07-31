@@ -41,9 +41,6 @@
           <ul *ngIf="usuarioActual && !comprobarEsVendedor(producto) && !comprobarEsAdmin()"
             class="list-unstyled d-flex justify-content-between">
             <li>
-              <i class="text-warning fa fa-star"></i>
-              <i class="text-warning fa fa-star"></i>
-              <i class="text-warning fa fa-star"></i>
 
               <i style="cursor: pointer;" *ngFor="let estrella of estrellas; index as i"
                 (click)="calificarProducto(i+1)" [class]="estrella"></i>
@@ -51,6 +48,7 @@
 
             </li>
           </ul>
+          <button (click)="mensaje(producto.idCliente)" class="float-start" style="background-color: rgb(255, 123, 0);" mat-button>Consultar</button>
           <button class="float-start" style="background-color: rgb(236, 159, 43);" mat-button  (click)="aniadirFavoritos()">Agregar a Favoritos</button>
           <!--<button *ngIf="!AgregadoALista" class="float-end" style="background-color: rgb(236, 159, 43);" mat-button (click)="aniadirFavoritos()">Quitar de Favoritos</button>-->
           <button type="button" class=" btn btn-danger btn-sm justify-end float-end" (click)="denuncia()"
