@@ -16,6 +16,7 @@ router.put('/recuperar-contrasenia', usuarioController.enviarTokenRestablecerCon
 router.get('/recuperar-contrasenia/:token', usuarioController.validarTokenRestablecerContrasenia);
 router.put('/recuperar-contrasenia/nueva-contrasenia', usuarioController.restablecerContrasenia);
 router.get('/obtenerDenuncias', usuarioController.obtenerDenunciasP) //obtiene todas las denuncias pendientes
+router.get('/obtenerUsuario/:idUsuario', usuarioController.obtenerUsuarioPorId)
 
 router.get('/', checkAuth,  usuarioController.obtenerUsuario); // Obtener todos los usuarios
 router.get('/:correo', checkAuth,  usuarioController.obtenerUsuarioPorCorreo);  // Obtener el usuario por correo
