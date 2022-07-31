@@ -14,7 +14,7 @@ const helper = new JwtHelperService();
 export class UsuarioService {
 
 
-  url = 'http://localhost:3000/usuario/registro/';
+  url = 'http://localhost:3000/usuario/';
 
   constructor(private http:HttpClient, private router:Router) { }
 
