@@ -183,12 +183,6 @@ exports.obtenerDenunciasP = (req, res) => {
     })
 }
 
-exports.obtenerUsuarioPorId = (req,res)=>{
-    Usuario.obtenerUsuarioPorId(req.params.idUsuario, (err,data)=>{
-        if(err) return res.status(500).send({msj:err})
-        return res.status(200).json(data)
-    })
-}
 
 exports.obtenerUsuarioPorId = (req,res)=>{
     Usuario.obtenerUsuarioPorId(req.params.idUsuario, (err,data)=>{
