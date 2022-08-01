@@ -18,11 +18,13 @@ import { DenunciasComponent } from './Components/admin/denuncias/denuncias.compo
 import { DetalleDeProductoComponent } from './Components/detalle-de-producto/detalle-de-producto.component';
 import { FormDenunciaComponent } from './Components/form-denuncia/form-denuncia.component';
 import { ListaDeDeseosComponent } from './Components/lista-de-deseos/lista-de-deseos.component';
+import { AnunciosComponent } from './Components/admin/anuncios/anuncios.component';
 
 //componentes
 const routes: Routes = [
 
   { path: '', component: LandingComponent },
+  { path: 'anuncios', component: AnunciosComponent},
   { path: 'inicio', component: IniciarSesionComponent },
   { path: 'registrar-usuario', component: RegistrarUsuarioComponent },
   { path: 'producto', component: ProductoComponent },
@@ -50,6 +52,7 @@ const routes: Routes = [
   { path: 'confirmar/:token', component: ValidarCorreoComponent },
   { path: 'tienda', component: TiendaComponent, canActivate: [AuthGuard] },
   { path: 'recuperar-contrasenia/:token', component: RecuperarContraseniaComponent },
+  { path: 'anuncios', component: AnunciosComponent},
   { path: 'recuperar-contrasenia', component: SolicitarRecuperarContraseniaComponent },
   //{path:'tienda/:tipoUsuario/categorias', component:CategoriasComponent, canActivate:[AuthGuard]},
   { path: 'categorias/:idCategoria', component: CategoriaComponent, canActivate: [AuthGuard] },

@@ -113,6 +113,7 @@ formatoDinero(cantidad:any){
   return formatearDinero(cantidad)
 }
 
+
 mostrarProductos(){
   this.mostarFormulario=false
   this.productosService.obtenerProductoActual(this.productoActual.idProducto).subscribe((res:any)=>{
@@ -121,6 +122,8 @@ mostrarProductos(){
     
   })
 }
+
+
 denuncia(){
   this.ruta= `form-denuncia/${this.idProducto}`;
   this.router.navigateByUrl(this.ruta);

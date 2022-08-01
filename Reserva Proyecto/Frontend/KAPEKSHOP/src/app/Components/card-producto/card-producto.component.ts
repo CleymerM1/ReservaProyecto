@@ -32,8 +32,8 @@ export class CardProductoComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerCalificacionProducto();
-    this.agregarAListaDeseos();
-    this.eliminarDeListaDeseos();
+  //  this.agregarAListaDeseos();
+    //this.eliminarDeListaDeseos();
   }
 
   mostrarProducto(){
@@ -112,7 +112,7 @@ export class CardProductoComponent implements OnInit {
     })
   }
 
-  
+/*  
 agregarAListaDeseos(){
   this.ListaDeseosService.agregarAListaDeseos(this.productoActual.idProducto).subscribe(() => {
   this.AgregadoALista = true;
@@ -129,6 +129,6 @@ eliminarDeListaDeseos(){
 
 
 
-
+*/
 
 }

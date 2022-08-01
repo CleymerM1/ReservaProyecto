@@ -10,6 +10,9 @@ router.get('/', productoController.obtenerProductos);
 router.get('/detalle/:id', productoController.obtenerProducto);
 //router.get('/:filter/:value1', productoController.filtrarProductos);
 
+router.get('/masClickeados', productoController.obtenerProductosMasVistos);
+
+
 router.post('/aniadirDeseos', productoController.aniadirFavoritos);
 router.get('/lista-de-deseos/:idUsuario', productoController.obtenerFavoritos);
 router.delete('/eliminarDeseos/:idUsuario/:idProducto', productoController.eliminarFavorito);

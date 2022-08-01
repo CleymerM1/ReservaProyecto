@@ -32,6 +32,9 @@
                     <li *ngIf="comprobarUsuario()" style="cursor: pointer;" class="nav-item">
                         <a class="nav-link" routerLink="/formDenuncia">Denuncias</a>
                     </li>
+                    <li *ngIf="comprobarUsuario()" style="cursor: pointer;" class="nav-item">
+                        <a class="nav-link" routerLink="/anuncios">Lo más relevante</a>
+                    </li>
                     
                     <li *ngIf="!token?.correo" class="nav-item">
                         <a class="nav-link" href="#" routerLink="/registrar-usuario">Registrarse</a>

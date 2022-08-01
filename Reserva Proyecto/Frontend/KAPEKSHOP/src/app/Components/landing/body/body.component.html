@@ -11,7 +11,8 @@
             <div class="container">
                 <div class="row p-5">
                     <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                        <img class="img-fluid" src="../../../../assets/new-walk-1064-3320811-1-zoom-removebg-preview.png" alt="">
+                        <img class="img-fluid"
+                            src="../../../../assets/new-walk-1064-3320811-1-zoom-removebg-preview.png" alt="">
                     </div>
                     <div class="col-lg-6 mb-0 d-flex align-items-center">
                         <div class="text-align-left align-self-center">
@@ -36,8 +37,9 @@
                             <h1 class="h1">Futuros Padres</h1>
                             <h3 class="h2">Body de manga corta para bebés</h3>
                             <p>
-                            Seis mamelucos de manga corta de algodón suave para bebé, con patrones, apliques y rayas.
-                            100% algodón
+                                Seis mamelucos de manga corta de algodón suave para bebé, con patrones, apliques y
+                                rayas.
+                                100% algodón
                             </p>
                         </div>
                     </div>
@@ -48,16 +50,17 @@
             <div class="container">
                 <div class="row p-5">
                     <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                        <img class="img-fluid" src="../../../../assets/619YBKQb+KL._AC_SL1500_-removebg-preview.png" alt="">
+                        <img class="img-fluid" src="../../../../assets/619YBKQb+KL._AC_SL1500_-removebg-preview.png"
+                            alt="">
                     </div>
                     <div class="col-lg-6 mb-0 d-flex align-items-center">
                         <div class="text-align-left">
                             <h1 class="h1">Electrónica</h1>
                             <h3 class="h2">Anillo de Luz con trípode </h3>
                             <p>
-                                Anillo de luz de 12 pulgadas con trípode, 
-                                anillo de luz para selfie con soporte de trípode de 62 pulgadas, 
-                                anillo de luz para grabación de video y transmisión en vivo, compatible con teléfonos, 
+                                Anillo de luz de 12 pulgadas con trípode,
+                                anillo de luz para selfie con soporte de trípode de 62 pulgadas,
+                                anillo de luz para grabación de video y transmisión en vivo, compatible con teléfonos,
                                 cámaras y cámaras web
                             </p>
                         </div>
@@ -66,24 +69,26 @@
             </div>
         </div>
     </div>
-    <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-jassa-hero-carousel" role="button" data-bs-slide="prev">
+    <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-jassa-hero-carousel"
+        role="button" data-bs-slide="prev">
         <i class="fas fa-chevron-left"></i>
     </a>
-    <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#template-mo-jassa-hero-carousel" role="button" data-bs-slide="next">
+    <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#template-mo-jassa-hero-carousel"
+        role="button" data-bs-slide="next">
         <i class="fas fa-chevron-right"></i>
     </a>
-  </div>
-  <!-- Fin del Banner -->
-  
-  
-  <!-- Inician categrías-->
-  <section class="container py-5">
+</div>
+<!-- Fin del Banner -->
+
+
+<!-- Inician categrías-->
+<section class="container py-5">
     <div class="row text-center pt-3">
         <div class="col-lg-6 m-auto">
             <h1 class="h1">Más Vendidos</h1>
             <p>
-              Los productos más populares
-              del momento, haz click para ver más
+                Los productos más populares
+                del momento, haz click para ver más
             </p>
         </div>
     </div>
@@ -104,22 +109,22 @@
             <p class="text-center"><a class="btn btn-success">Ver más</a></p>
         </div>
     </div>
-  </section>
-  
-  
-  
-  <!-- Start Featured Product -->
-  <section class="bg-light">
+</section>
+
+
+
+<!-- Start Featured Product -->
+<section class="bg-light">
     <div class="container py-5">
-        <div class="row text-center py-3">
+        <div class="row text-center py-1">
             <div class="col-lg-6 m-auto">
                 <h1 class="h1">Productos Destacados</h1>
                 <p>
-                 Calificaciones y comentarios sobre nuestros productos.
+                    Calificaciones y comentarios sobre nuestros productos.
                 </p>
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-12 col-md-4 mb-4">
                 <div class="card h-100">
                     <a href="#">
@@ -195,5 +200,31 @@
             </div>
         </div>
     </div>
-  </section>
 
+  </section>
+-->
+  <div class="row">
+<!--<mat-card class="obtener-anuncios" *ngFor="let item of producto">-->
+ <div *ngFor =" let producto of productos" class="col-4 mt-4">
+            <div class="container mt-5 ">
+                <div class="col-lg-7 offset-lg-2">
+                    <div class="card-body text-align-left">
+                        <mat-card class="obtener-anuncios ">
+                            <div class="lg-4-mg-5 ">
+                                <mat-card-header>
+                                    <div mat-card-avatar class="example-image"></div>
+                                    <mat-card-title>{{producto?.nombre}}</mat-card-title>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <img height="200" mat-card-image src="{{producto?.imagen}}" alt="Photo of a Shiba Inu">
+                                    <mat-card-content>
+                                     <app-carousel [images]="imagenes"></app-carousel>
+                                    <p class="descripcion mt-3">
+                                        Descripción: {{producto?.descripcion}}
+                                    </p>
+                                    <p class="costo">
+                                        costo: {{producto?.costo}}
+                                    </p>
+                                  
+                                </mat-card-content>
+                            
