@@ -141,8 +141,8 @@ Producto.eliminarTodosPorUsuario = (resultado) => {                             
 }                                                                                                 // Importante cambiar
 
 //Estas funciones son para contabilizar los productos mas visitados
-Producto.actualizarContador = (res) => {
-    let updateQuery = `update producto set contador = contador + 1`
+Producto.actualizarContador = (id,res) => {
+    let updateQuery = `update producto set contador = contador + 1 WHERE idProducto = '${id}'`
     conexion.query(updateQuery, (err, rows) => {
         if (err) return res({ msj: 'Hubo un error' + err }, null);
 
