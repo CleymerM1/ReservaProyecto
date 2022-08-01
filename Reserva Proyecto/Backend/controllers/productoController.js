@@ -49,7 +49,8 @@ exports.obtenerProductos = (req,res)=>{
 };
 
 exports.actualizarContador = (req,res)=>{
-    Producto.actualizarContador((error,data)=>{
+    let id = req.params.id
+    Producto.actualizarContador(id,(error,data)=>{
         if(error){
             res.status(404).json({msj: 'Hubo un problema al actualizar el contador' + error})
         }else{
