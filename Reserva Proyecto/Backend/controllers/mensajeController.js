@@ -25,3 +25,11 @@ exports.obtenerMensajes = (req,res)=>{
         return res.status(202).json(data)
     })
 }
+
+exports.obtenerConversacion = (req,res)=>{
+    let emisor_id=req.params.emisor_id
+    Mensaje.obtenerConversacion(emisor_id, (err, data)=>{
+        if(err) return res.status(500).send(err)
+        return res.status(202).json(data)
+    })
+}
