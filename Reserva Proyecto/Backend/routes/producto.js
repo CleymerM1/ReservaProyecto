@@ -17,7 +17,7 @@ router.post('/aniadirDeseos', productoController.aniadirFavoritos);
 router.get('/lista-de-deseos/:idUsuario', productoController.obtenerFavoritos);
 router.delete('/eliminarDeseos/:idUsuario/:idProducto', productoController.eliminarFavorito);
 
-router.post('/anuncio', productoController.crearAnuncios)
+//router.post('/anuncio', productoController.crearAnuncios)       este era para probar en el postman
 router.get('/obtenerAnuncios', productoController.obtenerAnuncios)
 router.delete('/eliminarAnuncio/:idProducto/:idUsuario', productoController.eliminarAnuncio)
 

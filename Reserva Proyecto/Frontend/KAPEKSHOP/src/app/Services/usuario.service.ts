@@ -14,7 +14,7 @@ const helper = new JwtHelperService();
 export class UsuarioService {
 
 
-  url = 'http://localhost:3000/usuario/registro/';
+  url = 'http://localhost:3000/usuario/';
 
   constructor(private http:HttpClient, private router:Router) { }
 
@@ -82,6 +82,11 @@ export class UsuarioService {
     const token = localStorage.getItem('token')
     const headers = getHeaders(token)
     return this.http.get(`http://localhost:3000/categoria`, headers);
+  }
+  
+  obtenerUsuarioPorId(idUsuario:any): Observable<any> {
+    let url=`http://localhost:3000/usuario/obtenerUsuario/${idUsuario}`
+    return this.http.get(url)
   }
 
 

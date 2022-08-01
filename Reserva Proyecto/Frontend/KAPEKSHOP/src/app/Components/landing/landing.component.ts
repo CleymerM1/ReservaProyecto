@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import leerToken from 'src/app/helpers/decodificarToken';
+import { ProductosService } from 'src/app/Services/productos.service';
 
 @Component({
   selector: 'app-landing',
@@ -9,10 +11,11 @@ import leerToken from 'src/app/helpers/decodificarToken';
 export class LandingComponent implements OnInit {
 
 
-  constructor() { }
+  constructor(private productosService: ProductosService, private route: ActivatedRoute) {
+
+  }
 
   ngOnInit(): void {
-    leerToken();
   }
 
 }

@@ -25,6 +25,10 @@ export class HeaderComponent implements OnInit {
     this.authService.cerrarSesion();
     this.router.navigateByUrl('/inicio')
   }
+  
+  mensaje(){
+    this.router.navigateByUrl('/usuario/chat');
+  }
 
   clickBurguer() {
     this.onClickBurguer.emit(true)
@@ -56,6 +60,14 @@ export class HeaderComponent implements OnInit {
     }else{
       return false
     }
+  }
+
+  obtenerUsuarioActual() {
+
+    this.usuarioService.obtenerUsuarioActual().subscribe((res: any) => {
+      this.usuarioActual = res;
+    })
+
   }
 
 

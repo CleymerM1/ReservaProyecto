@@ -1,6 +1,6 @@
 <!-- Header -->
 <nav class="navbar navbar-expand-lg navbar-light shadow">
-    <button (click)="clickBurguer()"  mat-button class="menu-button">
+    <button (click)="clickBurguer()" mat-button class="menu-button">
         <mat-icon>menu</mat-icon>
     </button>
     <div class="container d-flex justify-content-end align-items-end">
@@ -19,12 +19,13 @@
             id="templatemo_main_nav">
             <div class="flex-fill">
                 <ul class="nav navbar-nav d-flex justify-content-center mx-lg-auto">
-                    <li [ngClass]="urlItemActual == '/' ? 'item-seleccionado nav-item': 'nav-item'" >
+                    <li [ngClass]="urlItemActual == '/' ? 'item-seleccionado nav-item': 'nav-item'">
                         <a class="nav-link" routerLink="/">Principal</a>
                     </li>
-                    
-                    <li *ngIf="comprobarUsuarioAdmin()" [ngClass]="urlItemActual == '/tienda' ? 'item-seleccionado nav-item': 'nav-item'" >
-                        <a class="nav-link" routerLink="/admin">Admin</a>
+
+                    <li *ngIf="comprobarUsuarioAdmin()"
+                        [ngClass]="urlItemActual == '/tienda' ? 'item-seleccionado nav-item': 'nav-item'">
+                        <a class="nav-link" routerLink="/tienda">Admin</a>
                     </li>
                     <li *ngIf="comprobarUsuario()" style="cursor: pointer;" class="nav-item">
                         <a class="nav-link" routerLink="/categorias">Categorias</a>
@@ -32,10 +33,14 @@
                     <li *ngIf="comprobarUsuario()" style="cursor: pointer;" class="nav-item">
                         <a class="nav-link" routerLink="/formDenuncia">Denuncias</a>
                     </li>
+<<<<<<< HEAD
                     <li *ngIf="comprobarUsuario()" style="cursor: pointer;" class="nav-item">
                         <a class="nav-link" routerLink="/anuncios">Lo más relevante</a>
                     </li>
                     
+=======
+
+>>>>>>> c068ddc4693c3453d97ef0f5cad613b9fbdc6930
                     <li *ngIf="!token?.correo" class="nav-item">
                         <a class="nav-link" href="#" routerLink="/registrar-usuario">Registrarse</a>
                     </li>
@@ -45,7 +50,7 @@
                     <li *ngIf="token?.correo" class="nav-item">
                         <a class="nav-link" style="cursor: pointer;" (click)="cerrar()">Cerrar sesión</a>
                     </li>
-                    
+
                 </ul>
             </div>
             <div class="navbar align-self-center d-flex">
@@ -61,10 +66,16 @@
                     data-bs-target="#templatemo_search">
                     <i class="fa fa-fw fa-search text-dark mr-2"></i>
                 </a>
-                <a class="nav-icon position-relative text-decoration-none" href="#">
-                    <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                    <span
-                        class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                <svg routerLink="/producto/lista-de-deseos/{{usuarioActual.idUsuario}}" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-heart-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                </svg>
+                <a *ngIf="comprobarUsuarioAdmin()" (click)="mensaje()"  class="nav-icon position-relative text-decoration-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; color:black" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                      </svg>
+                      
                 </a>
                 <a class="nav-icon position-relative text-decoration-none" href="#">
                     <i class="fa fa-fw fa-user text-dark mr-3"></i>
@@ -88,6 +99,7 @@
         </div>
         <form action="" method="get" class="modal-content modal-body border-0 p-0">
             <div class="input-group mb-2">
+
                 <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
                 <button type="submit" class="input-group-text bg-success text-light">
                     <i class="fa fa-fw fa-search text-white"></i>

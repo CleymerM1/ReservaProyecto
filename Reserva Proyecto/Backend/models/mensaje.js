@@ -13,8 +13,7 @@ const Mensaje = function(objMensaje){
 Mensaje.crear = (req,res) =>{
     console.log(req);
     let {mensaje,emisor, receptor } = req;
-    let buscarConversacion = `select * from conversacion where (usuario1_id = ${emisor} and usuario2_id = ${receptor}) or (usuario2_id = ${receptor} and usuario1_id = ${emisor}); `
-    console.log(mensaje)
+    let buscarConversacion = `select * from conversacion where (usuario1_id = ${emisor} and usuario2_id = ${receptor}) or (usuario2_id = ${emisor} and usuario1_id = ${receptor}); `
     
     conexion.query(buscarConversacion, (err, rowsConversacion)=>{
         
@@ -50,6 +49,35 @@ Mensaje.crear = (req,res) =>{
                 
                 return res(null, {msj:'Mensaje agregado correctamente'})
                 
+            })
+        }
+    })
+    
+};
+
+
+Mensaje.obtenerConversacion = (emisor_id, receptor_id, res)=>{
+    let selectConversacion = `SELECT * FROM conversacion WHERE (usuario1_id = ${emisor_id} AND usuario2_id = ${receptor_id}) or (usuario2_id = ${emisor_id} AND usuario1_id = ${receptor_id});`
+    conexion.query(selectConversacion, (error, data)=>{
+        if(error) return res(error, null)
+        if(data.length){
+            return res(null, data)
+        }
+    })
+}
+
+Mensaje.obtenerMensajes = (emisor_id, receptor_id, res)=>{
+    let selectConversacion = `SELECT * FROM conversacion WHERE (usuario1_id = ${emisor_id} AND usuario2_id = ${receptor_id}) or (usuario2_id = ${emisor_id} AND usuario1_id = ${receptor_id});`
+    conexion.query(selectConversacion, (error, data)=>{
+        if(error) return res(error,null)
+        if(data.length){
+            console.log(data[0].id)
+            let selectMensajes = `SELECT * FROM mensaje WHERE conversacion_id = ${data[0].id}`
+            conexion.query(selectMensajes, (err, rows)=>{
+                if(err) return res(err,null)
+                if(rows.length){
+                    return res(null, rows)
+                }
             })
         }
     })

@@ -10,7 +10,6 @@ import { ListarProductosComponent } from 'src/app//Components/listar-productos/l
 import { Route } from '@angular/router';
 import decodificarToken from 'src/app/helpers/decodificarToken';
 import formatearDinero from 'src/app/helpers/formatoMoneda';
-import { ListaDeseosService } from 'src/app/Services/lista-de-deseos.services';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConfirmacionComponent } from '../../modal-confirmacion/modal-confirmacion.component';
 import { ConfigModal } from 'src/app/interfaces/config-modal';
@@ -45,7 +44,7 @@ export class AnunciosComponent implements OnInit {
 
 
 
-  constructor(private route: ActivatedRoute,private usuarioService: UsuarioService, private productosService: ProductosService, private router: Router,  private ListaDeseosService: ListaDeseosService) {
+  constructor(private route: ActivatedRoute,private usuarioService: UsuarioService, private productosService: ProductosService, private router: Router) {
     this.idUsuario = this.route.snapshot.params["id"];
     this.idProducto = this.route.snapshot.params["id"];
      }

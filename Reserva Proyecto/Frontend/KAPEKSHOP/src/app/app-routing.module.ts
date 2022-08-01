@@ -18,7 +18,11 @@ import { DenunciasComponent } from './Components/admin/denuncias/denuncias.compo
 import { DetalleDeProductoComponent } from './Components/detalle-de-producto/detalle-de-producto.component';
 import { FormDenunciaComponent } from './Components/form-denuncia/form-denuncia.component';
 import { ListaDeDeseosComponent } from './Components/lista-de-deseos/lista-de-deseos.component';
+<<<<<<< HEAD
 import { AnunciosComponent } from './Components/admin/anuncios/anuncios.component';
+=======
+import { MensajeComponent } from './Components/mensaje/mensaje.component';
+>>>>>>> c068ddc4693c3453d97ef0f5cad613b9fbdc6930
 
 //componentes
 const routes: Routes = [
@@ -40,9 +44,12 @@ const routes: Routes = [
   { path: 'tienda/categorias/:idCategoria', component: CategoriaComponent, canActivate: [AuthGuard] },
   { path: 'producto/detalle/:id', component: DetalleDeProductoComponent, canActivate: [AuthGuard] },
   { path: 'form-denuncia/:id', component: FormDenunciaComponent },
-  { path: 'producto/lista-de-deseos', component: ListaDeDeseosComponent},
+  { path: 'producto/lista-de-deseos/:id', component: ListaDeDeseosComponent, canActivate: [AuthGuard] },
+  {path: 'usuario/chat/:idUsuario',component: MensajeComponent},
+  
   { path: '**', redirectTo: '', pathMatch: 'full' },
 
+<<<<<<< HEAD
   { path: '', component: LandingComponent },
   { path: 'inicio', component: IniciarSesionComponent },
   { path: 'registrar-usuario', component: RegistrarUsuarioComponent },
@@ -61,6 +68,9 @@ const routes: Routes = [
   { path: 'producto/detalle/:id', component: DetalleDeProductoComponent },
   { path: 'producto/lista-de-deseos', component: ListaDeDeseosComponent},
   { path: '**', redirectTo: '', pathMatch: 'full' }
+=======
+  
+>>>>>>> c068ddc4693c3453d97ef0f5cad613b9fbdc6930
 ];
 
 @NgModule({

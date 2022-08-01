@@ -115,3 +115,6 @@ CREATE TABLE mensaje(
 		ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
+alter table listas add unique (idProducto, idUsuario);
+

@@ -39,23 +39,23 @@
                 {{listarProducto?.descripcion}}
               </p>
               <p class="precio">
-               Precio: {{formatoDinero(listarProducto?.costo)}}
+                Precio: {{formatoDinero(listarProducto?.costo)}}
               </p>
               <div>
                 <span>
-                  Calificación: 
+                  Calificación:
                 </span>
                 <ul class="list-unstyled d-flex justify-content-between">
                   <li>
-                      <!-- <i class="text-warning fa fa-star"></i>
+                    <!-- <i class="text-warning fa fa-star"></i>
                       <i class="text-warning fa fa-star"></i>
                       <i class="text-warning fa fa-star"></i> -->
-                      
-                      <i style="cursor: pointer;" *ngFor="let estrella of estrellas; index as i" [class]="estrella"></i>
-      
-      
+
+                    <i style="cursor: pointer;" *ngFor="let estrella of estrellas; index as i" [class]="estrella"></i>
+
+
                   </li>
-              </ul>
+                </ul>
               </div>
 
             </mat-card-content>
@@ -63,8 +63,11 @@
           <div>
             <button routerLink="/producto/detalle/{{listarProducto.idProducto}}" mat-stroked-button color="warn">Ver
               detalles </button>
+<<<<<<< HEAD
            <!--   <i *ngIf="AgregadoALista" class="fas fa-heart float-end" (click)="eliminarDeListaDeseos()"></i>
               <i *ngIf="!AgregadoALista" class="far fa-heart float-end" (click)="agregarAListaDeseos()"></i>-->
+=======
+>>>>>>> c068ddc4693c3453d97ef0f5cad613b9fbdc6930
           </div>
         </div>
 

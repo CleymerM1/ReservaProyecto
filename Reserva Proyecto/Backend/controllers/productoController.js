@@ -250,9 +250,8 @@ exports.eliminarDenuncia = (req,res)=>{
 
 /*funciones para las listas*/
 exports.aniadirFavoritos = (req, res) => {
-    let idU = req.body.idUsuario
-    let idP = req.body.idProducto
-    Producto.aniadirFavoritos(idU, idP, (err, data) => {
+    let { idUsuario, idProducto} = req.body;
+    Producto.aniadirFavoritos(idUsuario, idProducto,(err, data) => {
         if(err) 
             return res.status(500).send({msj:err})
         else
@@ -261,21 +260,21 @@ exports.aniadirFavoritos = (req, res) => {
 }
 
 exports.obtenerFavoritos = (req, res) => {
-    let idU = req.params.idUsuario
-    Producto.obtenerFavoritos(idU, (err, data) => {
+    let idUsuario = req.params.idUsuario
+    Producto.obtenerFavoritos(idUsuario, (err, data) => {
         if(err)
             return res.status(404).send({msj: err.msj || 'Error al buscar en la base d datos'})
         else if(data.error)
             return res.status(502).send({msj: data.error})
         else
-            return res.status(200).json(data)
+            return res.status(200).json({datos:data})
     })
 }
 
 exports.eliminarFavorito = (req, res) => {
-    let idU = req.params.idUsuario
-    let idP = req.params.idProducto
-    Producto.eliminarFavorito(idU, idP, (err, data) => {
+    let idUsuario = req.params.idUsuario
+    let idProducto = req.params.idProducto
+    Producto.eliminarFavorito(idUsuario, idProducto, (err, data) => {
         if(err) 
             return res.status(500).send({msj:err})
         else
@@ -289,6 +288,7 @@ exports.crearAnuncios = (req, res) => {
         if(err) 
             return res.status(500).send({msj:err})
         else
+            console.log('se ha usado la funcion Producto.crearAnuncios')
             return res.status(200).json(data)
     })
 }
