@@ -56,8 +56,10 @@ Mensaje.crear = (req,res) =>{
 };
 
 
-Mensaje.obtenerConversacion = (emisor_id, receptor_id, res)=>{
-    let selectConversacion = `SELECT * FROM conversacion WHERE (usuario1_id = ${emisor_id} AND usuario2_id = ${receptor_id}) or (usuario2_id = ${emisor_id} AND usuario1_id = ${receptor_id});`
+Mensaje.obtenerConversacion = (emisor_id, res)=>{
+
+    let selectConversacion = `SELECT * FROM conversacion WHERE usuario1_id = ${emisor_id} OR usuario2_id = ${emisor_id};`
+    console.log(selectConversacion)
     conexion.query(selectConversacion, (error, data)=>{
         if(error) return res(error, null)
         if(data.length){
