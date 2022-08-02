@@ -2,14 +2,10 @@ import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from 'src/app/interfaces/Categorias';
 import { Producto } from 'src/app/models/producto';
-import { CategoriasService } from 'src/app/Services/categorias.service';
 import { ProductosService } from 'src/app/Services/productos.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
-import { ListarProductosComponent } from '../listar-productos/listar-productos.component';
-import { Route } from '@angular/router';
 import decodificarToken from 'src/app/helpers/decodificarToken';
 import formatearDinero from 'src/app/helpers/formatoMoneda';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-detalle-de-producto',
@@ -25,10 +21,7 @@ export class DetalleDeProductoComponent implements OnInit {
   producto: any = [];
 
   idProducto: number;
-  producto:any;
   productoActual: any;
-
-  AgregadoALista: boolean = false;
 
   @Input() imagenes: any = []
   mostarFormulario: boolean | undefined;
@@ -45,7 +38,6 @@ export class DetalleDeProductoComponent implements OnInit {
     this.obtenerPorId()
     this.obtenerImagenes(this.idProducto)
     this.obtenerUsuarioActual()
-    this.aniadirFavoritos()
 
   }
 

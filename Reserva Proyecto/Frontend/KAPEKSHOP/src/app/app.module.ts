@@ -74,6 +74,8 @@ import { NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormDenunciaComponent } from './Components/form-denuncia/form-denuncia.component';
 import { ListaDeDeseosComponent } from './Components/lista-de-deseos/lista-de-deseos.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MensajeComponent } from './Components/mensaje/mensaje.component';
+import { BuscarComponent } from './Components/buscar/buscar.component';
 
 
 @NgModule({
@@ -135,7 +137,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     actualizarProductoComponent,
     MisProductosComponent,
     CarouselComponent,
-    ListaDeDeseosComponent
+    ListaDeDeseosComponent,
+    MensajeComponent,
+    BuscarComponent
     
     
   ],

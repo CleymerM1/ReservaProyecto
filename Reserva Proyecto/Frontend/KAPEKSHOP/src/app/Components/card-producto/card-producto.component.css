@@ -65,3 +65,8 @@ label:hover~label {
 input[type="radio"]:checked~label {
   color: orange;
 }
+
+.fa-heart{
+  color: palevioletred;
+  cursor: pointer;
+}

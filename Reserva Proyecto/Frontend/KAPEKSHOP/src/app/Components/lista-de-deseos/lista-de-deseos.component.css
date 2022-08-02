@@ -1,7 +1,7 @@
 .lista-de-deseos {
-  margin-bottom: 15px;
-  width: 250px;
-  height: 250px;
+  margin: 15px;
+  width: 300px;
+  height: 300px;
 }
 
 .descripcion {
@@ -13,3 +13,4 @@
 .h-6 {
   margin-right: 5px;
 }
+

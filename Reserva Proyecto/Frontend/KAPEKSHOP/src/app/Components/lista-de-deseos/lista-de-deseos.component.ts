@@ -1,13 +1,10 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import decodificarToken from 'src/app/helpers/decodificarToken';
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import formatearDinero from 'src/app/helpers/formatoMoneda';
-import { ConfigModal } from 'src/app/interfaces/config-modal';
 import { Producto } from 'src/app/models/producto';
 import { ProductosService } from 'src/app/Services/productos.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
-import { ModalConfirmacionComponent } from '../modal-confirmacion/modal-confirmacion.component';
 
 @Component({
   selector: 'app-lista-de-deseos',
@@ -34,10 +31,7 @@ export class ListaDeDeseosComponent implements OnInit {
   imagenB64: any
 
 
-  mostarFormulario: boolean | undefined;
-
-  constructor(private ProductosService: ProductosService, private usuarioService: UsuarioService, private route: ActivatedRoute,
-    private modalService: NgbModal) {
+  constructor(private ProductosService: ProductosService, private route: ActivatedRoute) {
     this.idUsuario = this.route.snapshot.params["id"];
     this.idProducto = this.route.snapshot.params["id"];
   }
@@ -54,7 +48,6 @@ export class ListaDeDeseosComponent implements OnInit {
       },
       next: (data) => {
         this.producto = data.datos
-        console.log("Lista de deseos: ", this.producto)
       }
     })
   }
@@ -84,35 +77,18 @@ export class ListaDeDeseosComponent implements OnInit {
     })
   }
 
-  /*eliminarFavorito() {
-    console.log("Eliminar< >>>>>>>>", this.idUsuario, this.idProducto)
+  eliminarFavorito(event: any) {
+    const idProducto = event
     if (confirm("¿Seguro que desea eliminar?")) {
-      this.ProductosService.eliminarFavorito(this.idUsuario, this.idProducto).subscribe({
+      this.ProductosService.eliminarFavorito(this.idUsuario, idProducto).subscribe({
         error: (error) => {
           console.log(error)
         },
         next: (data) => {
-          this.idUsuario = data
-          this.idProducto = data
-          console.log("Elementos eliminado ", this.idUsuario, this.idProducto)
+          this.cargarListaDeseos()
         }
       })
-    }*/
-
-  modalEliminar() {
-    let modalRef: NgbModalRef;
-    modalRef = this.modalService.open(ModalConfirmacionComponent)
-    let configuracion: ConfigModal = {
-      titulo1: '¿Está seguro de eliminar de favoritos?',
-      titulo2: 'Se eliminará el producto',
-      parametros: { eliminarFavorito: true, idProducto: this.listarProducto.idProducto }
     }
-
-    modalRef.componentInstance.mensaje = configuracion
-
-    modalRef.componentInstance.onEvento.subscribe((res: any) => [
-      this.onEvento.emit(true)
-    ])
   }
 }
 

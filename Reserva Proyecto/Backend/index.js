@@ -12,7 +12,7 @@ const Categoria = require('./models/categoria.js');
 app.use(express.json({limit: '50mb'}));
 
 //Configurar CORS
-/*const whiteList = [process.env.FRONTEND_URL]
+const whiteList = [process.env.FRONTEND_URL]
 const corsOptions = {
     origin: function(origin, callback ) {
         if(whiteList.includes(origin)){
@@ -23,8 +23,7 @@ const corsOptions = {
             callback( new Error('Error de CORS'))
         }
     }
-}*/
-
+}
 
 //MANDA UN CORREO AL USUARIO SUSCRITO A UNA CATEGORIA
 
