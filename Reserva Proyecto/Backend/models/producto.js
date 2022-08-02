@@ -21,7 +21,7 @@ Producto.crear = (newObjProducto, res) => {
     let insertQuery = `insert into producto (idCategoria, nombre, costo, estado, descripcion, ubicacion, idUsuario,imagen) 
                 VALUES ( '${newObjProducto.categoria}','${newObjProducto.nombre}','${newObjProducto.costo}',
                 '${newObjProducto.estado}','${newObjProducto.descripcion}','${newObjProducto.ubicacion}','${newObjProducto.idUsuario}', '${newObjProducto.imagen}')`;
-    
+
     conexion.query(insertQuery, (err, resRegistrarProducto) => {
         console.log(err)
         if (err) return res({ msj: 'El producto no pudo ser registrado' + err }, null)
@@ -31,13 +31,13 @@ Producto.crear = (newObjProducto, res) => {
 };
 
 /*-------Obtener Productos------*/
-Producto.obtenerTodos = (resultado)=>{
-    conexion.query("select * from producto", (err, rows)=>{
-        if(err) throw err;
-        rows = rows.map( producto => {
+Producto.obtenerTodos = (resultado) => {
+    conexion.query("select * from producto", (err, rows) => {
+        if (err) throw err;
+        rows = rows.map(producto => {
             producto.imagen = producto.imagen?.toString('ascii')
             return producto;
-        } )
+        })
         resultado(null, rows);
     });
 };
@@ -45,13 +45,13 @@ Producto.obtenerTodos = (resultado)=>{
 Producto.obtenerPorId = (id, resultado) => {
     let obtenerQuery = `select * from producto where idProducto = ${id}`
     conexion.query(obtenerQuery, (err, res) => {
-        if (err) 
+        if (err)
             return resultado({ msj: 'Hubo un error' + err }, null)
         else {
-            res = res.map( producto => {
+            res = res.map(producto => {
                 producto.imagen = producto.imagen?.toString('ascii')
                 return producto;
-            } )
+            })
             return resultado(null, res)
         }
     })
@@ -68,15 +68,15 @@ Producto.obtenerPorUbi = (departamento, resultado) => {
     })
 }
 Producto.obtenerPorCat = (idC, resultado) => {
-    
+
     let obtenerQuery = `select * from producto where idCategoria = '${idC}'`  //Hay que definir que columnas se quieren de la tabla producto
 
     conexion.query(obtenerQuery, (err, rows) => {
         if (err) throw err
-        rows = rows.map( producto => {
+        rows = rows.map(producto => {
             producto.imagen = producto.imagen?.toString('ascii')
             return producto;
-        } )
+        })
         resultado(null, rows)
     });
 };
@@ -96,7 +96,7 @@ Producto.obtenerPorCosto = (inter1, inter2, resultado) => {
 /*-------Actualizar por id------*/
 Producto.actualizarPorId = (id, newObjProducto, resultado) => {
 
-//SE QUITO IDCATEGORIA PARA QUE FUNCIONE EL ACTUALIZAR
+    //SE QUITO IDCATEGORIA PARA QUE FUNCIONE EL ACTUALIZAR
     let actualizarQuery = `UPDATE producto SET nombre = '${newObjProducto.nombre}', 
                             costo = '${newObjProducto.costo}', estado = '${newObjProducto.estado}', descripcion = '${newObjProducto.descripcion}', 
                             ubicacion = '${newObjProducto.ubicacion}' WHERE idProducto = '${id}'`
@@ -107,7 +107,7 @@ Producto.actualizarPorId = (id, newObjProducto, resultado) => {
         //  return resultado(null, { msj: 'No hubo cambios' }, null)
 
         return resultado(null, res)
-        }
+    }
     )
 }
 
@@ -141,10 +141,10 @@ Producto.eliminarTodosPorUsuario = (resultado) => {                             
 }                                                                                                 // Importante cambiar
 
 //Estas funciones son para contabilizar los productos mas visitados
-Producto.actualizarContador = (res) => {
-    let updateQuery = `update producto set contador = contador + 1`
+Producto.actualizarContador = (id,res) => {
+    let updateQuery = `update producto set contador = contador + 1 WHERE idProducto = '${id}'`
     conexion.query(updateQuery, (err, rows) => {
-        if(err) return res({msj: 'Hubo un error' + err}, null);
+        if (err) return res({ msj: 'Hubo un error' + err }, null);
 
         return res(null, rows);
     }
@@ -154,7 +154,7 @@ Producto.actualizarContador = (res) => {
 Producto.obtenerDiezProductosMasVisitados = (idCategoria, departamento, res) => {
     let searchQuery = `SELECT categoria.idCategoria, nombreCategoria, departamento, contador FROM categoria JOIN usuario ON idUsuario = usuario.idUsuario JOIN producto on producto.idCategoria = categoria.idCategoria WHERE (departamento = '${departamento}' AND categoria.idCategoria = ${idCategoria}) order by contador desc limit 10;`
     conexion.query(searchQuery, (err, rows) => {
-        if(err) return res({msj: 'Hubo un error' + err}, null);
+        if (err) return res({ msj: 'Hubo un error' + err }, null);
 
         return res(null, rows);
     }
@@ -170,10 +170,10 @@ Producto.crearDenuncia = (obj1, obj2, opcion, razon, otro, res) => {
                                                         ${obj2.idUsuario}, '${obj2.nombre}', '${obj2.apellido}', '${obj2.correo}',
                                                         ${obj1.idP}, '${obj1.nombreP}', '${opcion}', '${razon}', '${otro}', now())`
     conexion.query(insertQuery, (err, data) => {
-        if(err)
-            return res({msj:err}, null)
+        if (err)
+            return res({ msj: err }, null)
         else
-            return res(null, {msj:'Se pudo registrar la denuncia'})
+            return res(null, { msj: 'Se pudo registrar la denuncia' })
     })
 }
 /*idP es el id del producto
@@ -185,11 +185,11 @@ Producto.denuncia = (idP, idU, res) => {
     //este obtiene datos del comprador que esta denunciando
     let obtenerUsuario = `select idUsuario, nombre, apellido, correo from usuario where idUsuario = ${idU}`
     conexion.query(obtenerQuery, (err, obj1) => {
-        if(err)
+        if (err)
             return res(err, null)
         else
             conexion.query(obtenerUsuario, (err, obj2) => {
-                if(err)
+                if (err)
                     return res(err, null)
                 else
                     return res(null, [obj1[0], obj2[0]])
@@ -198,13 +198,13 @@ Producto.denuncia = (idP, idU, res) => {
 }
 
 Producto.subirImagen = (req, res) => {
-    let {idProducto, imagen } = req.body;
+    let { idProducto, imagen } = req.body;
     let query = `INSERT INTO foto (idProducto, imagen) VALUES (${idProducto}, '${imagen}');`
-    conexion.query( query, (err, data) => {
-        if(err)
-            return res({msj:err}, null)
+    conexion.query(query, (err, data) => {
+        if (err)
+            return res({ msj: err }, null)
         else
-            return res(null, {msj:'Imagen subida correctamente'})
+            return res(null, { msj: 'Imagen subida correctamente' })
     })
 }
 
@@ -212,14 +212,14 @@ Producto.obtenerImagenes = (idProducto, res) => {
     let query = `SELECT imagen FROM foto WHERE idProducto = ${idProducto}`
     conexion.query(query, (err, data) => {
 
-        if(err)
-            return res({msj:err}, null)
+        if (err)
+            return res({ msj: err }, null)
         else {
             data = data.map(imagen => {
                 imagen.imagen = imagen.imagen?.toString('ascii')
                 return imagen
             });
-            
+
             return res(null, data)
 
         }
@@ -231,54 +231,54 @@ Producto.calificar = (idProducto, idUsuario, calificacion, res) => {
     let buscarCalificacion = `SELECT * FROM calificacion WHERE idProducto = ${idProducto} AND idUsuario = ${idUsuario}`;
 
     conexion.query(buscarCalificacion, (err, rowsCalificacion) => {
-        if(err) throw err;
-        if(rowsCalificacion.length) {
+        if (err) throw err;
+        if (rowsCalificacion.length) {
             // Actualizar la calificación
             let queryUpdate = `UPDATE calificacion SET calificacion = ${calificacion} WHERE idProducto = ${idProducto} AND idUsuario = ${idUsuario}`;
             conexion.query(queryUpdate, (err, data) => {
-                if(err) throw err;
-                return res(null, {msj:'Calificación actualizada'})
+                if (err) throw err;
+                return res(null, { msj: 'Calificación actualizada' })
             })
-        }else {
+        } else {
             conexion.query(query, (err, data) => {
-                if(err)
-                    return res({msj:err}, null)
+                if (err)
+                    return res({ msj: err }, null)
                 else
-                    return res(null, {msj:'Calificacion registrada correctamente'})
+                    return res(null, { msj: 'Calificacion registrada correctamente' })
             })
         }
     })
 
 }
-Producto.obtenerDenuncias = (res)=>{
+Producto.obtenerDenuncias = (res) => {
     let obtener = `select * from denuncias;`
-    conexion.query(obtener,(error, rows)=>{
-        if(error) return res(error,null)
-        if(rows.length){
-            return res(null,rows)
+    conexion.query(obtener, (error, rows) => {
+        if (error) return res(error, null)
+        if (rows.length) {
+            return res(null, rows)
         }
         return res(null, [])
 
     })
 }
 
-Producto.eliminarDenuncia = (id, res)=>{
+Producto.eliminarDenuncia = (id, res) => {
     let eliminarD = `delete from denuncias where idDenuncia = ${id};`
-    conexion.query(eliminarD, (err, resultado)=>{
-        if(err) return res(err, null)
-        return res(null,{msj:'Denuncia eliminada'})
+    conexion.query(eliminarD, (err, resultado) => {
+        if (err) return res(err, null)
+        return res(null, { msj: 'Denuncia eliminada' })
     })
 }
 
 Producto.obtenerCalificacionUsuario = (idProducto, idUsuario, res) => {
     let query = `SELECT calificacion FROM calificacion WHERE idProducto = ${idProducto} AND idUsuario = ${idUsuario}`
     conexion.query(query, (err, data) => {
-        if(err)
-            return res({msj:err}, null)
+        if (err)
+            return res({ msj: err }, null)
         else {
-            if(data.length) {
+            if (data.length) {
                 return res(null, data[0].calificacion)
-            }else {
+            } else {
                 return res(null, 0)
             }
         }
@@ -290,12 +290,12 @@ Producto.obtenerCalificacionProducto = (idProducto, res) => {
     // Consulta para obtener el promedio de calificaciones de un producto
     let query = `SELECT AVG(calificacion) AS promedio FROM calificacion WHERE idProducto = ${idProducto}`;
     conexion.query(query, (err, data) => {
-        if(err)
-            return res({msj:err}, null)
+        if (err)
+            return res({ msj: err }, null)
         else {
-            if(data.length) {
+            if (data.length) {
                 return res(null, data[0].promedio)
-            }else {
+            } else {
                 return res(null, 0)
             }
         }
@@ -303,13 +303,18 @@ Producto.obtenerCalificacionProducto = (idProducto, res) => {
 }
 
 /*--------------Funciones para las listas-----------------*/
+<<<<<<< HEAD
+Producto.aniadirFavoritos = (idU, idP, resultado) => {
+    let aniadirQuery = `insert into listas (idUsuario, idProducto, tipoLista) values (${idU}, ${idP}, 'favoritos')`
+=======
 Producto.aniadirFavoritos = (idUsuario, idProducto, resultado) => {
 let aniadirQuery = `insert into listas (idUsuario, idProducto, tipoLista) values (${idUsuario}, ${idProducto}, 'favoritos')`
+>>>>>>> c068ddc4693c3453d97ef0f5cad613b9fbdc6930
     conexion.query(aniadirQuery, (err, rows) => {
-        if (err) 
+        if (err)
             return resultado({ msj: 'El producto no se pudo aniadir a favoritos' + err }, null)
         else
-            return resultado(null, { msj: 'El producto fue aniadido a favoritos'})
+            return resultado(null, { msj: 'El producto fue aniadido a favoritos' })
     })
 }
 
@@ -317,7 +322,11 @@ Producto.obtenerFavoritos = (idUsuario, resultado) => {
     let obtenerQuery = `select producto.idProducto, producto.idCategoria, producto.nombre, producto.costo, producto.estado, producto.descripcion, producto.ubicacion, producto.imagen 
                         from listas inner join producto on listas.idProducto = producto.idProducto where listas.idUsuario = ${idUsuario} AND listas.tipoLista = 'favoritos'`
     conexion.query(obtenerQuery, (err, rows) => {
+<<<<<<< HEAD
+        if (err)
+=======
         /*if(err)
+>>>>>>> c068ddc4693c3453d97ef0f5cad613b9fbdc6930
             return resultado(err, null)
         else
             return resultado(null, rows)*/
@@ -332,58 +341,65 @@ Producto.obtenerFavoritos = (idUsuario, resultado) => {
 Producto.eliminarFavorito = (idUsuario, idProducto, resultado) => {
     let eliminarQuery = `delete from listas where idUsuario = ${idUsuario} AND idProducto = ${idProducto};`
     conexion.query(eliminarQuery, (err, rows) => {
+<<<<<<< HEAD
+        if (err)
+            return resultado({ msj: 'El producto no se eliminar de favoritos' + err }, null)
+        else
+            return resultado(null, { msj: 'El producto fue eliminado de favoritos' })
+=======
         if (err) 
             return resultado({ msj: 'El producto no se pudo eliminar de favoritos' + err }, null)
         else if (rows.affectedRows == 0)
             return resultado({ msj: 'Este usuario no tiene permiso de borrar el producto de favoritos' }, null)
         else
             return resultado(null, { msj: 'El producto fue eliminado de la lista de favoritos'})
+>>>>>>> c068ddc4693c3453d97ef0f5cad613b9fbdc6930
     })
 }
 
 /*-----------------Anuncios----------------*/
 Producto.crearAnuncios = async (resultado) => {
     conexion.query('delete from anuncio', (err, res) => {
-        if(err)
+        if (err)
             return resultado({ msj: 'No se puediron eliminar los datos de la tabla anuncio' + err }, null)
         else
             conexion.query('select * from producto order by contador desc limit 10', (err, productos) => {
                 console.log(productos)
-                if(err)
+                if (err)
                     return resultado({ msj: 'No se puediron seleccionar los datos de la tabla anuncio' + err }, null)
                 else
-                    conexion.query( 'insert into anuncio values ?',
-                                    [productos.map(producto => [producto.idProducto, producto.idCategoria, producto.nombre, producto.descripcion, producto.costo, producto.idUsuario, producto.imagen])],
-                                    (err, res) => {
-                                        if(err)
-                                            return resultado({ msj: 'No se puediron crear los anuncios nuevos' + err }, null)
-                                        else
-                                            return resultado(null, { msj: 'Se crearon los anuncios exitosamete en la bd'})
-                    })
+                    conexion.query('insert into anuncio values ?',
+                        [productos.map(producto => [producto.idProducto, producto.idCategoria, producto.nombre, producto.descripcion, producto.costo, producto.idUsuario, producto.imagen])],
+                        (err, res) => {
+                            if (err)
+                                return resultado({ msj: 'No se puediron crear los anuncios nuevos' + err }, null)
+                            else
+                                return resultado(null, { msj: 'Se crearon los anuncios exitosamete en la bd' })
+                        })
             })
-    }) 
+    })
 }
 
 Producto.obtenerAnuncios = (resultado) => {
     conexion.query('select * from anuncio', (err, rows) => {
-        if(err) throw err;
+        if (err) throw err;
         rows = rows.map(anuncio => {
             anuncio.imagen = anuncio.imagen?.toString('ascii')
             return anuncio;
-        } )
+        })
         resultado(null, rows);
     })
 }
 
-Producto.eliminarAnuncioPorDuenio = (idP, idU, resultado) => {
-    let eliminarQuery = `delete from anuncio where idProducto = ${idP} AND idUsuario = ${idU}`
+Producto.eliminarAnuncioPorDuenio = (idProducto, idUsuario, resultado) => {
+    let eliminarQuery = `delete from anuncio where idProducto = ${idProducto} AND idUsuario = ${idUsuario};`
     conexion.query(eliminarQuery, (err, rows) => {
-        if (err) 
+        if (err)
             return resultado({ msj: 'El anuncio no se pudo eliminar' + err }, null)
         else if (rows.affectedRows == 0)
             return resultado({ msj: 'Este usuario no tiene permiso de borrar el anuncio' }, null)
         else
-            return resultado(null, { msj: 'El producto fue eliminado de los anuncios'})
+            return resultado(null, { msj: 'El producto fue eliminado de los anuncios' })
     })
 }
 

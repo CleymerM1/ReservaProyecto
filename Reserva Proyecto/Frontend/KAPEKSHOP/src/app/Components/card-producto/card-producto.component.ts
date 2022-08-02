@@ -33,8 +33,7 @@ export class CardProductoComponent implements OnInit {
   producto: any = []
 
 
-  constructor(private productoService: ProductosService, private usuarioService: UsuarioService, private modalService: NgbModal, private route: ActivatedRoute, 
-    private categoriasService: CategoriasService) {
+  constructor(private productoService: ProductosService, private usuarioService: UsuarioService, private modalService: NgbModal, private route: ActivatedRoute) {
     this.idUsuario = this.route.snapshot.params["id"];
     this.idProducto = this.route.snapshot.params["id"];
   }
@@ -42,6 +41,7 @@ export class CardProductoComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerCalificacionProducto();
     this.obtenerUsuarioActual()
+
   }
 
   mostrarProducto() {
@@ -113,7 +113,6 @@ export class CardProductoComponent implements OnInit {
       console.log(err)
     })
   }
-
   obtenerUsuarioActual() {
 
     this.usuarioService.obtenerUsuarioActual().subscribe((res: any) => {
@@ -145,7 +144,6 @@ export class CardProductoComponent implements OnInit {
       console.log(err)
     })
   }
-
   eliminarFavorito(event: any) {
     const idProducto = event
     this.productoService.eliminarFavorito(this.usuarioActual.idUsuario, idProducto).subscribe(() => {

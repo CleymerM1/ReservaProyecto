@@ -91,6 +91,24 @@ export class ProductosService {
     let url = `http://localhost:3000/producto/denuncia/eliminar/${id}`;
     return this.http.delete(url)
   }
+  
+
+  obtenerDiezProductosMasVisitados(): Observable<any>{
+    let url = `http://localhost:3000/producto/obtenerProductosMasVistos/`;
+    return this.http.get(url)
+  }
+
+
+  obtenerAnuncios(): Observable<any>{
+    let url = `http://localhost:3000/producto/obtenerAnuncios/`;
+    return this.http.get(url)
+  }
+
+  eliminarAnuncio(idProducto:any, idUsuario:any): Observable<any>{
+    let url=`http://localhost:3000/producto/eliminarAnuncio/${idProducto}/${idUsuario}}`;
+    return this.http.delete(url)
+  }
+
 
   aniadirFavoritos(idUsuario: any, idProducto: any): Observable<any> {
     let url = `http://localhost:3000/producto/aniadirDeseos/`;

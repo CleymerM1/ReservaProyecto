@@ -49,7 +49,8 @@ exports.obtenerProductos = (req,res)=>{
 };
 
 exports.actualizarContador = (req,res)=>{
-    Producto.actualizarContador((error,data)=>{
+    let id = req.params.id
+    Producto.actualizarContador(id,(error,data)=>{
         if(error){
             res.status(404).json({msj: 'Hubo un problema al actualizar el contador' + error})
         }else{
@@ -295,6 +296,8 @@ exports.crearAnuncios = (req, res) => {
 
 exports.obtenerAnuncios = (req, res) => {
     Producto.obtenerAnuncios((err, data) => {
+        console.log("Esta llegando")
+
         if(err)
             return res.status(404).send({msj: err.msj || 'Error al buscar en la base d datos'})
         else if(data.error)
@@ -305,9 +308,9 @@ exports.obtenerAnuncios = (req, res) => {
 }
 
 exports.eliminarAnuncio = (req, res) => {
-    let idU = req.params.idUsuario
-    let idP = req.params.idProducto
-    Producto.eliminarAnuncioPorDuenio(idP, idU, (err, data) => {
+    let idProducto = req.params.idProducto
+    let idUsuario = req.params.idUsuario
+    Producto.eliminarAnuncioPorDuenio(idProducto, idUsuario, (err, data) => {
         if(err) 
             return res.status(500).send({msj:err})
         else

@@ -18,5 +18,10 @@ export class MensajeService{
         let urlStr = `http://localhost:3000/mensaje/obtenerMensajes/${emisor_id}/${receptor_id}`
           return this.http.get(urlStr)
     }
+    
+    obtenerConversaciones(emisor_id:any): Observable<any>{
+        let url = `http://localhost:3000/mensaje/conversaciones/${emisor_id}`;
+        return this.http.get(url)
+    }
 
 }

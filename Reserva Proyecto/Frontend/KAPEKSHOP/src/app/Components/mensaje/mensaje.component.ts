@@ -17,8 +17,10 @@ export class MensajeComponent implements OnInit {
   usuarioActual:any;
   idUsuarioChat:any;
   usuarioChat:any;
+  usuariosConversacion:any=[]
   receptor_seleccionado: Usuario |undefined;
-  mensajes:any=[]
+  mensajes:any=[];
+  conversaciones:any=[];
 
   constructor(private route: ActivatedRoute,private usuarioService: UsuarioService, private mensajeService: MensajeService) {
 
@@ -27,8 +29,8 @@ export class MensajeComponent implements OnInit {
   ngOnInit(): void {
     this.idUsuarioChat = parseInt(this.route.snapshot.paramMap.get('idUsuario') || "")
     this.obtenerUsuarioActual()
-    //this.obtenerMensajes()
-    //this.obtenerUsuarioChat()
+    this.obtenerConversaciones()
+    
   }
 
   enviarMensaje(){
@@ -46,7 +48,7 @@ export class MensajeComponent implements OnInit {
       console.log(err)
     })
     this.nuevoMensaje=" ";
-    //obtenerMensajes
+    
     setTimeout(()=>{
       this.mensajesScrollFinal();
     },30);
@@ -55,8 +57,7 @@ export class MensajeComponent implements OnInit {
 
   seleccionarDestinatario(event:any){
     this.receptor_seleccionado= event;
-    //this.receptor_seleccionado = this.idUsuarioChat;
-    //MANDAMOS A LLAMAR LOS MENSAJES YA QUE AQUÍ ES CUANDO ABRIMOS EL CHAT CON 'X' USUARIO
+    
     console.log(this.receptor_seleccionado?.idUsuario)
     this.chat_activo = true;
 
@@ -64,7 +65,7 @@ export class MensajeComponent implements OnInit {
       this.mensajes = res
       console.log(res)
     })
-    //console.log(event.idUsuario)
+    
   }
 
   obtenerUsuarioActual(){
@@ -73,6 +74,7 @@ export class MensajeComponent implements OnInit {
       console.log(res)
       this.obtenerMensajes()
       this.obtenerUsuarioChat()
+      this.obtenerConversaciones()
     })
   }
 
@@ -107,6 +109,35 @@ export class MensajeComponent implements OnInit {
       console.log(err)
     })
   }
+
+  //obtengo las conversaciones
+  obtenerConversaciones(){
+    this.mensajeService.obtenerConversaciones(this.usuarioActual.idUsuario).subscribe(res=>{
+      this.conversaciones = res;
+      
+      
+      for(let i=0;i<res.length;i++){
+        console.log(res[i])
+        if((res[i].usuario1_id != this.usuarioActual.idUsuario)){
+          this.usuarioService.obtenerUsuarioPorId(res[i].usuario1_id).subscribe(res=>{
+            this.usuariosConversacion.push(res[0]); 
+          })
+          console.log('usuario1 difrente')
+        }else{
+          this.usuarioService.obtenerUsuarioPorId(res[i].usuario2_id).subscribe(res=>{
+            this.usuariosConversacion.push(res[0]);  
+          })
+          console.log('usuario2 diferente')
+        }
+      }
+      console.log(this.usuariosConversacion)
+
+    })
+
+  }
+  
+  
 }
+
 
 
