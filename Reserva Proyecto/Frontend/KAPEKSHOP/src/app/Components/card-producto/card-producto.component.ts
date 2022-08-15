@@ -154,6 +154,7 @@ export class CardProductoComponent implements OnInit {
     })
   }
 
+  
   filtrarProductos(){
 
   }

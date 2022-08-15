@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import leerToken from 'src/app/helpers/decodificarToken';
-import {AuthService} from 'src/app/auth/auth.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import { ProductosService } from 'src/app/Services/productos.service';
@@ -14,23 +14,24 @@ import { Producto } from 'src/app/models/producto';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() urlItemActual:string = "/";
+  @Input() urlItemActual: string = "/";
   @Output() onClickBurguer = new EventEmitter<boolean>()
+  @Output () 
 
 
-  usuarioActual:any;
-  token:any = leerToken();
+  usuarioActual: any;
+  token: any = leerToken();
   busqueda: string = '';
-  productos: any = [];
-  
-  constructor(private authService: AuthService,private router: Router, private usuarioService: UsuarioService, private productoService: ProductosService) { }
+  productosFiltrados: any = [];
 
-  cerrar(){
+  constructor(private authService: AuthService, private router: Router, private usuarioService: UsuarioService, private productoService: ProductosService) { }
+
+  cerrar() {
     this.authService.cerrarSesion();
     this.router.navigateByUrl('/inicio')
   }
-  
-  mensaje(){
+
+  mensaje() {
     this.router.navigateByUrl('/usuario/chat');
   }
 
@@ -42,26 +43,26 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.token);
 
-    if(this.token?.correo){
-      this.usuarioService.getUsuario(this.token.correo).subscribe((res:any)=>{
-        this.usuarioActual=res;
+    if (this.token?.correo) {
+      this.usuarioService.getUsuario(this.token.correo).subscribe((res: any) => {
+        this.usuarioActual = res;
         console.log(res)
       })
     }
   }
 
-  comprobarUsuarioAdmin(){
-    if(this.usuarioActual && this.usuarioActual.idRol==3) {
+  comprobarUsuarioAdmin() {
+    if (this.usuarioActual && this.usuarioActual.idRol == 3) {
       return true
-    }else{
+    } else {
       return false
     }
   }
 
-  comprobarUsuario(){
-    if(this.usuarioActual) {
+  comprobarUsuario() {
+    if (this.usuarioActual) {
       return true
-    }else{
+    } else {
       return false
     }
   }
@@ -74,13 +75,16 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  modalBuscar(){
-    this.productoService.getProductos().subscribe(data =>{
-      console.log(data);
-      this.productos = data;
+  modalBuscar() {
+    let busq = this.busqueda.toLowerCase()
+    this.productoService.getProductos().subscribe(data => {
+      console.log(data)
+      // this.productoService.filtrarProductos('busq', this.busqueda, productos);
+      const data1 = data.filter((el: any) =>
+        JSON.parse(el.nombre.toLowerCase().indexOf(busq)) > -1)
+      console.log(data1)
+      this.productosFiltrados= data1
     })
-
-    this.productoService.filtrarProductos(this.busqueda, 'busq', this.productos);
   }
 
 

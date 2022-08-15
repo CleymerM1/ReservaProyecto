@@ -1,10 +1,18 @@
-<app-header></app-header>
+<form action="" method="get" class="modal-content modal-body border-0 p-0">
+    <div class="input-group mb-2">
+        <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="¿Qué estás buscando?" [(ngModel)]="busqueda">
+        <button type="submit" class="input-group-text bg-success text-light" (click)="modalBuscar()">
+            <i class="fa fa-fw fa-search text-white"></i>
+        </button>
+    </div>
+</form>
+
 <mat-card class="obtener-anuncios">
     <div class="col-12 float-start" >
         <div class="container py-5">
             <div class="row text-align-left py-1">
                     <div class="row ">  
-                    <div *ngFor=" let producto of productos" class="col-4 mt-4">
+                    <div *ngFor=" let producto of productosFiltrados" class="col-4 mt-4">
                         <mat-card class="card-producto" >
                             <mat-card-header>
                                 <div mat-card-avatar class="example-header-image"></div>
@@ -19,15 +27,9 @@
                                     Precio: {{formatoDinero(producto?.costo)}}
                                 </p>
 
-                                <div>
-                                    <ul class="list-unstyled d-flex justify-content-between">
-                                        <li>
-                                            <i style="cursor: pointer;" *ngFor="let estrella of estrellas; index as i"
-                                                [class]="estrella"></i>
-                                        </li>
-                                    </ul>
-                                </div>
+                               
                             </mat-card-content>
                     
               
             
+

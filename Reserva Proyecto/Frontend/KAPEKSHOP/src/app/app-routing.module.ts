@@ -20,6 +20,7 @@ import { FormDenunciaComponent } from './Components/form-denuncia/form-denuncia.
 import { ListaDeDeseosComponent } from './Components/lista-de-deseos/lista-de-deseos.component';
 import { AnunciosComponent } from './Components/admin/anuncios/anuncios.component';
 import { MensajeComponent } from './Components/mensaje/mensaje.component';
+import { BuscarProductoComponent } from './Components/buscar-producto/buscar-producto.component';
 
 //componentes
 const routes: Routes = [
@@ -43,7 +44,9 @@ const routes: Routes = [
   { path: 'form-denuncia/:id', component: FormDenunciaComponent },
   { path: 'producto/lista-de-deseos/:id', component: ListaDeDeseosComponent, canActivate: [AuthGuard] },
   {path: 'usuario/chat/:idUsuario',component: MensajeComponent},
-  
+ 
+  { path: 'buscarProducto', component: BuscarProductoComponent },
+ 
   { path: '**', redirectTo: '', pathMatch: 'full' },
 
   { path: '', component: LandingComponent },

@@ -101,6 +101,9 @@ exports.filtrarProductos = (req, res) => {
     let value1 = req.params.value1
     let producto = req.body
     let data;
+    console.log(producto)
+    console.log(value1, "Valores")
+    console.log(filter, "Los filtros")
     if(!filter || !value1)
         return console.log('hay parametros vacios')
     else
@@ -117,6 +120,7 @@ exports.filtrarProductos = (req, res) => {
                 data = producto.filter(el => el.costo <= value1)
             case 'busq':
                 console.log("Hola")
+                data = producto.filter(el => el.nombre.toLowerCase().indexOf(value1) > -1)
         }
         return res.json(data)
 }
@@ -298,7 +302,7 @@ exports.crearAnuncios = (req, res) => {
 
 exports.obtenerAnuncios = (req, res) => {
     Producto.obtenerAnuncios((err, data) => {
-        console.log("Esta llegando")
+        console.log("Esta llegando Filtro")
 
         if(err)
             return res.status(404).send({msj: err.msj || 'Error al buscar en la base d datos'})

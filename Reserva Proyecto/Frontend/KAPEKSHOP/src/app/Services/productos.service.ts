@@ -39,7 +39,12 @@ export class ProductosService {
     let url = `http://localhost:3000/producto/${id}`;
     return this.http.get(url);
   }
-  filtrarProductos(filtro: string, valor: string, objProductos: any): Observable<any> {
+
+
+  filtrarProductos(filtro: any, valor: any, objProductos: any): Observable<any> {
+    console.log(objProductos)
+    console.log(filtro)
+    console.log(valor)
     let url = `http://localhost:3000/producto/${filtro}/${valor}`;
     return this.http.get(url, objProductos);
   }

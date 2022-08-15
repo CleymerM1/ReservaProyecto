@@ -49,19 +49,13 @@
 
                 </ul>
             </div>
-            <div class="navbar align-self-center d-flex">
-                <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                        <div class="input-group-text">
-                            <i class="fa fa-fw fa-search"></i>
-                        </div>
-                    </div>
-                </div>
+            <a style="cursor: pointer; margin-right: 7px;"
+            routerLink="/buscarProducto"><i class="fa fa-fw fa-search text-dark mr-2"></i></a>
+            <!--
                 <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal"
                     data-bs-target="#templatemo_search">
                     <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                </a>
+                </a>-->
                 <svg routerLink="/producto/lista-de-deseos/{{usuarioActual.idUsuario}}" style="cursor: pointer;"
                     xmlns="http://www.w3.org/2000/svg" matTooltip="Mis favoritos" width="21" height="21"
                     viewBox="0 0 576 512">
@@ -83,14 +77,14 @@
                     <span
                         class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
                 </a>
+               
             </div>
         </div>
 
-    </div>
 </nav>
 <!-- Fin Header -->
 
-<!-- Modal -->
+<!-- Modal 
 <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -107,3 +101,4 @@
         </form>
     </div>
 </div>
+-->

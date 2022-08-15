@@ -62,7 +62,6 @@ import { ModalConfirmacionComponent } from './Components/modal-confirmacion/moda
 import { actualizarProductoComponent } from './Components/actualizar-producto/actualizar-producto.component';
 import { DetalleDeProductoComponent } from './Components/detalle-de-producto/detalle-de-producto.component';
 
-
  
 //import { ProductoComponent } from './Components/producto/producto.component';
 import { PaginadorComponent } from './Components/paginador/paginador.component';
@@ -76,6 +75,7 @@ import { ListaDeDeseosComponent } from './Components/lista-de-deseos/lista-de-de
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MensajeComponent } from './Components/mensaje/mensaje.component';
 import { BuscarComponent } from './Components/buscar/buscar.component';
+import { BuscarProductoComponent } from './Components/buscar-producto/buscar-producto.component';
 
 
 @NgModule({
@@ -139,7 +139,8 @@ import { BuscarComponent } from './Components/buscar/buscar.component';
     CarouselComponent,
     ListaDeDeseosComponent,
     MensajeComponent,
-    BuscarComponent
+    BuscarComponent,
+    BuscarProductoComponent
     
     
   ],
@@ -167,6 +168,7 @@ import { BuscarComponent } from './Components/buscar/buscar.component';
     MatPaginatorModule,
     NgbCarouselModule,
     MatAutocompleteModule
+    
     
 
   ],

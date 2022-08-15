@@ -34,6 +34,9 @@ export class AnunciosComponent implements OnInit {
   productoActual: any;
   usuarioActual: any = [];
   AgregadoALista: boolean = false;
+  busqueda: string = '';
+  productosFiltrados: any = [];
+
 
   @Input() imagenes: any = []
   mostarFormulario: boolean | undefined;
@@ -219,6 +222,18 @@ export class AnunciosComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  modalBuscar() {
+    let busq = this.busqueda.toLowerCase()
+    this.productosService.getProductos().subscribe(data => {
+      console.log(data)
+      // this.productoService.filtrarProductos('busq', this.busqueda, productos);
+      const data1 = data.filter((el: any) =>
+        JSON.parse(el.nombre.toLowerCase().indexOf(busq)) > -1)
+      console.log(data1)
+      this.productosFiltrados= data1
+    })
   }
 
 
