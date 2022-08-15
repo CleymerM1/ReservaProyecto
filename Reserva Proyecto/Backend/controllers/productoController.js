@@ -119,10 +119,9 @@ exports.filtrarProductos = (req, res) => {
             case 'precMenos':
                 data = producto.filter(el => el.costo <= value1)
             case 'busq':
-                console.log("Hola")
-                data = producto.filter(el => el.nombre.toLowerCase().indexOf(value1) > -1)
+                data = producto.filter(el => el.nombre.ubicacion.toLowerCase().indexOf(value1) > -1)
         }
-        return res.json(data)
+        return res.json(data,)
 }
 
 /*-------------Actualizar por id-------------*/

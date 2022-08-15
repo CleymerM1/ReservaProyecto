@@ -1,35 +1,42 @@
+<app-header>?</app-header>
+<div class="container mt-5 ">
 <form action="" method="get" class="modal-content modal-body border-0 p-0">
-    <div class="input-group mb-2">
-        <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="¿Qué estás buscando?" [(ngModel)]="busqueda">
+    <div class="input-group">
+        <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="¿Qué estás buscando?"
+            [(ngModel)]="busqueda">
         <button type="submit" class="input-group-text bg-success text-light" (click)="modalBuscar()">
             <i class="fa fa-fw fa-search text-white"></i>
         </button>
     </div>
 </form>
+</div>
 
-<mat-card class="obtener-anuncios">
-    <div class="col-12 float-start" >
-        <div class="container py-5">
-            <div class="row text-align-left py-1">
-                    <div class="row ">  
-                    <div *ngFor=" let producto of productosFiltrados" class="col-4 mt-4">
-                        <mat-card class="card-producto" >
-                            <mat-card-header>
-                                <div mat-card-avatar class="example-header-image"></div>
-                                <mat-card-title>{{producto?.nombre}}</mat-card-title>
-                            </mat-card-header>
-                            <img height="200" mat-card-image src="{{producto?.imagen}}" alt="Photo of a Shiba Inu">
-                            <mat-card-content>
-                                <p class="descripcion">
-                                    {{producto?.descripcion}}
-                                </p>
-                                <p class="precio">
-                                    Precio: {{formatoDinero(producto?.costo)}}
-                                </p>
 
-                               
-                            </mat-card-content>
-                    
-              
-            
+<div class="col-12 float-start">
+    <div class="container py-5">
+        <div class="row text-align-left py-1">
+            <div class="row ">
+                <div *ngFor=" let producto of productosFiltrados" class="col-4 mt-4">
+                    <mat-card class="card-producto">
+                        <mat-card-header>
+                            <div mat-card-avatar class="example-header-image"></div>
+                            <mat-card-title>{{producto?.nombre}}</mat-card-title>
+                        </mat-card-header>
+                        <img height="200" mat-card-image src="{{producto?.imagen}}" alt="Photo of a Shiba Inu">
+                        <mat-card-content>
+                            <p class="descripcion">
+                                {{producto?.descripcion}}
+                            </p>
+                            <p class="precio">
+                                Precio: {{formatoDinero(producto?.costo)}}
+                            </p>
+                        </mat-card-content>
 
+                        <button routerLink="/producto/detalle/{{producto.idProducto}}" mat-stroked-button
+                            color="warn">Ver detalles </button>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

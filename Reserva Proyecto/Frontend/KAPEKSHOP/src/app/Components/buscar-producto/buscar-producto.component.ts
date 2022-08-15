@@ -25,12 +25,15 @@ export class BuscarProductoComponent implements OnInit {
   modalBuscar() {
     let busq = this.busqueda.toLowerCase()
     this.productoService.getProductos().subscribe(data => {
-      console.log(data)
-      // this.productoService.filtrarProductos('busq', this.busqueda, productos);
       const data1 = data.filter((el: any) =>
         JSON.parse(el.nombre.toLowerCase().indexOf(busq)) > -1)
       console.log(data1)
       this.productosFiltrados= data1
+      
+      const data2 = data.filter((el: any) =>
+      JSON.parse(el.ubicacion.toLowerCase().indexOf(busq)) > -1)
+      console.log(data2)
+      this.productosFiltrados = data2
     })
   }
 
