@@ -97,62 +97,13 @@ export class DetalleDeProductoComponent implements OnInit {
     reader.onerror = error => reject(error);
   });
 
-<<<<<<< HEAD
-mostrarCategoria(){
-  this.router.navigateByUrl(`categorias/${this.producto.idCategoria}`)
-}
-formatoDinero(cantidad:any){
-  return formatearDinero(cantidad)
-}
-
-
-mostrarProductos(){
-  this.mostarFormulario=false
-  this.productosService.obtenerProductoActual(this.productoActual.idProducto).subscribe((res:any)=>{
-    console.log(res)
-  }, (err:any)=>{
-    
-  })
-}
-
-
-denuncia(){
-  this.ruta= `form-denuncia/${this.idProducto}`;
-  this.router.navigateByUrl(this.ruta);
-}
-calificarProducto(calificacion:number) {
-  let token = decodificarToken();
-  if(!token) return;
-  let idUsuario = token.idUsuario;
-
-  this.productosService.actualizarCalificacion(this.producto.idProducto, idUsuario, calificacion).subscribe((res:any)=>{
-    console.log(res)
-    this.calificacion = calificacion
-    this.estrellas = this.generarEstrellas(calificacion)
-  }, err => {
-    console.log(err)
-  })
-}
-
-obtenerCalificacionProducto() {
-  let token = decodificarToken();
-  if(!token) return;
-  let idUsuario = token.idUsuario;
-
-  this.productosService.obtenerCalificacionUsuarioProducto(this.producto.idProducto, idUsuario).subscribe((res:any)=>{
-    console.log(res)
-    this.calificacion = res
-    this.estrellas = this.generarEstrellas(this.calificacion)
-  }, err => {
-    console.log(err)
-=======
   mostrarCategoria() {
     this.router.navigateByUrl(`categorias/${this.producto.idCategoria}`)
->>>>>>> c068ddc4693c3453d97ef0f5cad613b9fbdc6930
   }
   formatoDinero(cantidad: any) {
     return formatearDinero(cantidad)
   }
+
 
   mostrarProductos() {
     this.mostarFormulario = false
@@ -162,7 +113,8 @@ obtenerCalificacionProducto() {
 
     })
   }
-  
+
+
   denuncia() {
     this.ruta = `form-denuncia/${this.idProducto}`;
     this.router.navigateByUrl(this.ruta);
@@ -192,8 +144,7 @@ obtenerCalificacionProducto() {
       this.estrellas = this.generarEstrellas(this.calificacion)
     }, err => {
       console.log(err)
-    }
-    )
+    })
   }
 
   generarEstrellas(rango: number) {
@@ -239,12 +190,12 @@ obtenerCalificacionProducto() {
     }
 
   }
-  
-  mensaje(idUsuario:any){
-  console.log(idUsuario);
-  this.router.navigateByUrl(`/usuario/chat/${idUsuario}`);
-  
-}
+
+  mensaje(idUsuario: any) {
+    console.log(idUsuario);
+    this.router.navigateByUrl(`/usuario/chat/${idUsuario}`);
+
+  }
 
   aniadirFavoritos() {
     this.productosService.aniadirFavoritos(this.usuarioActual.idUsuario, this.producto.idProducto).subscribe((res: any) => {

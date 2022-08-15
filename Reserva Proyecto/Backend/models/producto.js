@@ -41,6 +41,7 @@ Producto.obtenerTodos = (resultado) => {
         resultado(null, rows);
     });
 };
+
 /*--------------------Funciones de Busqueda--------------------*/
 Producto.obtenerPorId = (id, resultado) => {
     let obtenerQuery = `select * from producto where idProducto = ${id}`
@@ -91,6 +92,7 @@ Producto.obtenerPorCosto = (inter1, inter2, resultado) => {
             return resultado({ msj: 'Productos no encontrado' }, null)
     })
 }
+
 /*-------------------------------------------------------------*/
 
 /*-------Actualizar por id------*/
@@ -303,13 +305,8 @@ Producto.obtenerCalificacionProducto = (idProducto, res) => {
 }
 
 /*--------------Funciones para las listas-----------------*/
-<<<<<<< HEAD
 Producto.aniadirFavoritos = (idU, idP, resultado) => {
     let aniadirQuery = `insert into listas (idUsuario, idProducto, tipoLista) values (${idU}, ${idP}, 'favoritos')`
-=======
-Producto.aniadirFavoritos = (idUsuario, idProducto, resultado) => {
-let aniadirQuery = `insert into listas (idUsuario, idProducto, tipoLista) values (${idUsuario}, ${idProducto}, 'favoritos')`
->>>>>>> c068ddc4693c3453d97ef0f5cad613b9fbdc6930
     conexion.query(aniadirQuery, (err, rows) => {
         if (err)
             return resultado({ msj: 'El producto no se pudo aniadir a favoritos' + err }, null)
@@ -322,14 +319,10 @@ Producto.obtenerFavoritos = (idUsuario, resultado) => {
     let obtenerQuery = `select producto.idProducto, producto.idCategoria, producto.nombre, producto.costo, producto.estado, producto.descripcion, producto.ubicacion, producto.imagen 
                         from listas inner join producto on listas.idProducto = producto.idProducto where listas.idUsuario = ${idUsuario} AND listas.tipoLista = 'favoritos'`
     conexion.query(obtenerQuery, (err, rows) => {
-<<<<<<< HEAD
         if (err)
-=======
-        /*if(err)
->>>>>>> c068ddc4693c3453d97ef0f5cad613b9fbdc6930
             return resultado(err, null)
         else
-            return resultado(null, rows)*/
+            return resultado(null, rows)
         if(err) throw err;
         rows = rows.map(favorito => {
             favorito.imagen = favorito.imagen?.toString('ascii')
@@ -341,19 +334,10 @@ Producto.obtenerFavoritos = (idUsuario, resultado) => {
 Producto.eliminarFavorito = (idUsuario, idProducto, resultado) => {
     let eliminarQuery = `delete from listas where idUsuario = ${idUsuario} AND idProducto = ${idProducto};`
     conexion.query(eliminarQuery, (err, rows) => {
-<<<<<<< HEAD
         if (err)
             return resultado({ msj: 'El producto no se eliminar de favoritos' + err }, null)
         else
             return resultado(null, { msj: 'El producto fue eliminado de favoritos' })
-=======
-        if (err) 
-            return resultado({ msj: 'El producto no se pudo eliminar de favoritos' + err }, null)
-        else if (rows.affectedRows == 0)
-            return resultado({ msj: 'Este usuario no tiene permiso de borrar el producto de favoritos' }, null)
-        else
-            return resultado(null, { msj: 'El producto fue eliminado de la lista de favoritos'})
->>>>>>> c068ddc4693c3453d97ef0f5cad613b9fbdc6930
     })
 }
 

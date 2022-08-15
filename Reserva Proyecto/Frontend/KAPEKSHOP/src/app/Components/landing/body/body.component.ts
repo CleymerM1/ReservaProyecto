@@ -9,7 +9,6 @@ import { ListarProductosComponent } from 'src/app//Components/listar-productos/l
 import { Route } from '@angular/router';
 import decodificarToken from 'src/app/helpers/decodificarToken';
 import formatearDinero from 'src/app/helpers/formatoMoneda';
-import { ListaDeseosService } from 'src/app/Services/lista-de-deseos.services';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConfirmacionComponent } from '../../modal-confirmacion/modal-confirmacion.component';
 import { ConfigModal } from 'src/app/interfaces/config-modal';
@@ -44,32 +43,31 @@ export class BodyComponent implements OnInit {
 
 
 
-  constructor(private route: ActivatedRoute, private productosService: ProductosService, private router: Router, private usuarioService: UsuarioService, private ListaDeseosService: ListaDeseosService) {
+  constructor(private route: ActivatedRoute, private productosService: ProductosService, private router: Router, private usuarioService: UsuarioService) {
     this.idProducto = this.route.snapshot.params["id"];
   }
 
   ngOnInit(): void {
-    this.obtenerAnuncioProducto()
     this.obtenerImagenes(this.idProducto)
     this.obtenerUsuarioActual()
 
   }
 
-  /*obtenerPorId() {
+  obtenerPorId() {
     this.productosService.obtenerPorId(this.idProducto).subscribe({
       error: (error) => {
         console.log(error)
       },
       next: (data) => {
         console.log(data)
-        this.producto=data[0];
+        this.productos=data[0];
         this.obtenerCalificacionProducto()
         imagen: this.imagenB64
       }
     })
 
   }
-*/
+
   obtenerAnuncioProducto() {
     this.productosService.obtenerAnuncios().subscribe({
       error: (error) => {
@@ -82,12 +80,6 @@ export class BodyComponent implements OnInit {
     })
 
   }
-
-
-
-
-
-
 
 
   eliminarProducto(id: number){
@@ -235,22 +227,5 @@ export class BodyComponent implements OnInit {
     }
 
   }
-
-
-  /*agregarAListaDeseos(){
-    this.ListaDeseosService.agregarAListaDeseos(this.producto.idProducto).subscribe(() => {
-    this.AgregadoALista = true;
-    })
-  }
-  
-  eliminarDeListaDeseos(){
-    this.ListaDeseosService.eliminarDeListaDeseos(this.producto.idProducto).subscribe(() => {
-      this.AgregadoALista = false;
-    })
-  
-  }*/
-
-
-
 
 }

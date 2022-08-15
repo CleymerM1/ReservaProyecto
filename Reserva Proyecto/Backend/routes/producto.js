@@ -8,7 +8,7 @@ router.post('/registro', productoController.crearProducto);
 router.post('/denuncia/:id',productoController.denunciarUsuario);
 router.get('/', productoController.obtenerProductos);
 router.get('/detalle/:id', productoController.obtenerProducto);
-//router.get('/:filter/:value1', productoController.filtrarProductos);
+router.get('/:filter/:value1', productoController.filtrarProductos);
 
 router.get('/masClickeados', productoController.obtenerProductosMasVistos);
 

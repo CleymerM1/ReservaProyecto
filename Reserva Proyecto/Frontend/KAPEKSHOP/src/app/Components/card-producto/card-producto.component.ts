@@ -10,6 +10,7 @@ import leerToken from 'src/app/helpers/decodificarToken'
 import { ActivatedRoute } from '@angular/router';
 import { Producto } from 'src/app/models/producto';
 import { CategoriasService } from 'src/app/Services/categorias.service';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Component({
   selector: 'app-card-producto',
@@ -37,6 +38,8 @@ export class CardProductoComponent implements OnInit {
     this.idUsuario = this.route.snapshot.params["id"];
     this.idProducto = this.route.snapshot.params["id"];
   }
+
+  filtrarProducto = '';
 
   ngOnInit(): void {
     this.obtenerCalificacionProducto();
@@ -150,4 +153,10 @@ export class CardProductoComponent implements OnInit {
       this.agregadoALista = false;
     })
   }
+
+  filtrarProductos(){
+
+  }
+
+
 }

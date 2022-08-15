@@ -3,6 +3,8 @@ import leerToken from 'src/app/helpers/decodificarToken';
 import {AuthService} from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/Services/usuario.service';
+import { ProductosService } from 'src/app/Services/productos.service';
+import { Producto } from 'src/app/models/producto';
 
 
 @Component({
@@ -18,8 +20,10 @@ export class HeaderComponent implements OnInit {
 
   usuarioActual:any;
   token:any = leerToken();
+  busqueda: string = '';
+  productos: any = [];
   
-  constructor(private authService: AuthService,private router: Router, private usuarioService: UsuarioService) { }
+  constructor(private authService: AuthService,private router: Router, private usuarioService: UsuarioService, private productoService: ProductosService) { }
 
   cerrar(){
     this.authService.cerrarSesion();
@@ -68,6 +72,15 @@ export class HeaderComponent implements OnInit {
       this.usuarioActual = res;
     })
 
+  }
+
+  modalBuscar(){
+    this.productoService.getProductos().subscribe(data =>{
+      console.log(data);
+      this.productos = data;
+    })
+
+    this.productoService.filtrarProductos(this.busqueda, 'busq', this.productos);
   }
 
 

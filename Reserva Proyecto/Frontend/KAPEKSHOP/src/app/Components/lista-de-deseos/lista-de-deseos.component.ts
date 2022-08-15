@@ -1,10 +1,8 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import formatearDinero from 'src/app/helpers/formatoMoneda';
 import { Producto } from 'src/app/models/producto';
 import { ProductosService } from 'src/app/Services/productos.service';
-import { UsuarioService } from 'src/app/Services/usuario.service';
 
 @Component({
   selector: 'app-lista-de-deseos',
