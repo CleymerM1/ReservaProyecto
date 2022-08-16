@@ -42,13 +42,14 @@ export class RegistrarUsuarioComponent implements OnInit {
       apellidoCompletoFormControl: new FormControl("", [Validators.required]),
       emailFormControl : new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
       contraseniaFormControl: new FormControl('',[Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')]),
+      confirmarcontraseniaFormControl: new FormControl('',[Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')]),
       telefonoFormControl: new FormControl('',[Validators.required, Validators.pattern("^((\\+504-?)|0)?[0-9]{8}$")]),
       direccionFormControl: new FormControl('',[Validators.required]),
       departamentoFormControl: new FormControl("", [Validators.required]),
       terminosFormControl: new FormControl(this.checked, [Validators.required,  Validators.requiredTrue]),
       
     })
-    enviarFormulario(){
+     enviarFormulario(){
       
       if( !this.formularioRegistro.invalid) {
 
@@ -59,27 +60,38 @@ export class RegistrarUsuarioComponent implements OnInit {
           direccion:this.formularioRegistro.get('direccionFormControl')?.value,
           departamento:this.formularioRegistro.get('departamentoFormControl')?.value,
           contrasenia: this.formularioRegistro.get('contraseniaFormControl')?.value,
+     
           estado: null,
           telefono :this.formularioRegistro.get('telefonoFormControl')?.value,
         }
 
-
-        this.usuarioService.crearUsuario(usuario).subscribe( (res:any) => {
-          console.log(res)
-          let config:ConfigModal = {
-            titulo1: '¡Excelente!',
-            titulo2: res.msj
-          }
-          this.open('exito',config )
-          this.router.navigateByUrl('/inicio')
-        }, (err:any) => {
+        if(this.formularioRegistro.get('contraseniaFormControl')?.value === this.formularioRegistro.get('confirmarcontraseniaFormControl')?.value ){
+          this.usuarioService.crearUsuario(usuario).subscribe( (res:any) => {
+            console.log(res)
+            let config:ConfigModal = {
+              titulo1: '¡Excelente!',
+              titulo2: res.msj
+            }
+            this.open('exito',config )
+            this.router.navigateByUrl('/inicio')
+          }, (err:any) => {
+            let config:ConfigModal = {
+              titulo1: '¡Error!',
+              titulo2: err.error.msj ||'No se pudo registrar el usuario'
+            }
+            console.log(err)
+            this.open('error',config )
+          })
+        }else{
           let config:ConfigModal = {
             titulo1: '¡Error!',
-            titulo2: err.error.msj ||'No se pudo registrar el usuario'
+            titulo2: 'Contraseñas distintas, vuelva a intentar'
           }
-          console.log(err)
           this.open('error',config )
-        })
+        }
+        
+        
+        
       }
 
       
