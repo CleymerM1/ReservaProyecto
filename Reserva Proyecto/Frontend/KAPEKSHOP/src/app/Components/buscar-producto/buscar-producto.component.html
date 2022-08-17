@@ -15,6 +15,9 @@
 <div class="col-12 float-start">
     <div class="container py-5">
         <div class="row text-align-left py-1">
+            <div *ngIf="verificacionProFil" class="row">
+                <h3 style="text-align: center;">No se encontraron resultados</h3>
+            </div>
             <div class="row ">
                 <div *ngFor=" let producto of productosFiltrados" class="col-4 mt-4">
                     <mat-card class="card-producto">
