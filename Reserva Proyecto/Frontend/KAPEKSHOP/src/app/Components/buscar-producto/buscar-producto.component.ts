@@ -15,6 +15,7 @@ export class BuscarProductoComponent implements OnInit {
 
   busqueda: string = '';
   productosFiltrados: any = [];
+  verificacionProFil:any=false;
 
   constructor(private authService: AuthService, private router: Router,  private productoService: ProductosService) { }
 
@@ -34,6 +35,9 @@ export class BuscarProductoComponent implements OnInit {
       JSON.parse(el.ubicacion.toLowerCase().indexOf(busq)) > -1)
       console.log(data2)
       this.productosFiltrados = data2
+      if(!this.productosFiltrados.length){
+        this.verificacionProFil = true
+      }
     })
   }
 
